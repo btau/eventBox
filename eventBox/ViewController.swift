@@ -45,7 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         expandedRows = []
         expandedRows.append(tableView.cellForRowAtIndexPath(indexPath) as! EventCell)
         tableView.beginUpdates()
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         tableView.endUpdates()
     }
     
