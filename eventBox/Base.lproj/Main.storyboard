@@ -218,15 +218,26 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="MGh-Vr-vjn"/>
                                 </connections>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3LO-Xd-Xfm">
+                                <rect key="frame" x="275.5" y="530" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Eok-xF-TIa"/>
+                                    <constraint firstAttribute="width" constant="50" id="r8w-U7-tFH"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.42325975529999998" blue="0.1988020751" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="PlusButton"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0Qi-A3-zay" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="AnH-mW-ytE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eYN-uB-rHy" secondAttribute="bottom" id="EV6-fX-m28"/>
                             <constraint firstAttribute="trailing" secondItem="0Qi-A3-zay" secondAttribute="trailing" id="MrN-kw-Qke"/>
+                            <constraint firstItem="3LO-Xd-Xfm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Tsz-n1-dm7"/>
                             <constraint firstItem="eYN-uB-rHy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YoU-Vf-uZa"/>
                             <constraint firstAttribute="trailing" secondItem="eYN-uB-rHy" secondAttribute="trailing" id="cgz-TF-b3o"/>
                             <constraint firstItem="eYN-uB-rHy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="74" id="iB3-Cn-QPg"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3LO-Xd-Xfm" secondAttribute="bottom" constant="20" id="tKn-6b-9M1"/>
                             <constraint firstItem="0Qi-A3-zay" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="z1z-gK-yvU"/>
                         </constraints>
                     </view>
