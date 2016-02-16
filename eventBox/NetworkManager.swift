@@ -24,16 +24,31 @@ class NetworkManager {
         return Static.instance!
     }
     
-    private
+    //private
     
     let rootRef = Firebase(url: "https://eventbox.firebaseio.com")
     var eventsRef = Firebase!()
+    var authData: FAuthData?
     
     
     //MARK: Facebook Login
+    func isLoggedIn() -> Bool {
+        if authData != nil {
+            return true
+        }
+        return false
+    }
+    
+    func logout() {
+        rootRef.unauth()
+        authData = nil
+        
+    }
+    
+    
     let facebookLogin = FBSDKLoginManager()
     
-    func loginWithFB()
+    func loginWithFB() 
     {
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: nil, handler:
             {(facebookResult, facebookError) -> Void in
@@ -53,7 +68,7 @@ class NetworkManager {
                         print("Login failed. \(error)")
                     }
                     else {
-                        print("Logged In \(authData)")
+                        print("Logged In \(authData.providerData["displayName"])")
                     }
                 
                 })
