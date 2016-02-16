@@ -13,6 +13,8 @@
 		0D2AF8181C725A17004099AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8171C725A17004099AD /* Assets.xcassets */; };
 		0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */; };
 		2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */; };
+		4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */; };
+		4C17AD211C7286190015D03B /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD201C7286190015D03B /* EventCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0D2AF81A1C725A17004099AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D2AF81C1C725A17004099AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.debug.xcconfig"; sourceTree = "<group>"; };
+		4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
+		4C17AD201C7286190015D03B /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD04160F45067675777DE5C1 /* Pods-eventBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				0D2AF8101C725A17004099AD /* AppDelegate.swift */,
+				4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */,
+				4C17AD201C7286190015D03B /* EventCell.swift */,
+				0D2AF8171C725A17004099AD /* Assets.xcassets */,
 				0D2AF8141C725A17004099AD /* Main.storyboard */,
 				0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */,
 			);
@@ -99,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				0D2AF81C1C725A17004099AD /* Info.plist */,
-				0D2AF8171C725A17004099AD /* Assets.xcassets */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -235,6 +241,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C17AD211C7286190015D03B /* EventCell.swift in Sources */,
+				4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
 			);
@@ -350,10 +358,13 @@
 			baseConfigurationReference = 260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = eventBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bT.eventBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -362,10 +373,13 @@
 			baseConfigurationReference = FD04160F45067675777DE5C1 /* Pods-eventBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = eventBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bT.eventBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
