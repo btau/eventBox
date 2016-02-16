@@ -16,6 +16,11 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    
+    //MARK: - ColectionView
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath)
         return cell
@@ -26,6 +31,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     
+    
+    //MARK: - Actions
     
     @IBAction func onSegmentControlChanged(sender: SegmentedControlView, forEvent event: UIEvent) {
         switch sender.selectedIndex {
@@ -38,6 +45,11 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         default:
             return
         }
+    }
+    
+    
+    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
+        
     }
 
 }

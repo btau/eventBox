@@ -20,6 +20,7 @@
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
+		4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSegue.swift; sourceTree = "<group>"; };
 		B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD04160F45067675777DE5C1 /* Pods-eventBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 				0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */,
 				0D2AF8141C725A17004099AD /* Main.storyboard */,
 				4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */,
+				4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */,
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
+				4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */,
 				0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
