@@ -12,6 +12,8 @@
 		0D2AF8161C725A17004099AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8141C725A17004099AD /* Main.storyboard */; };
 		0D2AF8181C725A17004099AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8171C725A17004099AD /* Assets.xcassets */; };
 		0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */; };
+		0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8291C72638F004099AD /* NetworkManager.swift */; };
+		0D2AF82C1C736900004099AD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF82B1C736900004099AD /* Event.swift */; };
 		2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 		0D2AF8171C725A17004099AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D2AF81A1C725A17004099AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D2AF81C1C725A17004099AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D2AF8291C72638F004099AD /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0D2AF82B1C736900004099AD /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.debug.xcconfig"; sourceTree = "<group>"; };
 		B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD04160F45067675777DE5C1 /* Pods-eventBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				0D2AF8241C725EB7004099AD /* Model */,
-				0D2AF8231C725EAA004099AD /* Controllers */,
+				0D2AF8231C725EAA004099AD /* Controller */,
 				0D2AF8221C725EA0004099AD /* View */,
 			);
 			path = eventBox;
@@ -80,26 +84,28 @@
 		0D2AF8221C725EA0004099AD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0D2AF8101C725A17004099AD /* AppDelegate.swift */,
-				0D2AF8141C725A17004099AD /* Main.storyboard */,
 				0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */,
+				0D2AF8141C725A17004099AD /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		0D2AF8231C725EAA004099AD /* Controllers */ = {
+		0D2AF8231C725EAA004099AD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0D2AF8101C725A17004099AD /* AppDelegate.swift */,
+				0D2AF8291C72638F004099AD /* NetworkManager.swift */,
 				0D2AF8121C725A17004099AD /* ViewController.swift */,
 			);
-			name = Controllers;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		0D2AF8241C725EB7004099AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0D2AF81C1C725A17004099AD /* Info.plist */,
+				0D2AF82B1C736900004099AD /* Event.swift */,
 				0D2AF8171C725A17004099AD /* Assets.xcassets */,
+				0D2AF81C1C725A17004099AD /* Info.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -235,6 +241,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
+				0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
 			);
