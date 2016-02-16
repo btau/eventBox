@@ -9,41 +9,49 @@
 import UIKit
 
 class NewEventSegue: UIStoryboardSegue {
-
-    var animator:UIDynamicAnimator? = nil
     
-    override func perform() {
+    var collision: UICollisionBehavior?
+    var animator: UIDynamicAnimator?
+    var gravity: UIGravityBehavior?
+    
+    override init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
         
-        let sourceVC      = self.sourceViewController.view
-        let destinationVC = self.destinationViewController.view
-
-        let screenWidth   = UIScreen.mainScreen().bounds.width
-        let screenHeight  = UIScreen.mainScreen().bounds.height
+        source.addChildViewController(destination)
+        destination.didMoveToParentViewController(source)
         
-        destinationVC.frame = CGRectMake(0.0, screenHeight, screenWidth, screenHeight)
+        let screenWidth  = UIScreen.mainScreen().bounds.width
+        let screenHeight = UIScreen.mainScreen().bounds.height
         
-        let window = UIApplication.sharedApplication().keyWindow
-        //window?.insertSubview(destinationVC, aboveSubview: sourceVC)
+        destination.view.frame = CGRectMake(0.0, screenHeight, screenWidth, screenHeight)
+        source.view.addSubview(destination.view)
         
-        let viewDrop: UIView = destinationVC.snapshotViewAfterScreenUpdates(true)
-        
-        viewDrop.frame = CGRectMake(0.0, screenHeight/2, screenWidth, screenHeight)
-        
-        sourceVC.addSubview(viewDrop)
-        
-        animator = UIDynamicAnimator(referenceView: self.sourceViewController.view)
-       
-        let gravity = UIGravityBehavior()
-        
-        gravity.addItem(viewDrop)
-        gravity.gravityDirection = CGVectorMake(0, -1)
-        
-        animator!.addBehavior(gravity)
-        
-        
+        print("init")
         
     }
     
- 
+    override func perform() {
+        
+        let destinationVC = self.destinationViewController.view
+        
+        animator!.removeAllBehaviors()
+        
+        gravity!.addItem(destinationVC)
+        gravity!.gravityDirection = CGVectorMake(0, -10)
+        
+        collision!.addItem(destinationVC)
+        
+        let left = CGPointMake(self.animator!.referenceView!.bounds.origin.x, self.animator!.referenceView!.bounds.origin.y)
+        
+        let right = CGPointMake(self.animator!.referenceView!.bounds.origin.x + self.animator!.referenceView!.bounds.size.width, self.animator!.referenceView!.bounds.origin.y);
+
+        collision!.addBoundaryWithIdentifier("top", fromPoint: left, toPoint: right)
+
+        animator!.addBehavior(collision!)
+        animator!.addBehavior(gravity!)
+        
+    }
+    
+    
     
 }

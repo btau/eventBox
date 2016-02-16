@@ -10,6 +10,8 @@ import UIKit
 
 class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var animator: UIDynamicAnimator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,8 +50,17 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     
-    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
-        
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addEventSegue" {
+            
+            let eventSegue       = segue as! NewEventSegue
+            animator             = UIDynamicAnimator(referenceView: self.view)
+            let gravity          = UIGravityBehavior()
+            let collision        = UICollisionBehavior()
+            eventSegue.animator  = animator
+            eventSegue.gravity   = gravity
+            eventSegue.collision = collision
+        }
     }
 
 }

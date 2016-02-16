@@ -311,7 +311,7 @@
                                 <color key="tintColor" red="0.3992299171" green="1" blue="0.59635763360000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="PlusButton"/>
                                 <connections>
-                                    <segue destination="bOD-nt-Ovi" kind="custom" identifier="addEventSegue" customClass="NewEventSegue" customModule="eventBox" customModuleProvider="target" id="ejr-pn-Faw"/>
+                                    <segue destination="bOD-nt-Ovi" kind="custom" identifier="addEventSegue" customClass="NewEventSegue" customModule="eventBox" animates="NO" id="ejr-pn-Faw"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWQ-4s-ZdS">
