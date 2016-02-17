@@ -14,6 +14,9 @@
 		0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */; };
 		0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8291C72638F004099AD /* NetworkManager.swift */; };
 		0D2AF82C1C736900004099AD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF82B1C736900004099AD /* Event.swift */; };
+		0E27CAEB1C73C67A0044688D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEA1C73C67A0044688D /* FBSDKCoreKit.framework */; };
+		0E27CAED1C73C68A0044688D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEC1C73C68A0044688D /* FBSDKLoginKit.framework */; };
+		0E27CAEF1C73C6940044688D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEE1C73C6940044688D /* FBSDKShareKit.framework */; };
 		2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */; };
 		4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */; };
 		4C17AD211C7286190015D03B /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD201C7286190015D03B /* EventCell.swift */; };
@@ -33,6 +36,9 @@
 		0D2AF81C1C725A17004099AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D2AF8291C72638F004099AD /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0D2AF82B1C736900004099AD /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		0E27CAEA1C73C67A0044688D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		0E27CAEC1C73C68A0044688D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		0E27CAEE1C73C6940044688D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.debug.xcconfig"; sourceTree = "<group>"; };
 		4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
 		4C17AD201C7286190015D03B /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -49,7 +55,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E27CAEF1C73C6940044688D /* FBSDKShareKit.framework in Frameworks */,
 				2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */,
+				0E27CAEB1C73C67A0044688D /* FBSDKCoreKit.framework in Frameworks */,
+				0E27CAED1C73C68A0044688D /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +148,9 @@
 		EEF095757061FF1235B60BE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E27CAEE1C73C6940044688D /* FBSDKShareKit.framework */,
+				0E27CAEC1C73C68A0044688D /* FBSDKLoginKit.framework */,
+				0E27CAEA1C73C67A0044688D /* FBSDKCoreKit.framework */,
 				B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */,
 			);
 			name = Frameworks;
