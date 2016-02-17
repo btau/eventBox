@@ -418,10 +418,10 @@
             </objects>
             <point key="canvasLocation" x="1221" y="1909.25"/>
         </scene>
-        <!--View Controller-->
+        <!--New Event View Controller-->
         <scene sceneID="IUZ-FR-HWH">
             <objects>
-                <viewController id="bOD-nt-Ovi" sceneMemberID="viewController">
+                <viewController id="bOD-nt-Ovi" customClass="NewEventViewController" customModule="eventBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e4K-kB-2r6"/>
                         <viewControllerLayoutGuide type="bottom" id="uMK-gj-7po"/>
@@ -429,8 +429,169 @@
                     <view key="view" contentMode="scaleToFill" id="NVl-KB-bDK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeI-kF-gcH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sI8-ml-VSY">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zf-Db-hx0">
+                                            <rect key="frame" x="200" y="204" width="200" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="5CJ-Dy-aZL"/>
+                                                <constraint firstAttribute="height" constant="64" id="ybA-z6-YsH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="27"/>
+                                            <state key="normal" title="Create">
+                                                <color key="titleColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="32"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0O-QA-olm">
+                                            <rect key="frame" x="200" y="332" width="200" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="YKM-NS-6tX"/>
+                                                <constraint firstAttribute="height" constant="64" id="lDN-vA-6QW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="27"/>
+                                            <state key="normal" title="Join">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="32"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhz-cY-zPw">
+                                            <rect key="frame" x="200" y="332" width="200" height="64"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="Bwg-xp-vjC"/>
+                                                <constraint firstAttribute="height" constant="64" id="F6Y-8v-N9j"/>
+                                            </constraints>
+                                        </view>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5r-Zc-vEg">
+                                            <rect key="frame" x="200" y="204" width="200" height="64"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="8eS-se-2B7"/>
+                                                <constraint firstAttribute="height" constant="64" id="jja-OO-HN4"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FB5-mi-Mhh">
+                                            <rect key="frame" x="16" y="26" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="ZO7-3B-5c2"/>
+                                                <constraint firstAttribute="height" constant="44" id="cvV-r2-hIP"/>
+                                            </constraints>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <state key="normal" image="noun_multiply_315673"/>
+                                            <connections>
+                                                <action selector="onExitTapped:" destination="bOD-nt-Ovi" eventType="touchUpInside" id="HLy-xE-sWA"/>
+                                            </connections>
+                                        </button>
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tOc-O8-WIr">
+                                            <rect key="frame" x="150" y="278" width="300" height="44"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="next"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textField>
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2V3-vu-m7U">
+                                            <rect key="frame" x="150" y="404" width="300" height="44"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="next"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textField>
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gkk-u4-KiT">
+                                            <rect key="frame" x="150" y="152" width="300" height="44"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardAppearance="alert" returnKeyType="next"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6zf-Db-hx0" firstAttribute="centerX" secondItem="sI8-ml-VSY" secondAttribute="centerX" id="AhS-bL-dVF"/>
+                                        <constraint firstItem="6zf-Db-hx0" firstAttribute="centerY" secondItem="sI8-ml-VSY" secondAttribute="centerY" constant="-64" id="Gxv-Lu-mB3"/>
+                                        <constraint firstItem="Fhz-cY-zPw" firstAttribute="centerX" secondItem="sI8-ml-VSY" secondAttribute="centerX" id="NNl-BA-apu"/>
+                                        <constraint firstItem="s0O-QA-olm" firstAttribute="centerY" secondItem="sI8-ml-VSY" secondAttribute="centerY" constant="64" id="Yvk-gR-eUQ"/>
+                                        <constraint firstItem="S5r-Zc-vEg" firstAttribute="centerX" secondItem="sI8-ml-VSY" secondAttribute="centerX" id="axo-ZI-Qvs"/>
+                                        <constraint firstItem="Fhz-cY-zPw" firstAttribute="centerY" secondItem="sI8-ml-VSY" secondAttribute="centerY" constant="64" id="chH-Wa-pjt"/>
+                                        <constraint firstItem="FB5-mi-Mhh" firstAttribute="leading" secondItem="sI8-ml-VSY" secondAttribute="leading" constant="16" id="dhs-NU-zJo"/>
+                                        <constraint firstItem="FB5-mi-Mhh" firstAttribute="top" secondItem="sI8-ml-VSY" secondAttribute="top" constant="26" id="iY8-vh-QiF"/>
+                                        <constraint firstItem="S5r-Zc-vEg" firstAttribute="centerY" secondItem="sI8-ml-VSY" secondAttribute="centerY" constant="-64" id="klk-H6-Qh4"/>
+                                        <constraint firstItem="s0O-QA-olm" firstAttribute="centerX" secondItem="sI8-ml-VSY" secondAttribute="centerX" id="mRq-id-Pmc"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ZeI-kF-gcH" firstAttribute="top" secondItem="NVl-KB-bDK" secondAttribute="top" id="9ur-M5-dhD"/>
+                            <constraint firstAttribute="trailing" secondItem="ZeI-kF-gcH" secondAttribute="trailing" id="SxI-Hc-fmX"/>
+                            <constraint firstItem="uMK-gj-7po" firstAttribute="top" secondItem="ZeI-kF-gcH" secondAttribute="bottom" id="dbo-9J-cnF"/>
+                            <constraint firstItem="ZeI-kF-gcH" firstAttribute="leading" secondItem="NVl-KB-bDK" secondAttribute="leading" id="udP-n5-30y"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createButtonDestination" destination="S5r-Zc-vEg" id="ug0-Uo-wfD"/>
+                        <outlet property="createEventButton" destination="6zf-Db-hx0" id="ZrA-Yx-qLr"/>
+                        <outlet property="joinButtonDestination" destination="Fhz-cY-zPw" id="NsP-Ka-1oj"/>
+                        <outlet property="joinEventButton" destination="s0O-QA-olm" id="c4i-yZ-jPE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jDQ-tJ-NHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -540,5 +701,6 @@
         <image name="Gear" width="22" height="22"/>
         <image name="PlusButton" width="75" height="75"/>
         <image name="Shadow" width="10" height="200"/>
+        <image name="noun_multiply_315673" width="150" height="150"/>
     </resources>
 </document>

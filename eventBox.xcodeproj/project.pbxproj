@@ -10,11 +10,12 @@
 		0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8101C725A17004099AD /* AppDelegate.swift */; };
 		0D2AF8131C725A17004099AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8121C725A17004099AD /* ViewController.swift */; };
 		0D2AF8161C725A17004099AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8141C725A17004099AD /* Main.storyboard */; };
-		0D2AF8181C725A17004099AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8171C725A17004099AD /* Assets.xcassets */; };
 		0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */; };
 		0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8291C72638F004099AD /* NetworkManager.swift */; };
 		0D2AF82C1C736900004099AD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF82B1C736900004099AD /* Event.swift */; };
 		2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */; };
+		4C0A4DCC1C73E2D60052D2B5 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A4DCB1C73E2D60052D2B5 /* NewEventViewController.swift */; };
+		4C0A4DCE1C73EFEE0052D2B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C0A4DCD1C73EFEE0052D2B5 /* Assets.xcassets */; };
 		4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */; };
 		4C17AD211C7286190015D03B /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD201C7286190015D03B /* EventCell.swift */; };
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
@@ -28,12 +29,13 @@
 		0D2AF8101C725A17004099AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D2AF8121C725A17004099AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D2AF8151C725A17004099AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0D2AF8171C725A17004099AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D2AF81A1C725A17004099AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D2AF81C1C725A17004099AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D2AF8291C72638F004099AD /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0D2AF82B1C736900004099AD /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.debug.xcconfig"; sourceTree = "<group>"; };
+		4C0A4DCB1C73E2D60052D2B5 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
+		4C0A4DCD1C73EFEE0052D2B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
 		4C17AD201C7286190015D03B /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
@@ -97,10 +99,10 @@
 		0D2AF8221C725EA0004099AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4C0A4DCD1C73EFEE0052D2B5 /* Assets.xcassets */,
 				0D2AF8101C725A17004099AD /* AppDelegate.swift */,
 				4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */,
 				4C17AD201C7286190015D03B /* EventCell.swift */,
-				0D2AF8171C725A17004099AD /* Assets.xcassets */,
 				0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */,
 				0D2AF8141C725A17004099AD /* Main.storyboard */,
 				4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */,
@@ -115,6 +117,7 @@
 				0D2AF8291C72638F004099AD /* NetworkManager.swift */,
 				0D2AF8121C725A17004099AD /* ViewController.swift */,
 				4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */,
+				4C0A4DCB1C73E2D60052D2B5 /* NewEventViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -207,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */,
-				0D2AF8181C725A17004099AD /* Assets.xcassets in Resources */,
+				4C0A4DCE1C73EFEE0052D2B5 /* Assets.xcassets in Resources */,
 				0D2AF8161C725A17004099AD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +272,7 @@
 			files = (
 				4C17AD211C7286190015D03B /* EventCell.swift in Sources */,
 				4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */,
+				4C0A4DCC1C73E2D60052D2B5 /* NewEventViewController.swift in Sources */,
 				4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */,
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,

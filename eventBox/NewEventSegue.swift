@@ -23,8 +23,15 @@ class NewEventSegue: UIStoryboardSegue {
         let screenWidth  = UIScreen.mainScreen().bounds.width
         let screenHeight = UIScreen.mainScreen().bounds.height
         
-        destination.view.frame = CGRectMake(0.0, screenHeight, screenWidth, screenHeight)
+        destination.view.frame = CGRectMake(0.0, 0.0, screenWidth, screenHeight)
+        destination.view.alpha = 0
         source.view.addSubview(destination.view)
+        
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            destination.view.alpha = 1
+            }) { (bool:Bool) -> Void in
+                
+        }
         
         print("init")
         
@@ -32,23 +39,24 @@ class NewEventSegue: UIStoryboardSegue {
     
     override func perform() {
         
-        let destinationVC = self.destinationViewController.view
-        
-        animator!.removeAllBehaviors()
-        
-        gravity!.addItem(destinationVC)
-        gravity!.gravityDirection = CGVectorMake(0, -10)
-        
-        collision!.addItem(destinationVC)
-        
-        let left = CGPointMake(self.animator!.referenceView!.bounds.origin.x, self.animator!.referenceView!.bounds.origin.y)
-        
-        let right = CGPointMake(self.animator!.referenceView!.bounds.origin.x + self.animator!.referenceView!.bounds.size.width, self.animator!.referenceView!.bounds.origin.y);
 
-        collision!.addBoundaryWithIdentifier("top", fromPoint: left, toPoint: right)
-
-        animator!.addBehavior(collision!)
-        animator!.addBehavior(gravity!)
+        
+        
+//        animator!.removeAllBehaviors()
+//        
+//        gravity!.addItem(destinationVC)
+//        gravity!.gravityDirection = CGVectorMake(0, -10)
+//        
+//        collision!.addItem(destinationVC)
+//        
+//        let left = CGPointMake(self.animator!.referenceView!.bounds.origin.x, self.animator!.referenceView!.bounds.origin.y)
+//        
+//        let right = CGPointMake(self.animator!.referenceView!.bounds.origin.x + self.animator!.referenceView!.bounds.size.width, self.animator!.referenceView!.bounds.origin.y);
+//
+//        collision!.addBoundaryWithIdentifier("top", fromPoint: left, toPoint: right)
+//
+//        animator!.addBehavior(collision!)
+//        animator!.addBehavior(gravity!)
         
     }
     
