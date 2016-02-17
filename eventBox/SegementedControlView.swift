@@ -43,11 +43,6 @@ import UIKit
             }
         }
         
-        @IBInspectable var borderColor : UIColor = UIColor.whiteColor() {
-            didSet {
-                layer.borderColor = borderColor.CGColor
-            }
-        }
         
         @IBInspectable var font : UIFont! = UIFont.systemFontOfSize(12) {
             didSet {

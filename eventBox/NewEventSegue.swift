@@ -37,13 +37,13 @@ class NewEventSegue: UIStoryboardSegue {
         animator!.removeAllBehaviors()
         
         gravity!.addItem(destinationVC)
-        gravity!.gravityDirection = CGVectorMake(0, -10)
+        gravity!.gravityDirection = CGVectorMake(0, -8)
         
         collision!.addItem(destinationVC)
         
-        let left = CGPointMake(self.animator!.referenceView!.bounds.origin.x, self.animator!.referenceView!.bounds.origin.y)
+        let left = CGPointMake(self.animator!.referenceView!.bounds.origin.x, self.animator!.referenceView!.bounds.origin.y - 1)
         
-        let right = CGPointMake(self.animator!.referenceView!.bounds.origin.x + self.animator!.referenceView!.bounds.size.width, self.animator!.referenceView!.bounds.origin.y);
+        let right = CGPointMake(self.animator!.referenceView!.bounds.origin.x + self.animator!.referenceView!.bounds.size.width, self.animator!.referenceView!.bounds.origin.y - 1);
 
         collision!.addBoundaryWithIdentifier("top", fromPoint: left, toPoint: right)
 

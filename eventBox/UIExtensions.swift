@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView {
+@IBDesignable extension UIView {
     
     @IBInspectable var cornerRadius: CGFloat {
         get {
@@ -17,6 +17,43 @@ extension UIView {
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor {
+        get {
+            return UIColor(CGColor: layer.borderColor!)
+        }
+        set {
+            layer.borderColor = newValue.CGColor
+        }
+    }
+    
+}
+
+@IBDesignable extension UITextField {
+    
+    @IBInspectable var padding: CGFloat {
+        get {
+            return 0
+        }
+        set {
+            let paddingView = UIView(frame: CGRectMake(0,0,newValue,20))
+            
+            leftView     = paddingView
+            leftViewMode = .Always
+            
+            rightView     = paddingView
+            rightViewMode = .Always
         }
     }
     
