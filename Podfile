@@ -8,5 +8,6 @@ pod 'Firebase'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'Calendar-iOS'
 end
 

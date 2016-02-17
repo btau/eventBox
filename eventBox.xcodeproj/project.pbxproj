@@ -20,6 +20,7 @@
 		2EB0C3A94F5CE4224B5894D6 /* Pods_eventBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */; };
 		4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */; };
 		4C17AD211C7286190015D03B /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17AD201C7286190015D03B /* EventCell.swift */; };
+		4C44BB031C74CD67003A0276 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB021C74CD67003A0276 /* CreateEventViewController.swift */; };
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
@@ -42,6 +43,7 @@
 		260407B4A54339AADFE4E283 /* Pods-eventBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.debug.xcconfig"; sourceTree = "<group>"; };
 		4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
 		4C17AD201C7286190015D03B /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		4C44BB021C74CD67003A0276 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				0D2AF8291C72638F004099AD /* NetworkManager.swift */,
 				0D2AF8121C725A17004099AD /* ViewController.swift */,
 				4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */,
+				4C44BB021C74CD67003A0276 /* CreateEventViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
 				4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */,
 				0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */,
+				4C44BB031C74CD67003A0276 /* CreateEventViewController.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
 				4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */,
