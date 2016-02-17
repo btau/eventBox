@@ -24,27 +24,33 @@ class NetworkManager {
         return Static.instance!
     }
     
-    //private
+    private
     
     let rootRef = Firebase(url: "https://eventbox.firebaseio.com")
     var eventsRef = Firebase!()
-    var authData: FAuthData?
+    var usersRef = Firebase!()
     
+    private var events: [Event] = []
+    
+    //MARK: Internal Functions
+    init() {
+        print("Network Manager Initialized")
+        eventsRef = rootRef.childByAppendingPath("events")
+        usersRef = rootRef.childByAppendingPath("users")
+    }
     
     //MARK: Facebook Login
-    func isLoggedIn() -> Bool {
-        if authData != nil {
-            return true
-        }
-        return false
-    }
-    
-    func logout() {
-        rootRef.unauth()
-        authData = nil
-        
-    }
-    
+//    func isLoggedIn() -> Bool {
+//        if authData != nil {
+//            return true
+//        }
+//        return false
+//    }
+//    
+//    func logout() {
+//        rootRef.unauth()
+//        authData = nil
+//    }
     
     let facebookLogin = FBSDKLoginManager()
     
@@ -76,8 +82,91 @@ class NetworkManager {
         })
     }
     
+    //MARK: Event Handling
+    func sendEvent(event: Event) {
+        
+        let eventRef = eventsRef.childByAutoId()
+        
+        let eventData =
+        ["eventUID": eventRef.key,
+            "eventName": event.eventName,
+            "startDate": event.startDate,
+            "lat":String(event.location.lat),
+            "lon":String(event.location.lon),
+            "comments": [],
+            "guests":[]]
+        
+        eventsRef.setValue(eventData)
+    }
+   
+    
+    func deleteEvent(eventUID: String) {
+        let eventRef = eventsRef.childByAppendingPath(eventUID)
+        
+        let foundIndex = events.indexOf { (event:Event) -> Bool in
+            if event.eventUID == eventUID {
+                return true
+            }
+            return false
+        }
+        
+        if let index = foundIndex {
+            events.removeAtIndex(index)
+            eventRef.removeValue()
+        }
+    }
     
     
+    func getEvents() {
+        eventsRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
+            
+            let keys = snapshot.value.allKeys as! [String]
+            
+            var allEvents = [Event]()
+            
+            for key in keys {
+                guard let eventData = snapshot.value.objectForKey(key) as? [String:AnyObject]
+                    else { print("Error in events"); break }
+                
+                let newEvent = self.unpackEvent(eventData)
+                
+                allEvents.append(newEvent)
+                print("Got all events")
+            }
+
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            })
+        }
+    }
+    
+    
+    func unpackEvent(eventData: [String:AnyObject]) -> Event {
+        let newEvent = Event()
+        
+        let lat = eventData["lat"] as! String
+        let lon = eventData["lon"] as! String
+        
+        newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
+        newEvent.eventUID = eventData["eventUID"] as! String
+//        newEvent.hostUID = eventData["hostUID"] as! String
+        newEvent.eventName = eventData["eventName"] as! String
+        newEvent.startDate = eventData["startDate"] as! Double
+
+//        if let comments = eventData["comments"] as? [String:AnyObject] {
+//            for comment in comments {
+//                
+//                let time = comment.1["time"] as! Double
+//                let message = comment.1["message"] as! String
+//                let userUID = comment.1["userUID"] as! String
+//                
+//                let commentUID = comment.0
+//                
+//                newEvent.comments.append(Comment(userUID: userUID, time: time, message: message, commentUID: commentUID))
+//            }
+//        }
+        return newEvent
+    }
+
     
     
 }
