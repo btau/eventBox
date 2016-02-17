@@ -75,6 +75,19 @@ class NetworkManager {
                     }
                     else {
                         print("Logged In \(authData.providerData["displayName"])")
+                        
+                        let newUser = User(UID: authData.uid)
+                        newUser.UID = authData.uid
+                        newUser.userName = (authData.providerData["displayName"] as? String)!
+                        newUser.image = (authData.providerData["profileImageURL"] as? String)!
+
+                        let newUserRef = self.usersRef.childByAppendingPath(newUser.UID)
+                        
+                        let userData: [String:AnyObject] =
+                        ["userName":newUser.userName,
+                                 "image":newUser.image]
+
+                        newUserRef.updateChildValues(userData)
                     }
                 
                 })
@@ -96,7 +109,7 @@ class NetworkManager {
             "comments": [],
             "guests":[]]
         
-        eventsRef.setValue(eventData)
+        eventRef.setValue(eventData)
     }
    
     
@@ -117,8 +130,36 @@ class NetworkManager {
     }
     
     
+    func unpackEvent(eventData: [String:AnyObject]) -> Event {
+        let newEvent = Event()
+        
+        let lat = eventData["lat"] as! String
+        let lon = eventData["lon"] as! String
+        
+        newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
+        newEvent.eventUID = eventData["eventUID"] as! String
+        newEvent.eventName = eventData["eventName"] as! String
+        newEvent.startDate = eventData["startDate"] as! Double
+        //        newEvent.hostUID = eventData["hostUID"] as! String
+        
+        //        if let comments = eventData["comments"] as? [String:AnyObject] {
+        //            for comment in comments {
+        //
+        //                let time = comment.1["time"] as! Double
+        //                let message = comment.1["message"] as! String
+        //                let userUID = comment.1["userUID"] as! String
+        //
+        //                let commentUID = comment.0
+        //
+        //                newEvent.comments.append(Comment(userUID: userUID, time: time, message: message, commentUID: commentUID))
+        //            }
+        //        }
+        return newEvent
+    }
+    
+    
     func getEvents() {
-        eventsRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
+        eventsRef.observeEventType(.Value) { (snapshot: FDataSnapshot!) -> Void in
             
             let keys = snapshot.value.allKeys as! [String]
             
@@ -131,42 +172,13 @@ class NetworkManager {
                 let newEvent = self.unpackEvent(eventData)
                 
                 allEvents.append(newEvent)
-                print("Got all events")
+                print(newEvent.eventName)
             }
 
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
             })
         }
     }
-    
-    
-    func unpackEvent(eventData: [String:AnyObject]) -> Event {
-        let newEvent = Event()
-        
-        let lat = eventData["lat"] as! String
-        let lon = eventData["lon"] as! String
-        
-        newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
-        newEvent.eventUID = eventData["eventUID"] as! String
-//        newEvent.hostUID = eventData["hostUID"] as! String
-        newEvent.eventName = eventData["eventName"] as! String
-        newEvent.startDate = eventData["startDate"] as! Double
 
-//        if let comments = eventData["comments"] as? [String:AnyObject] {
-//            for comment in comments {
-//                
-//                let time = comment.1["time"] as! Double
-//                let message = comment.1["message"] as! String
-//                let userUID = comment.1["userUID"] as! String
-//                
-//                let commentUID = comment.0
-//                
-//                newEvent.comments.append(Comment(userUID: userUID, time: time, message: message, commentUID: commentUID))
-//            }
-//        }
-        return newEvent
-    }
-
-    
     
 }

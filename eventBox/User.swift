@@ -12,11 +12,13 @@ import UIKit
 class User {
     var UID: String
     var userName: String
-    var image: UIImage
+    var image: String
+    var userEvents: [String] //String will be eventUID
     
-    init(UID: String, userName: String) {
+    init(UID: String) {
         self.UID = UID
         self.userName = ""
-        self.image = UIImage()
+        self.image = ""
+        self.userEvents = []
     }
 }
