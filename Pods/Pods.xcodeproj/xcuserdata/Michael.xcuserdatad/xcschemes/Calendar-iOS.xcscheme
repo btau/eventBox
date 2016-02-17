@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8BE361AD9F43F640DFBAC292'
-               BlueprintName = 'FBSDKShareKit'
+               BlueprintIdentifier = '37301ECE44BF34AEB7CB4CA3'
+               BlueprintName = 'Calendar-iOS'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FBSDKShareKit.framework'>
+               BuildableName = 'Calendar_iOS.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

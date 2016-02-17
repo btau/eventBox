@@ -15,11 +15,14 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
-    
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+
+    }
+
     
     //MARK: - ColectionView
     
@@ -61,6 +64,24 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             eventSegue.gravity   = gravity
             eventSegue.collision = collision
         }
+    }
+    
+    
+    override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+        if let id = identifier{
+            if id == "addEventUnwind" {
+                let unwindSegue = NewEventUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                    
+                })
+                return unwindSegue
+            }
+        }
+        
+        return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)!
+    }
+    
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
+        
     }
 
 }

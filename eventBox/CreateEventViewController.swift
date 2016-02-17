@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Calendar_iOS
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate {
-
+class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate {
+    
     
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
@@ -19,15 +20,24 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     
     let animationSpeed = 0.25
     
+    var tintView: UIView?
+    
+    var cancel = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField]
-
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
 
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-
+        
         clearTextfields(Except: textField)
         
         UIView.animateWithDuration(animationSpeed) { () -> Void in
@@ -42,18 +52,22 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         width.duration = animationSpeed
         width.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
-       textField.layer.addAnimation(width, forKey: "borderWidth")
+        textField.layer.addAnimation(width, forKey: "borderWidth")
         
         if textField.tag == 1 {
             return true
+        } else if textField.tag == 2 {
+            
+            performSegueWithIdentifier("CalendarPop", sender: nil)
+            
         }
         return false
     }
     
-    func clearTextfields(Except selectedTextfield: UITextField) {
-     
+    func clearTextfields(Except selectedTextfield: UITextField?) {
+        
         for textField in textFields {
-            guard textField.tag != selectedTextfield.tag else {
+            guard textField.tag != selectedTextfield?.tag else {
                 continue
             }
             
@@ -75,12 +89,58 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
             textField.layer.addAnimation(width, forKey: "borderWidth")
             
         }
+    }
+    
+    //MARK: - CalenderView -
+    
+    func calendarViewControllerDidDismiss() {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.tintView!.alpha = 0
+            }) { (bool:Bool) -> Void in
+                self.tintView?.removeFromSuperview()
+        }
         
-        
+        clearTextfields(Except: nil)
         
     }
     
-
+    func calendarViewControllerDidSelectDate(date: NSDate) {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .LongStyle
+        formatter.timeStyle = .NoStyle
+        
+        eventDateTextField.text = formatter.stringFromDate(date)
+    }
     
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "CalendarPop" {
+            
+            let calVC = segue.destinationViewController as! CalendarViewController
+            
+            calVC.delegate = self
+            
+            tintView = UIView(frame: (UIApplication.sharedApplication().keyWindow?.bounds)!)
+            tintView!.alpha = 0
+            tintView!.backgroundColor = .blackColor()
+            self.view.insertSubview(tintView!, atIndex: self.view.subviews.count)
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.tintView!.alpha = 0.5
+            })
+        } else if segue.identifier == "addEventUnwind" {
+            
+            let unwindSegue = segue as! NewEventUnwind
+            
+            let animator = UIDynamicAnimator(referenceView: segue.destinationViewController.view)
+            let snap = UISnapBehavior(item: segue.sourceViewController.view, snapToPoint: CGPointMake(0, 0))
+            
+            unwindSegue.animator = animator
+            unwindSegue.snap = snap
+            unwindSegue.cancel = cancel
+        }
+    }
+    
+    
+    
+    
+    
 }

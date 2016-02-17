@@ -465,6 +465,9 @@
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="noun_multiply_315673"/>
+                                        <connections>
+                                            <segue destination="QAt-v7-KET" kind="unwind" identifier="addEventUnwind" customClass="NewEventUnwind" customModule="eventBox" customModuleProvider="target" unwindAction="returnFromSegueActions:" id="m7f-ds-Ydt"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3P3-n7-nqK">
                                         <rect key="frame" x="16" y="73" width="566" height="64"/>
@@ -509,14 +512,18 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                                <real key="value" value="82"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="82"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="bOD-nt-Ovi" id="FbY-BH-7Mn"/>
+                                            <segue destination="Ur1-SO-Gec" kind="presentation" identifier="CalendarPop" customClass="CalendarViewSegue" customModule="eventBox" customModuleProvider="target" id="NdV-uR-9R2"/>
                                         </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_calendar_138379" translatesAutoresizingMaskIntoConstraints="NO" id="90j-94-a9N">
@@ -543,10 +550,13 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                                <real key="value" value="82"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                <real key="value" value="82"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -699,8 +709,106 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jDQ-tJ-NHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QAt-v7-KET" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1922" y="1909"/>
+        </scene>
+        <!--Calendar View Controller-->
+        <scene sceneID="4Jq-xB-dMa">
+            <objects>
+                <viewController modalPresentationStyle="overFullScreen" id="Ur1-SO-Gec" customClass="CalendarViewController" customModule="eventBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="odG-78-s2A"/>
+                        <viewControllerLayoutGuide type="bottom" id="nq6-rJ-qyn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gHR-YJ-K5D">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdC-nE-h8W">
+                                <rect key="frame" x="150" y="124" width="300" height="280"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wI-vs-lpQ" customClass="CalendarView">
+                                        <rect key="frame" x="10" y="10" width="280" height="260"/>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="9Vp-V4-s17"/>
+                                            <constraint firstAttribute="height" constant="260" id="ZUO-nP-qaS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="A7F-FD-sFa"/>
+                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerY" secondItem="FdC-nE-h8W" secondAttribute="centerY" id="Kha-Ry-wjn"/>
+                                    <constraint firstAttribute="height" constant="280" id="mPg-Ih-Dj6"/>
+                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerX" secondItem="FdC-nE-h8W" secondAttribute="centerX" id="oqt-Iu-9h2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wrl-9R-SM2">
+                                <rect key="frame" x="180" y="412" width="240" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avg-jQ-7yl">
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="GZp-fR-FIM"/>
+                                            <constraint firstAttribute="height" constant="64" id="P4l-xM-Qv1"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="0.32016387369999999" blue="0.27679930559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="noun_delete_45887"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="32"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onCancelTapped:" destination="Ur1-SO-Gec" eventType="touchUpInside" id="4ac-bd-fye"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G20-FB-V8R">
+                                        <rect key="frame" x="176" y="0.0" width="64" height="64"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="Huu-Ku-NQn"/>
+                                            <constraint firstAttribute="height" constant="64" id="LwX-DT-fXL"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="noun_check_45890"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="32"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onCheckTapped:" destination="Ur1-SO-Gec" eventType="touchUpInside" id="6cH-kL-4wV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wrl-9R-SM2" firstAttribute="leading" secondItem="FdC-nE-h8W" secondAttribute="leading" constant="30" id="LbK-5b-Mao"/>
+                            <constraint firstItem="FdC-nE-h8W" firstAttribute="centerY" secondItem="gHR-YJ-K5D" secondAttribute="centerY" constant="-36" id="Udo-xJ-s8J"/>
+                            <constraint firstItem="wrl-9R-SM2" firstAttribute="trailing" secondItem="FdC-nE-h8W" secondAttribute="trailing" constant="-30" id="c3n-9q-zk1"/>
+                            <constraint firstItem="FdC-nE-h8W" firstAttribute="centerX" secondItem="gHR-YJ-K5D" secondAttribute="centerX" id="lep-Np-V8I"/>
+                            <constraint firstItem="wrl-9R-SM2" firstAttribute="top" secondItem="FdC-nE-h8W" secondAttribute="bottom" constant="8" id="nSm-b0-q2K"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="calendarView" destination="9wI-vs-lpQ" id="Dp1-Jk-A8M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Da0-4J-NKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1922" y="2652"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Way-MD-Tww">
@@ -808,7 +916,9 @@
         <image name="Shadow" width="10" height="200"/>
         <image name="noun_bell_10289" width="150" height="150"/>
         <image name="noun_calendar_138379" width="150" height="150"/>
+        <image name="noun_check_45890" width="150" height="150"/>
         <image name="noun_clock_200962" width="150" height="150"/>
+        <image name="noun_delete_45887" width="150" height="150"/>
         <image name="noun_multiply_315673" width="150" height="150"/>
         <image name="people-party-dancing-music" width="1920" height="1275"/>
     </resources>
