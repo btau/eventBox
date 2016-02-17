@@ -24,6 +24,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     
     var cancel = true
     
+    var animator: UIDynamicAnimator?
+    var snap: UISnapBehavior?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,16 +133,23 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             
             let unwindSegue = segue as! NewEventUnwind
             
-            let animator = UIDynamicAnimator(referenceView: segue.destinationViewController.view)
-            let snap = UISnapBehavior(item: segue.sourceViewController.view, snapToPoint: CGPointMake(0, 0))
+            animator = UIDynamicAnimator(referenceView: segue.destinationViewController.view)
+            snap = UISnapBehavior(item: segue.sourceViewController.view, snapToPoint: CGPointMake(0, 0))
             
-            unwindSegue.animator = animator
-            unwindSegue.snap = snap
+            unwindSegue.animator = animator!
+            unwindSegue.snap = snap!
             unwindSegue.cancel = cancel
+            
+           
+            
+            let time = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss", userInfo: nil, repeats: false)
         }
     }
     
-    
+        func dismiss() {
+            dismissViewControllerAnimated(false, completion: nil)
+            print("dealloc")
+        }
     
     
     

@@ -20,13 +20,16 @@ class NewEventUnwind: UIStoryboardSegue {
         let destinationVCView = destinationViewController.view as UIView
 
         let screenHeight = UIScreen.mainScreen().bounds.size.height
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
         
         
         if cancel {
             //Cancel Animation
             
-            
-            snap?.snapPoint = CGPointMake(sourceVCView.center.x, screenHeight * 2)
+            snap?.damping = 0.4
+            snap?.snapPoint = CGPointMake(sourceVCView.center.x, -screenHeight/1.5)
+            //let push = UIPushBehavior(items: [sourceVCView], mode: UIPushBehaviorMode.Instantaneous)
+            //push.setAngle(90, magnitude: 1)
             
             animator?.addBehavior(snap!)
             
@@ -40,6 +43,8 @@ class NewEventUnwind: UIStoryboardSegue {
             
             
         }
+        
+        //let timer = NSTimer(fireDate: NSDate(timeIntervalSinceNow: 5), interval: 1, target: self, selector: "dismiss", userInfo: nil, repeats: false)
     }
     
 }
