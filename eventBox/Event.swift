@@ -21,9 +21,11 @@ struct LocationCords {
 
 struct Guest {
     var userUID: String
+    var time: NSDate
     
-    init(userUID: String) {
+    init(userUID: String, time: String) {
         self.userUID = userUID
+        self.time = NSDate(timeIntervalSince1970: Double(time)!)
     }
 }
 
@@ -48,7 +50,7 @@ class Event {
     var startDate: Double
     var location: LocationCords
     var comments: [Comment]
-    var guests: [User]
+    var guests: [String] //String with userUID
     
     init() {
         hostUID = ""
