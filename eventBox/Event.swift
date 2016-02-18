@@ -29,17 +29,29 @@ struct Guest {
     }
 }
 
-struct Comment {
+struct Message {
     var userUID: String
     var time: NSDate
     var message: String
-    var commentUID: String
+    var messageUID: String
     
-    init(userUID: String, time: Double, message: String, commentUID: String) {
+    init(userUID: String, time: Double, message: String, messageUID: String) {
         self.userUID = userUID
         self.time = NSDate(timeIntervalSince1970: time)
         self.message = message
-        self.commentUID = commentUID
+        self.messageUID = messageUID
+    }
+}
+
+struct Item {
+    var itemUID: String
+    var item: String
+    var userUID: String
+    
+    init(itemUID: String, item: String, userUID: String) {
+        self.itemUID = itemUID
+        self.item = item
+        self.userUID = userUID
     }
 }
 
@@ -49,8 +61,9 @@ class Event {
     var eventName: String
     var startDate: Double
     var location: LocationCords
-    var comments: [Comment]
+    var messages: [Message]
     var guests: [String] //String with userUID
+    var items: [Item]
     
     init() {
         hostUID = ""
@@ -58,7 +71,8 @@ class Event {
         eventName = ""
         startDate = 0
         location = LocationCords(lat: 0.0, lon: 0.0)
-        comments = []
+        messages = []
         guests = []
+        items = []
     }
 }

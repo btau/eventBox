@@ -38,7 +38,7 @@ class NetworkManager {
         print("Network Manager Initialized")
         eventsRef = rootRef.childByAppendingPath("events")
         usersRef = rootRef.childByAppendingPath("users")
-        setUpObservers()
+//        setUpObservers()
     }
     
     //MARK: Facebook Login
@@ -140,8 +140,9 @@ class NetworkManager {
             "startDate": event.startDate,
             "lat":String(event.location.lat),
             "lon":String(event.location.lon),
-            "comments": [],
-            "guests":[]]
+            "messages": [],
+            "guests":[],
+            "items": []]
         
         eventRef.setValue(eventData)
     }
@@ -181,18 +182,24 @@ class NetworkManager {
             }
         }
         
+        if let items = eventData["items"] as? [Item] {
+            for item in items {
+                newEvent.items.append(item)
+            }
+        }
+        
             //        newEvent.hostUID = eventData["hostUID"] as! String
             
-            //        if let comments = eventData["comments"] as? [String:AnyObject] {
-            //            for comment in comments {
+            //        if let messages = eventData["messages"] as? [String:AnyObject] {
+            //            for message in messages {
             //
-            //                let time = comment.1["time"] as! Double
-            //                let message = comment.1["message"] as! String
-            //                let userUID = comment.1["userUID"] as! String
+            //                let time = message.1["time"] as! Double
+            //                let newMessage = message.1["message"] as! String
+            //                let userUID = message.1["userUID"] as! String
             //
-            //                let commentUID = comment.0
+            //                let messageUID = message.0
             //
-            //                newEvent.comments.append(Comment(userUID: userUID, time: time, message: message, commentUID: commentUID))
+            //                newEvent.messages.append(Message(userUID: userUID, time: time, message: message, messageUID: messageUID))
             //            }
             //        }
             return newEvent
@@ -220,7 +227,7 @@ class NetworkManager {
         }
     }
     
-    //Guest Attendance Handling
+    //Event Attendance Handling
     func attendEvent(eventUID: String) {
         
         guard let userUID = currentUser?.UID
@@ -229,14 +236,53 @@ class NetworkManager {
         let attendEventRef = eventsRef.childByAppendingPath("\(eventUID)/guests/\(userUID)")
         let attendanceData = ["time": String(NSDate().timeIntervalSince1970)]
         
+        let userEventRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventUID)")
+        let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
+        
         attendEventRef.updateChildValues(attendanceData)
+        userEventRef.updateChildValues(userEventData)
     }
     
     func unattendEvent(userUID: String, eventUID: String) {
         
         let attendEventRef = eventsRef.childByAppendingPath("\(eventUID)/guests/\(userUID)")
         attendEventRef.removeValue()
+        
+        let userEventRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventUID)")
+        userEventRef.removeValue()
     }
+    
+    
+    //Admin Item Handling
+    func addItem(item: String, toEvent eventUID: String) {
+        
+        let eventItemRef = eventsRef.childByAppendingPath("\(eventUID)/items/").childByAutoId()
+        
+        let metaData = ["item": item]
+        
+        eventItemRef.setValue(metaData)
+    }
+    
+    func removeItem(eventUID: String) {
+        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items")
+
+        itemRef.removeValue()
+    }
+    
+    //User Item Handling
+    func selectItem(eventUID: String, itemUID: String, userUID: String) {
+        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)")
+        let itemData = ["userUID": String(userUID)]
+        
+        itemRef.updateChildValues(itemData)
+    }
+    
+    func unselectItem(eventUID: String, itemUID: String, userUID: String) {
+        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)/\(userUID)")
+        
+        itemRef.removeValue()
+    }
+    
 }
 
 

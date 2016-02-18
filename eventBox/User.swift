@@ -9,6 +9,17 @@
 import Foundation
 import UIKit
 
+
+struct UserEvent {
+    var eventUID: String
+    var time: NSDate
+    
+    init(eventUID: String, time: String) {
+        self.eventUID = eventUID
+        self.time = NSDate(timeIntervalSince1970: Double(time)!)
+    }
+}
+
 class User {
     var UID: String
     var userName: String
