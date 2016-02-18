@@ -264,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="1205"/>
+            <point key="canvasLocation" x="1221" y="635"/>
         </scene>
         <!--Dashboard View Controller-->
         <scene sceneID="I3J-B6-TAC">
@@ -350,17 +350,23 @@
                                         <color key="value" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="thumbColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="unselectedLabelColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onSegmentControlChanged:forEvent:" destination="Xv8-wC-Jqe" eventType="valueChanged" id="qMy-aq-TFU"/>
                                 </connections>
                             </view>
-                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="snw-ec-z56">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="snw-ec-z56">
                                 <rect key="frame" x="0.0" y="80" width="600" height="442"/>
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XFO-60-VMN">
@@ -711,7 +717,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jDQ-tJ-NHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="QAt-v7-KET" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1922" y="1909"/>
+            <point key="canvasLocation" x="1221" y="2629"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="4Jq-xB-dMa">
@@ -725,33 +731,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdC-nE-h8W">
-                                <rect key="frame" x="150" y="124" width="300" height="280"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wI-vs-lpQ" customClass="CalendarView">
-                                        <rect key="frame" x="10" y="10" width="280" height="260"/>
-                                        <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="280" id="9Vp-V4-s17"/>
-                                            <constraint firstAttribute="height" constant="260" id="ZUO-nP-qaS"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="A7F-FD-sFa"/>
-                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerY" secondItem="FdC-nE-h8W" secondAttribute="centerY" id="Kha-Ry-wjn"/>
-                                    <constraint firstAttribute="height" constant="280" id="mPg-Ih-Dj6"/>
-                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerX" secondItem="FdC-nE-h8W" secondAttribute="centerX" id="oqt-Iu-9h2"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wrl-9R-SM2">
-                                <rect key="frame" x="180" y="412" width="240" height="64"/>
+                                <rect key="frame" x="182.5" y="412" width="235" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avg-jQ-7yl">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
@@ -772,7 +753,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G20-FB-V8R">
-                                        <rect key="frame" x="176" y="0.0" width="64" height="64"/>
+                                        <rect key="frame" x="171" y="0.0" width="64" height="64"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="Huu-Ku-NQn"/>
@@ -791,6 +772,31 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FdC-nE-h8W">
+                                <rect key="frame" x="152.5" y="124" width="295" height="280"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wI-vs-lpQ" customClass="CalendarView">
+                                        <rect key="frame" x="10" y="10" width="275" height="260"/>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="9Vp-V4-s17"/>
+                                            <constraint firstAttribute="height" constant="260" id="ZUO-nP-qaS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="A7F-FD-sFa"/>
+                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerY" secondItem="FdC-nE-h8W" secondAttribute="centerY" id="Kha-Ry-wjn"/>
+                                    <constraint firstAttribute="height" constant="280" id="mPg-Ih-Dj6"/>
+                                    <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerX" secondItem="FdC-nE-h8W" secondAttribute="centerX" id="oqt-Iu-9h2"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wrl-9R-SM2" firstAttribute="leading" secondItem="FdC-nE-h8W" secondAttribute="leading" constant="30" id="LbK-5b-Mao"/>
@@ -808,7 +814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Da0-4J-NKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1922" y="2652"/>
+            <point key="canvasLocation" x="1221" y="3368"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Way-MD-Tww">
@@ -889,7 +895,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="myi-Jq-Rfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="2580"/>
+            <point key="canvasLocation" x="1221" y="1246"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="D7z-Ax-C5D">
@@ -907,7 +913,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BRC-87-z98" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1949" y="1205"/>
+            <point key="canvasLocation" x="1949" y="635"/>
         </scene>
     </scenes>
     <resources>
