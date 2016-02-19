@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - Calendar-iOS (0.9)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.0):
@@ -12,18 +13,23 @@ PODS:
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - Firebase (2.5.0)
+  - FoldingTabBar (1.0.2)
 
 DEPENDENCIES:
+  - Calendar-iOS
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
   - Firebase
+  - FoldingTabBar (~> 1.0.2)
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Calendar-iOS: 2296d7b4354a36ee1eefa012617b573270a206cb
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  FoldingTabBar: 79df76dfd5a84c0a369beaa378a31c07aa53b6b2
 
 COCOAPODS: 0.39.0

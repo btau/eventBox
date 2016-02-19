@@ -57,4 +57,28 @@ import UIKit
         }
     }
     
+    @IBInspectable var leftPadding: CGFloat {
+        get {
+            return 0
+        }
+        set {
+            let paddingView = UIView(frame: CGRectMake(0,0,newValue,20))
+            
+            leftView     = paddingView
+            leftViewMode = .Always
+        }
+    }
+    
+}
+
+extension UIColor {
+    
+    class func eventBoxGreen() -> UIColor {
+        return UIColor(red: 91/255, green: 255/255, blue: 134/255, alpha: 1.0)
+    }
+    
+    class func eventBoxBlack() -> UIColor {
+        return UIColor(red: 49/255, green: 49/255, blue: 49/255, alpha: 1.0)
+    }
+    
 }

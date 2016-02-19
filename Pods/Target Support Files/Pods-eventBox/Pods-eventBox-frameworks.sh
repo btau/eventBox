@@ -85,15 +85,19 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-eventBox/Bolts.framework"
+  install_framework "Pods-eventBox/Calendar_iOS.framework"
   install_framework "Pods-eventBox/FBSDKCoreKit.framework"
   install_framework "Pods-eventBox/FBSDKLoginKit.framework"
   install_framework "Pods-eventBox/FBSDKShareKit.framework"
   install_framework "Pods-eventBox/Firebase.framework"
+  install_framework "Pods-eventBox/FoldingTabBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-eventBox/Bolts.framework"
+  install_framework "Pods-eventBox/Calendar_iOS.framework"
   install_framework "Pods-eventBox/FBSDKCoreKit.framework"
   install_framework "Pods-eventBox/FBSDKLoginKit.framework"
   install_framework "Pods-eventBox/FBSDKShareKit.framework"
   install_framework "Pods-eventBox/Firebase.framework"
+  install_framework "Pods-eventBox/FoldingTabBar.framework"
 fi

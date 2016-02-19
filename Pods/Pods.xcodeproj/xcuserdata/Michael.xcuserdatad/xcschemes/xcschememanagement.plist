@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Calendar-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FoldingTabBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-eventBox.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,6 +47,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0F52284BB73D7CF6A946B01B92E4E07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>360DDE334700FEA7F68FFF42F46F6CDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
 		<dict>
 			<key>primary</key>
@@ -47,7 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AEEDDAC77EAC281EE268D45FB63787AF</key>
+		<key>A9311AEE29526A452F26D77A6AF612F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

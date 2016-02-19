@@ -4,9 +4,13 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'eventBox' do
+    
 pod 'Firebase'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'Calendar-iOS'
+pod 'FoldingTabBar', '~> 1.0.2'
+
 end
 
