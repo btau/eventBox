@@ -19,36 +19,60 @@ struct LocationCords {
     }
 }
 
-struct Comment {
+struct Guest {
+    var userUID: String
+    var time: NSDate
+    
+    init(userUID: String, time: String) {
+        self.userUID = userUID
+        self.time = NSDate(timeIntervalSince1970: Double(time)!)
+    }
+}
+
+struct Message {
     var userUID: String
     var time: NSDate
     var message: String
+    var messageUID: String
     
-    init(userUID: String, time: Double, message: String) {
+    init(userUID: String, time: Double, message: String, messageUID: String) {
         self.userUID = userUID
         self.time = NSDate(timeIntervalSince1970: time)
         self.message = message
+        self.messageUID = messageUID
+    }
+}
+
+struct Item {
+    var itemUID: String
+    var item: String
+    var userUID: String
+    
+    init(itemUID: String, item: String, userUID: String) {
+        self.itemUID = itemUID
+        self.item = item
+        self.userUID = userUID
     }
 }
 
 class Event {
+    var hostUID: String
     var eventUID: String
     var eventName: String
-//    var startDate: NSDate
-//    var startTime: NSDate
-//    var endDate: NSDate
-//    var endTime: NSDate
+    var startDate: Double
     var location: LocationCords
-    var comments: [Comment]
+    var messages: [Message]
+    var guests: [String] //String with userUID
+    var items: [Item]
     
-    init(time: Double) {
+    init() {
+        hostUID = ""
         eventUID = ""
         eventName = ""
-//        startDate = NSDate(
-//        startTime = NSDate(
-//        endDate = NSDate(
-//        endTime = NSDate(
+        startDate = 0
         location = LocationCords(lat: 0.0, lon: 0.0)
-        comments = []
+        messages = []
+        guests = []
+        items = []
     }
 }
