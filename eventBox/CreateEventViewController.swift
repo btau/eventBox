@@ -142,7 +142,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             
            
             
-            let time = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss", userInfo: nil, repeats: false)
+          //  let time = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss", userInfo: nil, repeats: false)
         }
     }
     

@@ -24,10 +24,13 @@
 		4C44BB0A1C74E433003A0276 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB091C74E433003A0276 /* CalendarViewController.swift */; };
 		4C44BB0C1C74FB1C003A0276 /* CalendarViewSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0B1C74FB1C003A0276 /* CalendarViewSegue.swift */; };
 		4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */; };
+		4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */; };
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
 		4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */; };
+		4CFF2E901C7668E6007DFC93 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */; };
+		4CFF2E921C766D9D007DFC93 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E911C766D9D007DFC93 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,14 +50,17 @@
 		4C17AD1E1C7286030015D03B /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
 		4C17AD201C7286190015D03B /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		4C44BB021C74CD67003A0276 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
-		4C44BB061C74DD31003A0276 /* eventBox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "eventBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		4C44BB091C74E433003A0276 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		4C44BB0B1C74FB1C003A0276 /* CalendarViewSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewSegue.swift; sourceTree = "<group>"; };
 		4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventUnwind.swift; sourceTree = "<group>"; };
+		4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSegue.swift; sourceTree = "<group>"; };
+		4CFF2E8E1C7659B7007DFC93 /* eventBox-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eventBox-Bridging-Header.h"; sourceTree = "<group>"; };
+		4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		4CFF2E911C766D9D007DFC93 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		B7C47453BEED7D5FF78F0351 /* Pods_eventBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD04160F45067675777DE5C1 /* Pods-eventBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventBox/Pods-eventBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +143,9 @@
 				4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */,
 				4C44BB021C74CD67003A0276 /* CreateEventViewController.swift */,
 				4C44BB091C74E433003A0276 /* CalendarViewController.swift */,
+				4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */,
+				4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */,
+				4CFF2E911C766D9D007DFC93 /* ListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -153,8 +162,8 @@
 		4CE97DBF1C7395BD0081BE50 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4CFF2E8E1C7659B7007DFC93 /* eventBox-Bridging-Header.h */,
 				4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */,
-				4C44BB061C74DD31003A0276 /* eventBox-Bridging-Header.h */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -293,15 +302,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CFF2E921C766D9D007DFC93 /* ListViewController.swift in Sources */,
 				4C44BB0A1C74E433003A0276 /* CalendarViewController.swift in Sources */,
 				4C17AD211C7286190015D03B /* EventCell.swift in Sources */,
 				4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */,
 				4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */,
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
+				4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */,
 				4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */,
 				4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */,
 				0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */,
+				4CFF2E901C7668E6007DFC93 /* MessageViewController.swift in Sources */,
 				4C44BB031C74CD67003A0276 /* CreateEventViewController.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
