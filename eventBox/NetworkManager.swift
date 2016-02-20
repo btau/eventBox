@@ -11,6 +11,8 @@ import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
 
+
+
 class NetworkManager {
     
     class var sharedManager: NetworkManager {
@@ -22,6 +24,11 @@ class NetworkManager {
             Static.instance = NetworkManager()
         }
         return Static.instance!
+    }
+    
+ 
+    var authData: FAuthData? {
+        return rootRef.authData
     }
     
     private
@@ -41,6 +48,7 @@ class NetworkManager {
 //        setUpObservers()
     }
     
+    
     //MARK: Facebook Login
 //    func isLoggedIn() -> Bool {
 //        if authData != nil {
@@ -49,23 +57,26 @@ class NetworkManager {
 //        return false
 //    }
 //    
-//    func logout() {
-//        rootRef.unauth()
+    func logout() {
+        rootRef.unauth()
 //        authData = nil
-//    }
+    }
     
     let facebookLogin = FBSDKLoginManager()
     
-    func loginWithFB() 
+    func loginWithFB(DidLogInUser loggedInUser: ()->Void, DidFailToLogInUser failedLogIn:(error:NSError)->Void)
     {
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: nil, handler:
             {(facebookResult, facebookError) -> Void in
             
             if facebookError != nil {
                 print("Facebook Login failed. Error \(facebookError)")
+                failedLogIn(error: facebookError)
             }
             else if facebookResult.isCancelled {
                 print("Facebook Login was cancelled")
+                let error = NSError(domain: "Canceled", code: 64, userInfo: [NSLocalizedDescriptionKey : "Login Canceled"])
+                failedLogIn(error: error)
             }
             else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
@@ -74,6 +85,7 @@ class NetworkManager {
                     
                     if error != nil {
                         print("Login failed. \(error)")
+                        failedLogIn(error: error)
                     }
                     else {
                         print("Logged In \(authData.providerData["displayName"])")
@@ -93,6 +105,7 @@ class NetworkManager {
                         
                         self.currentUser = newUser
                         print("Facebook func: \(self.currentUser!.UID)")
+                        loggedInUser()
                     }
                 })
             }
