@@ -31,6 +31,7 @@
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
 		4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */; };
+		4CFD8A881C778BE40041AD0A /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFD8A871C778BE40041AD0A /* MessageTableViewCell.swift */; };
 		4CFF2E901C7668E6007DFC93 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */; };
 		4CFF2E921C766D9D007DFC93 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E911C766D9D007DFC93 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSegue.swift; sourceTree = "<group>"; };
+		4CFD8A871C778BE40041AD0A /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		4CFF2E8E1C7659B7007DFC93 /* eventBox-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eventBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		4CFF2E911C766D9D007DFC93 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */,
 				4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */,
 				4C44BB0B1C74FB1C003A0276 /* CalendarViewSegue.swift */,
+				4CFD8A871C778BE40041AD0A /* MessageTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */,
 				0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */,
 				4CFF2E901C7668E6007DFC93 /* MessageViewController.swift in Sources */,
+				4CFD8A881C778BE40041AD0A /* MessageTableViewCell.swift in Sources */,
 				4C44BB031C74CD67003A0276 /* CreateEventViewController.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
