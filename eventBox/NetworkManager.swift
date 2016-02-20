@@ -134,9 +134,10 @@ class NetworkManager {
         
         let eventRef = eventsRef.childByAutoId()
         
-        let eventData =
+        let eventData: [String:AnyObject] =
         ["eventUID": eventRef.key,
             "eventName": event.eventName,
+            "hostUID": event.hostUID,
             "startDate": event.startDate,
             "lat":String(event.location.lat),
             "lon":String(event.location.lon),
@@ -172,6 +173,7 @@ class NetworkManager {
         let lon = eventData["lon"] as! String
         
         newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
+        newEvent.hostUID = eventData["hostUID"] as! String
         newEvent.eventUID = eventData["eventUID"] as! String
         newEvent.eventName = eventData["eventName"] as! String
         newEvent.startDate = eventData["startDate"] as! Double
@@ -188,8 +190,8 @@ class NetworkManager {
             }
         }
         
-            //        newEvent.hostUID = eventData["hostUID"] as! String
-            
+        return newEvent
+        
             //        if let messages = eventData["messages"] as? [String:AnyObject] {
             //            for message in messages {
             //
@@ -202,8 +204,6 @@ class NetworkManager {
             //                newEvent.messages.append(Message(userUID: userUID, time: time, message: message, messageUID: messageUID))
             //            }
             //        }
-            return newEvent
-        
     }
     
     
@@ -254,33 +254,36 @@ class NetworkManager {
     
     
     //Admin Item Handling
-    func addItem(item: String, toEvent eventUID: String) {
+    func addItem(item item: String, eventUID: String) {
         
         let eventItemRef = eventsRef.childByAppendingPath("\(eventUID)/items/").childByAutoId()
         
-        let metaData = ["item": item]
+        let eventItemData = ["item": item]
         
-        eventItemRef.setValue(metaData)
+        eventItemRef.setValue(eventItemData)
     }
     
-    func removeItem(eventUID: String) {
-        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items")
+    func removeItem(eventUID eventUID: String, itemUID: String) {
+        
+        let eventItemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)")
 
-        itemRef.removeValue()
+        eventItemRef.removeValue()
     }
     
     //User Item Handling
-    func selectItem(eventUID: String, itemUID: String, userUID: String) {
-        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)")
-        let itemData = ["userUID": String(userUID)]
+    func selectItem(eventUID eventUID: String, itemUID: String, userUID: String) {
         
-        itemRef.updateChildValues(itemData)
+        let eventItemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)")
+        let eventItemData = ["userUID": String(userUID)]
+        
+        eventItemRef.updateChildValues(eventItemData)
     }
     
-    func unselectItem(eventUID: String, itemUID: String, userUID: String) {
-        let itemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)/\(userUID)")
+    func unselectItem(eventUID eventUID: String, itemUID: String) {
         
-        itemRef.removeValue()
+        let eventItemRef = eventsRef.childByAppendingPath("\(eventUID)/items/\(itemUID)/userUID")
+        
+        eventItemRef.removeValue()
     }
     
 }
