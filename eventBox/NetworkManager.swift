@@ -47,7 +47,7 @@ class NetworkManager {
         usersRef = rootRef.childByAppendingPath("users")
         
         if rootRef.authData != nil {
-
+            
         }
 //        setUpObservers()
     }
@@ -69,6 +69,7 @@ class NetworkManager {
     
     func loginWithFB(DidLogInUser loggedInUser: ()->Void, DidFailToLogInUser failedLogIn:(error:NSError)->Void)
     {
+        
         facebookLogin.logInWithReadPermissions(["email"], fromViewController: nil, handler:
             {(facebookResult, facebookError) -> Void in
             
@@ -97,7 +98,7 @@ class NetworkManager {
                         newUser.UID = authData.uid
                         newUser.userName = (authData.providerData["displayName"] as? String)!
                         newUser.image = (authData.providerData["profileImageURL"] as? String)!
-
+                        
                         let newUserRef = self.usersRef.childByAppendingPath(newUser.UID)
                         
                         let userData: [String:AnyObject] =
@@ -116,33 +117,50 @@ class NetworkManager {
     }
     
     //MARK: User Handling
-    func getUserForUID(userUID: String, didGetUser: (user: User) -> Void) {
+    func getUserForUID(userUID: String?, didGetUser: (user: User) -> Void) {
+        
+        if userUID == nil {
+            
+            let userRef = self.usersRef.childByAppendingPath(self.authData?.uid)
+            Debug.log(self.authData!.uid)
+            userRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
+                
+                self.currentUser = self.unpackUser(snapshot)
+                
+                didGetUser(user: self.currentUser!)
+            }
+            
+            return
+        }
         
         let userRef = usersRef.childByAppendingPath(userUID)
         
         userRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
             
-            let currentUser = self.unpackUser(snapshot.value as! [String:AnyObject])
+            let currentUser = self.unpackUser(snapshot)
          
             didGetUser(user: currentUser)
         }
     }
     
-    func unpackUser(userData: [String:AnyObject]) -> User {
+    func unpackUser(data: FDataSnapshot) -> User {
         
-        let newUser = User?()
+        let userData = data.value as! [String:AnyObject]
         
-        newUser!.UID = userData["userUID"] as! String
-        newUser!.userName = userData["userName"] as! String
-        newUser!.image = userData["image"] as! String
+        let UID = data.key
         
-        if let userEvents = userData["userEvents"] as? [String] {
+        let newUser = User(UID: UID)
+        
+        newUser.userName = userData["userName"] as! String
+        newUser.image = userData["image"] as! String
+        
+        if let userEvents = userData["userEvents"] as? [String:[String:String]] {
             for event in userEvents {
-                newUser!.userEvents.append(event)
+                newUser.userEvents.append(event.0)
             }
         }
         
-        return newUser!
+        return newUser
     }
     
     //MARK: Set Up Observers
@@ -177,6 +195,11 @@ class NetworkManager {
     //MARK: Event Handling
     func createEvent(event: Event) {
         
+        guard let userUID = currentUser?.UID else {
+            Debug.log("No User")
+            return
+        }
+        
         let eventRef = eventsRef.childByAutoId()
         
         let eventData: [String:AnyObject] =
@@ -190,6 +213,10 @@ class NetworkManager {
             "guests":[],
             "items": []]
         
+        let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
+        let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
+        
+        userAdminRef.setValue(userEventData)
         eventRef.setValue(eventData)
     }
    
@@ -252,24 +279,46 @@ class NetworkManager {
     }
     
     
-    func getUserEvents() {
-        eventsRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
-            print("get Event Func: \(self.currentUser!.UID)")
-            let keys = snapshot.value.allKeys as! [String]
+    
+    func getUserEvents(
+        Success didGetEvents: (events: [Event]) -> Void,
+        Failed failedToGetEvents: () -> Void
+        ) {
             
-            var userEvents = [Event]()
-            
-            for key in keys {
-                guard let eventData = snapshot.value.objectForKey(key) as? [String:AnyObject]
-                    else { print("Error in events"); break }
-                
-                let newEvent = self.unpackEvent(eventData)
-                if newEvent.guests.contains((self.currentUser?.UID)!) {
-                    userEvents.append(newEvent)
-                    print("Count: \(userEvents.count)")
-                }
+            guard let eventsToDownload = currentUser?.userEvents else {
+                failedToGetEvents()
+                return
             }
-        }
+            
+           // print(eventsToDownload.count)
+            
+            var index = 0
+            
+            var events = [Event]()
+            
+            for event in eventsToDownload {
+                
+                eventsRef.childByAppendingPath(event).observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+                    
+                    let event = self.unpackEvent(snapshot.value as! [String:AnyObject])
+                    events.append(event)
+                    
+                    index++
+                    
+                    if index == eventsToDownload.count {
+                        
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            didGetEvents(events: events)
+                        })
+                        
+                    }
+                    
+                })
+                
+            }
+            
+            
+
     }
     
     //Event Attendance Handling

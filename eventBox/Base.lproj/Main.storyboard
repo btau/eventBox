@@ -480,6 +480,9 @@
                             <constraint firstItem="s66-PS-lif" firstAttribute="trailing" secondItem="Hxn-pO-6Wz" secondAttribute="trailingMargin" id="uZj-XX-yac"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="snw-ec-z56" id="uO9-i6-Xxj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxg-zM-2vu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,9 +13,7 @@ class LaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NetworkManager.sharedManager.logout()
-        
+                
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -28,7 +26,11 @@ class LaunchViewController: UIViewController {
             return
         }
         //Is logged in
-        performSegueWithIdentifier("LoggedInSegue", sender: nil)
+        
+        NetworkManager.sharedManager.getUserForUID(nil) { (user) -> Void in
+            self.performSegueWithIdentifier("LoggedInSegue", sender: nil)
+        }
+        
     }
     
     

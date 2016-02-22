@@ -12,9 +12,23 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
 
     var animator: UIDynamicAnimator?
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    var events: [Event]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NetworkManager.sharedManager.getUserEvents(
+            Success: { (events) -> Void in
+                self.events = events
+                self.collectionView.reloadData()
+            },
+            Failed: { () -> Void in
+                
+        })
+        
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -34,7 +48,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if let eventCount = events?.count {
+            collectionView.hidden = false
+            return eventCount
+        }
+        collectionView.hidden = true
+        return 0
     }
     
     
