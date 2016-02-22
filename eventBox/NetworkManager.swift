@@ -45,9 +45,12 @@ class NetworkManager {
         print("Network Manager Initialized")
         eventsRef = rootRef.childByAppendingPath("events")
         usersRef = rootRef.childByAppendingPath("users")
+        
+        if rootRef.authData != nil {
+
+        }
 //        setUpObservers()
     }
-    
     
     //MARK: Facebook Login
 //    func isLoggedIn() -> Bool {
@@ -112,6 +115,36 @@ class NetworkManager {
         })
     }
     
+    //MARK: User Handling
+    func getUserForUID(userUID: String, didGetUser: (user: User) -> Void) {
+        
+        let userRef = usersRef.childByAppendingPath(userUID)
+        
+        userRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) -> Void in
+            
+            let currentUser = self.unpackUser(snapshot.value as! [String:AnyObject])
+         
+            didGetUser(user: currentUser)
+        }
+    }
+    
+    func unpackUser(userData: [String:AnyObject]) -> User {
+        
+        let newUser = User?()
+        
+        newUser!.UID = userData["userUID"] as! String
+        newUser!.userName = userData["userName"] as! String
+        newUser!.image = userData["image"] as! String
+        
+        if let userEvents = userData["userEvents"] as? [String] {
+            for event in userEvents {
+                newUser!.userEvents.append(event)
+            }
+        }
+        
+        return newUser!
+    }
+    
     //MARK: Set Up Observers
     func setUpObservers() {
         
@@ -141,9 +174,8 @@ class NetworkManager {
         }
     }
 
-    
     //MARK: Event Handling
-    func sendEvent(event: Event) {
+    func createEvent(event: Event) {
         
         let eventRef = eventsRef.childByAutoId()
         
