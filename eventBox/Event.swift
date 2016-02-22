@@ -64,6 +64,10 @@ class Event {
     var messages: [Message]
     var guests: [String] //String with userUID
     var items: [Item]
+    var backgroundImage: UIImage {
+        return UIImage(named: imageName)!
+    }
+    var imageName: String
     
     init() {
         hostUID = ""
@@ -74,5 +78,6 @@ class Event {
         messages = []
         guests = []
         items = []
+        imageName = "1"
     }
 }
