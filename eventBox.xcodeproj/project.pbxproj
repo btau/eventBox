@@ -33,6 +33,7 @@
 		4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */; };
 		4CF418231C7902210040A0A6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418221C7902210040A0A6 /* LaunchViewController.swift */; };
 		4CF418251C7908550040A0A6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418241C7908550040A0A6 /* OnboardingViewController.swift */; };
+		4CF418271C791A5C0040A0A6 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418261C791A5C0040A0A6 /* TimeViewController.swift */; };
 		4CFD8A881C778BE40041AD0A /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFD8A871C778BE40041AD0A /* MessageTableViewCell.swift */; };
 		4CFF2E901C7668E6007DFC93 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */; };
 		4CFF2E921C766D9D007DFC93 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFF2E911C766D9D007DFC93 /* ListViewController.swift */; };
@@ -67,6 +68,7 @@
 		4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSegue.swift; sourceTree = "<group>"; };
 		4CF418221C7902210040A0A6 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		4CF418241C7908550040A0A6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		4CF418261C791A5C0040A0A6 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		4CFD8A871C778BE40041AD0A /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		4CFF2E8E1C7659B7007DFC93 /* eventBox-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eventBox-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CFF2E8F1C7668E6007DFC93 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				4CFF2E911C766D9D007DFC93 /* ListViewController.swift */,
 				4CF418221C7902210040A0A6 /* LaunchViewController.swift */,
 				4CF418241C7908550040A0A6 /* OnboardingViewController.swift */,
+				4CF418261C791A5C0040A0A6 /* TimeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CFF2E921C766D9D007DFC93 /* ListViewController.swift in Sources */,
+				4CF418271C791A5C0040A0A6 /* TimeViewController.swift in Sources */,
 				4C44BB0A1C74E433003A0276 /* CalendarViewController.swift in Sources */,
 				4C17AD211C7286190015D03B /* EventCell.swift in Sources */,
 				0D0D42001C762A5400987B3C /* Debug.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import Calendar_iOS
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate, TimeViewControllerDelegate {
     
     
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -57,14 +57,18 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
         textField.layer.addAnimation(width, forKey: "borderWidth")
         
-        if textField.tag == 1 {
+        switch textField.tag {
+        case 1:
             return true
-        } else if textField.tag == 2 {
-            
+        case 2:
             performSegueWithIdentifier("CalendarPop", sender: nil)
-            
+        case 3:
+            performSegueWithIdentifier("TimePop", sender: nil)
+        default:
+            return false
         }
         return false
+
     }
     
     func clearTextfields(Except selectedTextfield: UITextField?) {
@@ -97,14 +101,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     //MARK: - CalenderView -
     
     func calendarViewControllerDidDismiss() {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.tintView!.alpha = 0
-            }) { (bool:Bool) -> Void in
-                self.tintView?.removeFromSuperview()
-        }
-        
-        clearTextfields(Except: nil)
-        
+        dismissTintView()
     }
     
     func calendarViewControllerDidSelectDate(date: NSDate) {
@@ -113,6 +110,18 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         formatter.timeStyle = .NoStyle
         
         eventDateTextField.text = formatter.stringFromDate(date)
+    }
+    
+    func timeViewControllerDidDismiss() {
+        dismissTintView()
+    }
+    
+    func timeViewControllerDidSelectTime(time: NSDate) {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .NoStyle
+        formatter.timeStyle = .ShortStyle
+        
+        eventTimeTextField.text = formatter.stringFromDate(time)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -129,6 +138,23 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.tintView!.alpha = 0.5
             })
+            
+            
+        } else if segue.identifier == "TimePop" {
+            
+            let timeVC = segue.destinationViewController as! TimeViewController
+            
+            timeVC.delegate = self
+            
+            tintView = UIView(frame: (UIApplication.sharedApplication().keyWindow?.bounds)!)
+            tintView!.alpha = 0
+            tintView!.backgroundColor = .blackColor()
+            self.view.insertSubview(tintView!, atIndex: self.view.subviews.count)
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.tintView!.alpha = 0.5
+            })
+            
+            
         } else if segue.identifier == "addEventUnwind" {
             
             let unwindSegue = segue as! NewEventUnwind
@@ -150,6 +176,24 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             dismissViewControllerAnimated(false, completion: nil)
             print("dealloc")
         }
+    
+    func dismissTintView() {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.tintView!.alpha = 0
+            }) { (bool:Bool) -> Void in
+                self.tintView?.removeFromSuperview()
+        }
+        
+        clearTextfields(Except: nil)
+    }
+    
+    
+    @IBAction func onCreateTapped(sender: UIButton) {
+        
+        
+        
+    }
+    
     
     
     
