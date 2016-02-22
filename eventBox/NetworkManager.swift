@@ -211,7 +211,8 @@ class NetworkManager {
             "lon":String(event.location.lon),
             "messages": [],
             "guests":[],
-            "items": []]
+            "items": [],
+            "imageName": event.imageName]
         
         let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
@@ -249,6 +250,7 @@ class NetworkManager {
         newEvent.eventUID = eventData["eventUID"] as! String
         newEvent.eventName = eventData["eventName"] as! String
         newEvent.startDate = eventData["startDate"] as! Double
+        newEvent.imageName = eventData["imageName"] as! String
         
         if let guests = eventData["guests"] as? [String] {
             for guest in guests {
