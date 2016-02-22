@@ -27,8 +27,9 @@ class OnboardingViewController: UIViewController {
         
         network.loginWithFB(
             DidLogInUser: { () -> Void in
-                
+                NetworkManager.sharedManager.getUserForUID(nil) { (user) -> Void in
                 self.performSegueWithIdentifier("LoggedInSegue", sender: nil)
+                    }
                 
             },
             DidFailToLogInUser: { (error) -> Void in

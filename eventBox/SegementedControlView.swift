@@ -37,7 +37,7 @@ import UIKit
             }
         }
         
-        @IBInspectable var thumbColor : UIColor = UIColor.whiteColor() {
+        @IBInspectable var thumbColor : UIColor = UIColor.eventBoxAccent() {
             didSet {
                 setSelectedColors()
             }
