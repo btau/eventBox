@@ -21,7 +21,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
-                self.collectionView.reloadData()
+               // self.collectionView.reloadData()
             },
             Failed: { () -> Void in
                 
@@ -34,11 +34,38 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
-
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupCollectionView()
     }
 
     
     //MARK: - ColectionView
+    
+    
+    
+    func setupCollectionView() {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        let screenBounds = UIScreen.mainScreen().bounds
+        let refresh = UIRefreshControl()
+        
+        flowLayout.itemSize = CGSizeMake(screenBounds.width, 100)
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.scrollDirection = .Horizontal
+        
+        refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refresh)
+        refresh.bounds.offsetInPlace(dx: -20, dy: 0)
+        
+        collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        
+        collectionView.reloadData()
+        
+    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath)
@@ -56,7 +83,9 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         return 0
     }
     
-    
+    func startRefresh() {
+        
+    }
     
     //MARK: - Actions
     

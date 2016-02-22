@@ -290,8 +290,6 @@ class NetworkManager {
                 return
             }
             
-           // print(eventsToDownload.count)
-            
             var index = 0
             
             var events = [Event]()
