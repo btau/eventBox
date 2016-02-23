@@ -205,7 +205,7 @@ class NetworkManager {
         let eventData: [String:AnyObject] =
         ["eventUID": eventRef.key,
             "eventName": event.eventName,
-            "hostUID": event.hostUID,
+            "hostUID": userUID,
             "startDate": event.startDate,
             "lat":String(event.location.lat),
             "lon":String(event.location.lon),
@@ -244,6 +244,8 @@ class NetworkManager {
         
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
+        
+        print(eventData)
         
         newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
         newEvent.hostUID = eventData["hostUID"] as! String

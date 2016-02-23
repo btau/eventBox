@@ -73,8 +73,18 @@ import UIKit
 
 extension UIColor {
     
+    
     class func eventBoxGreen() -> UIColor {
         return UIColor(red: 91/255, green: 255/255, blue: 134/255, alpha: 1.0)
+    }
+    
+    class func eventBoxAccent() -> UIColor {
+        
+        let green = NSUserDefaults.standardUserDefaults().floatForKey("green") / 255
+        let blue  = NSUserDefaults.standardUserDefaults().floatForKey("blue") / 255
+        let red   = NSUserDefaults.standardUserDefaults().floatForKey("red") / 255
+        
+        return UIColor(colorLiteralRed: red, green: green, blue: blue, alpha: 1.0)
     }
     
     class func eventBoxBlack() -> UIColor {

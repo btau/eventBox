@@ -8,11 +8,21 @@
 
 import UIKit
 
+enum DisplayItems {
+    
+    case All
+    case Upcoming
+    case Past
+    
+}
+
 class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var animator: UIDynamicAnimator?
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var newEventButton: UIButton!
+    @IBOutlet weak var eventsCollectionView: UICollectionView!
+    var cvFrame: CGRect!
     var events: [Event]?
     
     override func viewDidLoad() {
@@ -21,7 +31,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
-               // self.collectionView.reloadData()
+                self.setupCollectionView()
+                
             },
             Failed: { () -> Void in
                 
@@ -39,9 +50,20 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.setupCollectionView()
+
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        var insets = self.eventsCollectionView.contentInset
+        let value = (self.view.frame.size.width - (self.eventsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width) * 0.5
+        insets.left = value
+        insets.right = value
+        self.eventsCollectionView.contentInset = insets
+        self.eventsCollectionView.decelerationRate = UIScrollViewDecelerationRateFast;
+        
+    }
+    
     
     //MARK: - ColectionView
     
@@ -49,27 +71,45 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func setupCollectionView() {
         
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = CenterCellCollectionViewFlowLayout()
         let screenBounds = UIScreen.mainScreen().bounds
         let refresh = UIRefreshControl()
         
-        flowLayout.itemSize = CGSizeMake(screenBounds.width, 100)
-        flowLayout.minimumLineSpacing = 0
+        flowLayout.itemSize = CGSizeMake(screenBounds.width - 50, eventsCollectionView.frame.height)
+        flowLayout.minimumLineSpacing = -10
         flowLayout.scrollDirection = .Horizontal
         
         refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        collectionView.addSubview(refresh)
-        refresh.bounds.offsetInPlace(dx: -20, dy: 0)
         
-        collectionView.setCollectionViewLayout(flowLayout, animated: false)
+
+        eventsCollectionView.addSubview(refresh)
+        refresh.bounds.offsetInPlace(dx: 0, dy: -20)
         
-        collectionView.reloadData()
+        eventsCollectionView.collectionViewLayout = flowLayout
+        
+        cvFrame = eventsCollectionView.frame
+        eventsCollectionView.frame = CGRect(x: cvFrame.origin.x, y: cvFrame.origin.y + UIScreen.mainScreen().bounds.height, width: cvFrame.width, height: cvFrame.height)
+        
+        eventsCollectionView.reloadData()
+        UIView.animateWithDuration(0.8, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+
+            self.eventsCollectionView.frame = self.cvFrame
+            
+            }, completion: {
+                //Code to run after animating
+                (value: Bool) in
+        })
         
     }
+
+    
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath)
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath) as? EventCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         
+        cell.configureWithEvent(events![indexPath.row])
     
         return cell
     }
@@ -79,12 +119,28 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             collectionView.hidden = false
             return eventCount
         }
+        
         collectionView.hidden = true
         return 0
     }
     
+    
+    func exchangeCollectionItems(displayItems: DisplayItems) {
+//        
+//        switch displayItems {
+//            case
+//        }
+//        
+    }
+    
+    
     func startRefresh() {
         
+    }
+    
+    
+    func setColors() {
+        newEventButton.tintColor = UIColor.eventBoxAccent()
     }
     
     //MARK: - Actions
