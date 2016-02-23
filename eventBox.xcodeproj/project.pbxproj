@@ -16,6 +16,7 @@
 		0D2AF81B1C725A17004099AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D2AF8191C725A17004099AD /* LaunchScreen.storyboard */; };
 		0D2AF82A1C72638F004099AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF8291C72638F004099AD /* NetworkManager.swift */; };
 		0D2AF82C1C736900004099AD /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AF82B1C736900004099AD /* Event.swift */; };
+		0D7C81901C7BA83600892A25 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C818F1C7BA83600892A25 /* MapViewController.swift */; };
 		0E27CAEB1C73C67A0044688D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEA1C73C67A0044688D /* FBSDKCoreKit.framework */; };
 		0E27CAED1C73C68A0044688D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEC1C73C68A0044688D /* FBSDKLoginKit.framework */; };
 		0E27CAEF1C73C6940044688D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E27CAEE1C73C6940044688D /* FBSDKShareKit.framework */; };
@@ -53,6 +54,7 @@
 		0D2AF81C1C725A17004099AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D2AF8291C72638F004099AD /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0D2AF82B1C736900004099AD /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		0D7C818F1C7BA83600892A25 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0E27CAEA1C73C67A0044688D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		0E27CAEC1C73C68A0044688D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0E27CAEE1C73C6940044688D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../Desktop/FacebookSDKs-iOS-20160210/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				4CF418221C7902210040A0A6 /* LaunchViewController.swift */,
 				4CF418241C7908550040A0A6 /* OnboardingViewController.swift */,
 				4CF418261C791A5C0040A0A6 /* TimeViewController.swift */,
+				0D7C818F1C7BA83600892A25 /* MapViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				0D0D42001C762A5400987B3C /* Debug.swift in Sources */,
 				4C17AD1F1C7286030015D03B /* EventHeaderCell.swift in Sources */,
 				4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */,
+				0D7C81901C7BA83600892A25 /* MapViewController.swift in Sources */,
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
 				4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */,
