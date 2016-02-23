@@ -25,11 +25,14 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     var cvFrame: CGRect!
     var events: [Event]?
-    
-    let CVA_DURATION: Double  = 0.8
-    let CVA_DELAY: Double     = 0.0
-    let CVA_DAMPING: CGFloat  = 0.5
+
+    let CVA_DURATION: Double  = 0.5
+    let CVA_DELAY:    Double  = 0.0
+    let CVA_DAMPING:  CGFloat = 0.75
     let CVA_VELOCITY: CGFloat = 0.5
+    
+    let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,14 +41,14 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
+                
+                self.events?.sortInPlace({ NSDate(timeIntervalSince1970: $0.0.startDate).compare(NSDate(timeIntervalSince1970: $0.1.startDate )) == .OrderedAscending })
+
                 self.popDropCollectionView(true)
             },
             Failed: { () -> Void in
                 
         })
-        
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,6 +59,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        popDownCell()
         
     }
     
@@ -81,30 +85,20 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         let screenBounds = UIScreen.mainScreen().bounds
         let refresh = UIRefreshControl()
         
+        
+        eventsCollectionView.frame = CGRect(x: 0.0, y: 80, width: eventsCollectionView.frame.width, height: screenBounds.height - (80 + 78))
+        cvFrame = eventsCollectionView.frame
+
+        
         flowLayout.itemSize = CGSizeMake(screenBounds.width - 50, eventsCollectionView.frame.height)
         flowLayout.minimumLineSpacing = -10
         flowLayout.scrollDirection = .Horizontal
         
         refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
         
-        
-        //eventsCollectionView.addSubview(refresh)
-        //refresh.bounds.offsetInPlace(dx: 0, dy: -20)
-        
         eventsCollectionView.collectionViewLayout = flowLayout
         
-        cvFrame = eventsCollectionView.frame
         eventsCollectionView.frame = CGRect(x: cvFrame.origin.x, y: cvFrame.origin.y + UIScreen.mainScreen().bounds.height, width: cvFrame.width, height: cvFrame.height)
-        
-//        eventsCollectionView.reloadData()
-//        UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-//            
-//            self.eventsCollectionView.frame = self.cvFrame
-//            
-//            }, completion: {
-//                //Code to run after animating
-//                (value: Bool) in
-//        })
         
     }
     
@@ -130,9 +124,10 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         return 0
     }
     
+    
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let b = UIScreen.mainScreen().bounds
         
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? EventCollectionViewCell else {
             return
@@ -141,36 +136,69 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         
         NetworkManager.sharedManager.selectEvent(cell.event)
         
-        let cellImageView = UIImageView(image: cell.eventImageView.image)
-        cellImageView.frame = cell.eventImageView.frame
+        popUpCell(cell)
+
+    }
+    
+    //MARK - Animations
+    
+    var cellImageView    = UIImageView()
+    var poppedCellBounds = CGRect()
+    
+    func popUpCell(cell: EventCollectionViewCell) {
+        
+        poppedCellBounds = self.view.convertRect(cell.eventImageView.bounds, fromView: cell.cellView)
+        print(cell.eventImageView.bounds.origin.x)
+        print(poppedCellBounds.origin.x)
+        cellImageView = UIImageView(image: cell.eventImageView.image)
+        cellImageView.frame = self.view.convertRect(cell.eventImageView.frame, toView: self.view)
         cellImageView.contentMode = .ScaleAspectFill
         cellImageView.clipsToBounds = true
         cellImageView.center = UIApplication.sharedApplication().keyWindow!.center
         cellImageView.cornerRadius = 10
         cellImageView.alpha = 0
-
-        self.view.addSubview(cellImageView)
-
+        
+       // self.view.addSubview(cellImageView)
+        self.view.insertSubview(cellImageView, belowSubview: newEventButton)
+        
         
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             
-            cellImageView.alpha = 1
+            self.cellImageView.alpha = 1
             
             }) { (done) -> Void in
-            
-            
+                
                 UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .CurveEaseIn, animations: { () -> Void in
                     
-                    cellImageView.frame = CGRect(x: b.origin.x, y: b.origin.y, width: b.width, height: b.height)
+                    self.cellImageView.frame = CGRect(x: self.SCREEN_BOUNDS.origin.x, y: self.SCREEN_BOUNDS.origin.y, width: self.SCREEN_BOUNDS.width, height: self.SCREEN_BOUNDS.height)
                     
                     }, completion: { (done) -> Void in
                         self.performSegueWithIdentifier("enterEventSegue", sender: nil)
                 })
-                
-                
         }
+    }
+    
+    func popDownCell() {
         
-        
+        self.cellImageView.alpha = 1
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            self.cellImageView.frame = CGRect(
+                x: self.poppedCellBounds.origin.x,
+                y: self.poppedCellBounds.origin.y,
+                width: self.poppedCellBounds.width,
+                height: self.poppedCellBounds.height)
+            
+            }) { (done) -> Void in
+                
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    
+                    self.cellImageView.alpha = 0
+                    
+                    }, completion: { (done) -> Void in
+                            self.cellImageView.removeFromSuperview()
+                })
+        }
     }
 
     func popDropCollectionView(drop: Bool) {
@@ -258,12 +286,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
                 return unwindSegue
             }
         }
-        
         return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)!
     }
     
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
-        
+        Debug.log("return")
+        //popDownCell()
     }
     
 }
