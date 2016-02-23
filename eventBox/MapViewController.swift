@@ -8,30 +8,34 @@
 
 import UIKit
 import Mapbox
+import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController, MGLMapViewDelegate {
+class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate {
+
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
     @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var getDirectionsButton: UIButton!
     
-    var event: Event!
-    
+    var locationManager = CLLocationManager()
     var currentEvent = Event()
     var currentEventAnnotation = MGLPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentEvent = NetworkManager.sharedManager.selectedEvent!
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         self.view.backgroundColor = UIColor.eventBoxBlack()
         getDirectionsButton.backgroundColor = UIColor.eventBoxGreen()
         getDirectionsButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
         mapView.showsUserLocation = true
-        
-        //TODO: Test Code - Delete Later
-        currentEvent.eventName = "Test Event"
-        currentEvent.location = LocationCords(lat: 41.8789, lon: -87.6358)
         
         //Creating Pin Annotation for Event
         currentEventAnnotation.coordinate = CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon)
@@ -57,16 +61,19 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
             }
         }
      
-        
         eventNameLabel.textColor = UIColor.eventBoxGreen()
         eventNameLabel.text = currentEvent.eventName
-        
-        
     }
     
     @IBAction func onGetDirectionsTapped(sender: UIButton) {
-        //TODO: Send user to Apple Maps for step by step directions
         
+        let coords = CLLocationCoordinate2DMake(self.currentEvent.location.lat, self.currentEvent.location.lon)
+        let placemark = MKPlacemark(coordinate: coords, addressDictionary: nil)
+        let item = MKMapItem(placemark: placemark)
+        item.name = self.currentEvent.eventName
+        item.openInMapsWithLaunchOptions(nil)
+        
+        locationManager.stopUpdatingLocation()
     }
     
 }
