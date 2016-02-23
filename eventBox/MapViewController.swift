@@ -20,32 +20,49 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
     @IBOutlet weak var getDirectionsButton: UIButton!
     
     var locationManager = CLLocationManager()
-    var currentEvent = Event()
+//    var currentEvent = Event()
     var currentEventAnnotation = MGLPointAnnotation()
+    var currentEvent: Event = NetworkManager.sharedManager.selectedEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentEvent = NetworkManager.sharedManager.selectedEvent!
+        reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: "eventUpdate", object: nil)
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
         self.view.backgroundColor = UIColor.eventBoxBlack()
-        getDirectionsButton.backgroundColor = UIColor.eventBoxGreen()
+        getDirectionsButton.backgroundColor = UIColor.eventBoxAccent()
         getDirectionsButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
-        mapView.showsUserLocation = true
         
-        //Creating Pin Annotation for Event
+        mapView.showsUserLocation = true
+        mapView.delegate = self
+    }
+    
+    
+    func reloadData() {
+        currentEvent = NetworkManager.sharedManager.selectedEvent!
+        eventNameLabel.textColor = UIColor.eventBoxAccent()
+        eventNameLabel.text = currentEvent.eventName
+        mapView.removeAnnotation(currentEventAnnotation)
+        createPinAnnotation()
+        reverseGeocode()
+    }
+    
+    
+    func createPinAnnotation() {
         currentEventAnnotation.coordinate = CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon)
         mapView.setCenterCoordinate(CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon), zoomLevel: 15, animated: false)
         currentEventAnnotation.title = currentEvent.eventName
         mapView.addAnnotation(currentEventAnnotation)
         view.addSubview(mapView)
-        mapView.delegate = self
-
-        //Reverse GeoCoding Lat/Lon to Event Address
+    }
+    
+    
+    func reverseGeocode() {
         let location = CLLocation(latitude: currentEvent.location.lat, longitude: currentEvent.location.lon)
         CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) -> Void in
             if error != nil {
@@ -60,10 +77,8 @@ class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManager
                 }
             }
         }
-     
-        eventNameLabel.textColor = UIColor.eventBoxGreen()
-        eventNameLabel.text = currentEvent.eventName
     }
+    
     
     @IBAction func onGetDirectionsTapped(sender: UIButton) {
         
