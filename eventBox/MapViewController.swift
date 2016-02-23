@@ -13,19 +13,18 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
+    @IBOutlet weak var mapView: MGLMapView!
+    @IBOutlet weak var getDirectionsButton: UIButton!
     
     var currentEvent = Event()
     var currentEventAnnotation = MGLPointAnnotation()
-    var mapView: MGLMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.eventBoxBlack()
-        
-        // initialize the map view
-        mapView = MGLMapView(frame: view.bounds)
-        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        getDirectionsButton.backgroundColor = UIColor.eventBoxGreen()
+        getDirectionsButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
         mapView.showsUserLocation = true
         
         //TODO: Test Code - Delete Later
@@ -65,6 +64,7 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     @IBAction func onGetDirectionsTapped(sender: UIButton) {
         //TODO: Send user to Apple Maps for step by step directions
+        
     }
     
 }
