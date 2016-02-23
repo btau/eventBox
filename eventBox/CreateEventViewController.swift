@@ -15,6 +15,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
+    @IBOutlet weak var eventAddressTextField: UITextField!
+    
     
     var textFields: [UITextField]!
     var eventDate: NSDate?
@@ -32,15 +34,23 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textFields = [eventNameTextField,eventDateTextField,eventTimeTextField]
+        textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
         
     }
+    
+ 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        clearTextfields(Except: nil)
+        return true
+    }
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         clearTextfields(Except: textField)
@@ -60,7 +70,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         textField.layer.addAnimation(width, forKey: "borderWidth")
         
         switch textField.tag {
-        case 1:
+        case 1,4:
             return true
         case 2:
             performSegueWithIdentifier("CalendarPop", sender: nil)
@@ -80,7 +90,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
                 continue
             }
             
-            textField.resignFirstResponder()
+            if selectedTextfield?.tag == 2 || selectedTextfield?.tag == 3 {
+                textField.resignFirstResponder()
+            }
             
             let color = UIColor(red: 240/255, green: 249/255, blue: 255/255, alpha: 1.0)
             UIView.animateWithDuration(animationSpeed) { () -> Void in
