@@ -17,13 +17,19 @@ enum DisplayItems {
 }
 
 class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     var animator: UIDynamicAnimator?
     
     @IBOutlet weak var newEventButton: UIButton!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
+    
     var cvFrame: CGRect!
     var events: [Event]?
+    
+    let CVA_DURATION: Double  = 0.8
+    let CVA_DELAY: Double     = 0.0
+    let CVA_DAMPING: CGFloat  = 0.5
+    let CVA_VELOCITY: CGFloat = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +56,9 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var insets = self.eventsCollectionView.contentInset
@@ -81,7 +87,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         
         refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
         
-
+        
         eventsCollectionView.addSubview(refresh)
         refresh.bounds.offsetInPlace(dx: 0, dy: -20)
         
@@ -91,8 +97,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         eventsCollectionView.frame = CGRect(x: cvFrame.origin.x, y: cvFrame.origin.y + UIScreen.mainScreen().bounds.height, width: cvFrame.width, height: cvFrame.height)
         
         eventsCollectionView.reloadData()
-        UIView.animateWithDuration(0.8, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-
+        UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            
             self.eventsCollectionView.frame = self.cvFrame
             
             }, completion: {
@@ -101,7 +107,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         })
         
     }
-
+    
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -110,7 +116,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         }
         
         cell.configureWithEvent(events![indexPath.row])
-    
+        
         return cell
     }
     
@@ -124,13 +130,31 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         return 0
     }
     
+
     
-    func exchangeCollectionItems(displayItems: DisplayItems) {
-//        
-//        switch displayItems {
-//            case
-//        }
-//        
+    func popDropCollectionView(drop: Bool) {
+        
+        UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: .CurveEaseInOut, animations: { () -> Void in
+            
+            if drop {
+                
+                let f = self.cvFrame
+                self.eventsCollectionView.frame = CGRect(x: f.origin.x, y: f.origin.y + UIScreen.mainScreen().bounds.height, width: f.width, height: f.height)
+                
+            } else {
+                
+                self.eventsCollectionView.frame = self.cvFrame
+            }
+                
+            }, completion: { (done) -> Void in
+                
+                if drop {
+                    self.eventsCollectionView.reloadData()
+                    self.popDropCollectionView(false)
+                }
+                
+        })
+        
     }
     
     
@@ -156,6 +180,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         default:
             return
         }
+        
+        popDropCollectionView(true)
     }
     
     
@@ -189,5 +215,5 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
         
     }
-
+    
 }
