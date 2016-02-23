@@ -10,6 +10,8 @@ import UIKit
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var event: Event!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

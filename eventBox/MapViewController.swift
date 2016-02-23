@@ -14,6 +14,8 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
     
+    var event: Event!
+    
     var currentEvent = Event()
     var currentEventAnnotation = MGLPointAnnotation()
     var mapView: MGLMapView!

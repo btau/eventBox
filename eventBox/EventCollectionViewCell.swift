@@ -18,7 +18,13 @@ class EventCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var eventImageView: UIImageView!
     
+    @IBOutlet weak var cellView: UIView!
+    
+    var event: Event!
+    
     func configureWithEvent(event: Event) {
+        
+        self.event = event
         
         eventImageView.image = UIImage(named: event.imageName)
         

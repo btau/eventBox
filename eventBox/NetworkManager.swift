@@ -31,11 +31,14 @@ class NetworkManager {
         return rootRef.authData
     }
     
+    var selectedEvent: Event?
+    
     private
     
     let rootRef = Firebase(url: "https://eventbox.firebaseio.com")
     var eventsRef = Firebase!()
     var usersRef = Firebase!()
+    
     
     private var events: [Event] = []
     private var currentUser: User?
@@ -166,33 +169,55 @@ class NetworkManager {
     //MARK: Set Up Observers
     func setUpObservers() {
         
-        eventsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) -> Void in
-            let eventData = snapshot.value as! [String:AnyObject]
-            let newEvent = self.unpackEvent(eventData)
-            self.events.append(newEvent)
-        }
-        
-        eventsRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) -> Void in
-            let eventData = snapshot.value as! [String:AnyObject]
-            let changedEvent = self.unpackEvent(eventData)
-            
-            if let foundIndex = self.events.indexOf({ $0.eventUID == changedEvent.eventUID }) {
-                self.events.removeAtIndex(foundIndex)
-                self.events.insert(changedEvent, atIndex: foundIndex)
-            }
-        }
-        
-        eventsRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) -> Void in
-            let eventData = snapshot.value as! [String:AnyObject]
-            let removedEvent = self.unpackEvent(eventData)
-            
-            if let foundIndex = self.events.indexOf({ $0.eventUID == removedEvent.eventUID }) {
-                self.events.removeAtIndex(foundIndex)
-            }
-        }
+//        eventsRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) -> Void in
+//            let eventData = snapshot.value as! [String:AnyObject]
+//            let newEvent = self.unpackEvent(eventData)
+//            self.events.append(newEvent)
+//        }
+//        
+//        eventsRef.observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) -> Void in
+//            let eventData = snapshot.value as! [String:AnyObject]
+//            let changedEvent = self.unpackEvent(eventData)
+//            
+//            if let foundIndex = self.events.indexOf({ $0.eventUID == changedEvent.eventUID }) {
+//                self.events.removeAtIndex(foundIndex)
+//                self.events.insert(changedEvent, atIndex: foundIndex)
+//            }
+//        }
+//        
+//        eventsRef.observeEventType(.ChildRemoved) { (snapshot: FDataSnapshot!) -> Void in
+//            let eventData = snapshot.value as! [String:AnyObject]
+//            let removedEvent = self.unpackEvent(eventData)
+//            
+//            if let foundIndex = self.events.indexOf({ $0.eventUID == removedEvent.eventUID }) {
+//                self.events.removeAtIndex(foundIndex)
+//            }
+//        }
     }
 
     //MARK: Event Handling
+    
+    func selectEvent(event: Event) {
+        
+        if let lastEvent = selectedEvent {
+            eventsRef.childByAppendingPath(lastEvent.eventUID).removeAllObservers()
+        }
+        
+        selectedEvent = event
+        
+        eventsRef.childByAppendingPath(event.eventUID).observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) -> Void in
+            
+            let eventData = snapshot.value as! [String:AnyObject]
+            
+            self.selectedEvent = self.unpackEvent(eventData)
+            
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "eventUpdate", object: nil))
+           
+        }
+        
+        
+    }
+    
     func createEvent(event: Event) {
         
         guard let userUID = currentUser?.UID else {

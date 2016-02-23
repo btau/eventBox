@@ -33,12 +33,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setupCollectionView()
+
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
-                self.setupCollectionView()
-                
+                self.popDropCollectionView(true)
             },
             Failed: { () -> Void in
                 
@@ -88,23 +88,23 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
         
         
-        eventsCollectionView.addSubview(refresh)
-        refresh.bounds.offsetInPlace(dx: 0, dy: -20)
+        //eventsCollectionView.addSubview(refresh)
+        //refresh.bounds.offsetInPlace(dx: 0, dy: -20)
         
         eventsCollectionView.collectionViewLayout = flowLayout
         
         cvFrame = eventsCollectionView.frame
         eventsCollectionView.frame = CGRect(x: cvFrame.origin.x, y: cvFrame.origin.y + UIScreen.mainScreen().bounds.height, width: cvFrame.width, height: cvFrame.height)
         
-        eventsCollectionView.reloadData()
-        UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-            
-            self.eventsCollectionView.frame = self.cvFrame
-            
-            }, completion: {
-                //Code to run after animating
-                (value: Bool) in
-        })
+//        eventsCollectionView.reloadData()
+//        UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+//            
+//            self.eventsCollectionView.frame = self.cvFrame
+//            
+//            }, completion: {
+//                //Code to run after animating
+//                (value: Bool) in
+//        })
         
     }
     
@@ -130,15 +130,57 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         return 0
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let b = UIScreen.mainScreen().bounds
+        
+        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? EventCollectionViewCell else {
+            return
+        }
+        
+        
+        NetworkManager.sharedManager.selectEvent(cell.event)
+        
+        let cellImageView = UIImageView(image: cell.eventImageView.image)
+        cellImageView.frame = cell.eventImageView.frame
+        cellImageView.contentMode = .ScaleAspectFill
+        cellImageView.clipsToBounds = true
+        cellImageView.center = UIApplication.sharedApplication().keyWindow!.center
+        cellImageView.cornerRadius = 10
+        cellImageView.alpha = 0
 
-    
+        self.view.addSubview(cellImageView)
+
+        
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            
+            cellImageView.alpha = 1
+            
+            }) { (done) -> Void in
+            
+            
+                UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .CurveEaseIn, animations: { () -> Void in
+                    
+                    cellImageView.frame = CGRect(x: b.origin.x, y: b.origin.y, width: b.width, height: b.height)
+                    
+                    }, completion: { (done) -> Void in
+                        self.performSegueWithIdentifier("enterEventSegue", sender: nil)
+                })
+                
+                
+        }
+        
+        
+    }
+
     func popDropCollectionView(drop: Bool) {
         
         UIView.animateWithDuration(CVA_DURATION, delay: CVA_DELAY, usingSpringWithDamping: CVA_DAMPING, initialSpringVelocity: CVA_VELOCITY, options: .CurveEaseInOut, animations: { () -> Void in
             
             if drop {
                 
-                let f = self.cvFrame
+                let f = self.eventsCollectionView.frame
+                self.cvFrame = f
                 self.eventsCollectionView.frame = CGRect(x: f.origin.x, y: f.origin.y + UIScreen.mainScreen().bounds.height, width: f.width, height: f.height)
                 
             } else {
@@ -185,6 +227,9 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     
+    //MARK: - Navigation
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addEventSegue" {
             
@@ -195,6 +240,11 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             eventSegue.animator  = animator
             eventSegue.gravity   = gravity
             eventSegue.collision = collision
+        } else if segue.identifier == "enterEventSegue" {
+            
+            let eventDetailVC = segue.destinationViewController as! EventDetailViewController
+            eventDetailVC.event = NetworkManager.sharedManager.selectedEvent
+            
         }
     }
     

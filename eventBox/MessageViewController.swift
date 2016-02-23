@@ -17,6 +17,8 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     
     @IBOutlet weak var textEntryView: UIVisualEffectView!
     
+    var event: Event!
+    
     var messagesArray = ["Test!","Awesome!!!!! YAY, WOO, ALRIGHT! LET'S GO!!","This is a longer test Message!","This app is amaizing! I'm telling alllllllllllll my friends!","Me too!","I am running out of things to say","Yeah same here.... hmmm","The design def needs to be better, I don't like it!","Yeah it could use some work","But function is what we are after!","Yeah! wait.. we?? I am talking to myself","oh boy","jeghaejhgjadbg","fhjad sgkjah gj hgj ajsgjesh gklja","gnajs gbakj bgkjaewbg","ghae sghieaw gewh gjew gjaw b","haej guiewa gewa hgiawh","gb jskgjawe gharwb hgb arw","ghrsaj gbra giarw bg","gas ","gsjg iarwgi awh","dg iurashgiur hgia r",]
     
     override func viewDidLoad() {

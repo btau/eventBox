@@ -15,9 +15,15 @@ class EventDetailViewController: UIViewController, YALTabBarViewDelegate {
     
     var detailController: YALFoldingTabBarController!
     
+    var event: Event!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        MyNoSelectedViewController *myViewController = [[MyNoSelectedViewController alloc] initWithNibName:@"MyNoSelectedViewController" bundle:[NSBundle mainBundle]];
+
+//        [self.tabBarController setSelectedViewController:nil];
+//        [self.tabBarController setSelectedViewController:myViewController];
 
     }
 
@@ -30,8 +36,12 @@ class EventDetailViewController: UIViewController, YALTabBarViewDelegate {
         
         detailController = segue.destinationViewController as! YALFoldingTabBarController
         
-     //   detailController.delegate = self
-       // detailController.tabBarView.delegate = self
+//        let eventLandingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("EventLandingViewController") as! EventLandingViewController
+//        var array = detailController.viewControllers
+//        array?.append(eventLandingVC)
+//        detailController.viewControllers = array
+//        detailController.selectedViewController = eventLandingVC
+        
         
         detailController.tabBarViewHeight                     = YALTabBarViewDefaultHeight
         detailController.tabBarView.tabBarViewEdgeInsets      = YALTabBarViewHDefaultEdgeInsets
@@ -41,26 +51,27 @@ class EventDetailViewController: UIViewController, YALTabBarViewDelegate {
 
         detailController.tabBarView.extraTabBarItemHeight = YALExtraTabBarItemsDefaultHeight;
 
-      //  let menu = YALTabBarItem(itemImage: UIImage(named: "noun_menu_198777"), leftItemImage: nil, rightItemImage: nil)
         
         detailController.centerButtonImage = UIImage(named: "PlusButton")
         
-        let message = YALTabBarItem(itemImage:  UIImage(named: "noun_message_323222"), leftItemImage: nil, rightItemImage: UIImage(named: "noun_comment_118635"))
+        let message = YALTabBarItem(itemImage:  UIImage(named: "noun_message_323222"), leftItemImage: UIImage(named: "noun_delete_45887"), rightItemImage: UIImage(named: "noun_comment_118635"))
         
-        let location = YALTabBarItem(itemImage: UIImage(named: "noun_location-pin_281085"), leftItemImage:nil, rightItemImage: nil)
+        let location = YALTabBarItem(itemImage: UIImage(named: "noun_location-pin_281085"), leftItemImage:UIImage(named: "noun_delete_45887"), rightItemImage: nil)
 
         
         
-        let admin = YALTabBarItem(itemImage: UIImage(named: "Gear"), leftItemImage: nil, rightItemImage: nil)
+        let landing = YALTabBarItem(itemImage: UIImage(named: "noun_newspaper_158465"), leftItemImage: nil, rightItemImage: nil)
         
-        let things = YALTabBarItem(itemImage: UIImage(named: "List"), leftItemImage: nil, rightItemImage: nil)
+        let things = YALTabBarItem(itemImage: UIImage(named: "List"), leftItemImage: UIImage(named: "noun_delete_45887"), rightItemImage: nil)
         
-        detailController.leftBarItems = [things, location]
-        detailController.rightBarItems = [message, admin]
+        detailController.leftBarItems = [landing, things]
+        detailController.rightBarItems = [location, message]
         
-        detailController.tabBarView.tintColor = .eventBoxGreen()
-        detailController.tabBarView.tabBarColor = .clearColor()
-        detailController.tabBarView.dotColor = .eventBoxGreen()
+
+        
+        detailController.tabBarView.tintColor = .eventBoxAccent()
+        detailController.tabBarView.tabBarColor = .eventBoxBlack()
+        detailController.tabBarView.dotColor = .eventBoxAccent()
     }
 
     
