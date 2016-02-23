@@ -96,5 +96,7 @@
 	</array>
 	<key>MGLMapboxAccessToken</key>
 	<string>pk.eyJ1IjoiYnRhdSIsImEiOiJjaWt5aHhxcG4wMjE4dWFrc2Rsd3JjOXltIn0.NQyD2TjmRz1zsDCZGfjSSw</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow us to use your location to provide directions to your event.</string>
 </dict>
 </plist>

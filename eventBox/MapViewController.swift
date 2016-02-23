@@ -7,23 +7,26 @@
 //
 
 import UIKit
-import MapKit
+import Mapbox
 
-class MapViewController: UIViewController {
-    
+class MapViewController: UIViewController, MGLMapViewDelegate {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
-    @IBOutlet weak var mapView: MKMapView!
     
-    
-    var currentEventAnnotation = MKPointAnnotation()
     var currentEvent = Event()
+    var currentEventAnnotation = MGLPointAnnotation()
+    var mapView: MGLMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.eventBoxBlack()
+        
+        // initialize the map view
+        mapView = MGLMapView(frame: view.bounds)
+        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        mapView.showsUserLocation = true
         
         //TODO: Test Code - Delete Later
         currentEvent.eventName = "Test Event"
@@ -31,9 +34,12 @@ class MapViewController: UIViewController {
         
         //Creating Pin Annotation for Event
         currentEventAnnotation.coordinate = CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon)
+        mapView.setCenterCoordinate(CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon), zoomLevel: 15, animated: false)
         currentEventAnnotation.title = currentEvent.eventName
         mapView.addAnnotation(currentEventAnnotation)
-        
+        view.addSubview(mapView)
+        mapView.delegate = self
+
         //Reverse GeoCoding Lat/Lon to Event Address
         let location = CLLocation(latitude: currentEvent.location.lat, longitude: currentEvent.location.lon)
         CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) -> Void in
@@ -53,9 +59,12 @@ class MapViewController: UIViewController {
         
         eventNameLabel.textColor = UIColor.eventBoxGreen()
         eventNameLabel.text = currentEvent.eventName
+        
+        
     }
     
     @IBAction func onGetDirectionsTapped(sender: UIButton) {
         //TODO: Send user to Apple Maps for step by step directions
     }
+    
 }
