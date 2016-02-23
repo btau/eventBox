@@ -404,14 +404,14 @@
                                     <constraint firstAttribute="height" constant="44" id="9hi-dU-Fzo"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLabelColor">
-                                        <color key="value" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="unselectedLabelColor">
                                         <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="thumbColor">
+                                        <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -447,21 +447,22 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="264" height="157.5"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBZ-FF-GQv">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="MBZ-FF-GQv">
                                                                         <rect key="frame" x="8" y="8" width="248" height="29"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="29" id="UbA-9i-mQH"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
+                                                                        <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgJ-C9-cNt">
-                                                                        <rect key="frame" x="8" y="38" width="248" height="21"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="SgJ-C9-cNt">
+                                                                        <rect key="frame" x="8" y="38" width="248" height="52"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="21" id="CJn-AA-9Am"/>
+                                                                            <constraint firstAttribute="height" constant="52" id="CJn-AA-9Am"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                                        <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_info_91723" translatesAutoresizingMaskIntoConstraints="NO" id="XYv-QO-EFk">
@@ -476,8 +477,8 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="21" id="QLL-bQ-Tkn"/>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                                        <color key="textColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -559,6 +560,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="bigCountdownLabel" destination="OQm-tx-IAf" id="hVf-cC-O5g"/>
+                                            <outlet property="eventDateLabel" destination="SgJ-C9-cNt" id="mxV-1v-qGa"/>
+                                            <outlet property="eventImageView" destination="8NZ-mQ-pNH" id="UkT-do-sEp"/>
+                                            <outlet property="eventNameLabel" destination="MBZ-FF-GQv" id="4k3-kL-0yq"/>
+                                            <outlet property="hostNameLabel" destination="7He-L5-fNi" id="cNp-nv-4dk"/>
                                             <segue destination="6FY-AS-Fr8" kind="show" id="4Ns-x7-Ovk"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1582,7 +1588,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="4608" height="3072"/>
+        <image name="1" width="2048" height="1365"/>
         <image name="Gear" width="22" height="22"/>
         <image name="LeftAngle" width="84" height="84"/>
         <image name="PlusButton" width="75" height="75"/>

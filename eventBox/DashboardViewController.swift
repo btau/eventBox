@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum DisplayItems {
+    
+    case All
+    case Upcoming
+    case Past
+    
+}
+
 class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var animator: UIDynamicAnimator?
@@ -72,8 +80,10 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         flowLayout.scrollDirection = .Horizontal
         
         refresh.addTarget(self, action: "startRefresh", forControlEvents: UIControlEvents.ValueChanged)
-       // eventsCollectionView.addSubview(refresh)
-       // refresh.bounds.offsetInPlace(dx: -20, dy: 0)
+        
+
+        eventsCollectionView.addSubview(refresh)
+        refresh.bounds.offsetInPlace(dx: 0, dy: -20)
         
         eventsCollectionView.collectionViewLayout = flowLayout
         
@@ -95,8 +105,11 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath)
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("EventCell", forIndexPath: indexPath) as? EventCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         
+        cell.configureWithEvent(events![indexPath.row])
     
         return cell
     }
@@ -110,6 +123,16 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         collectionView.hidden = true
         return 0
     }
+    
+    
+    func exchangeCollectionItems(displayItems: DisplayItems) {
+//        
+//        switch displayItems {
+//            case
+//        }
+//        
+    }
+    
     
     func startRefresh() {
         

@@ -245,6 +245,8 @@ class NetworkManager {
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
         
+        print(eventData)
+        
         newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
         newEvent.hostUID = eventData["hostUID"] as! String
         newEvent.eventUID = eventData["eventUID"] as! String
