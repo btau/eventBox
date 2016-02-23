@@ -36,13 +36,14 @@ class EventCollectionViewCell: UICollectionViewCell {
         
         
         let date = NSDate(timeIntervalSince1970: event.startDate)
-        eventDateLabel.text = formatter.stringFromDate(date)
+        
+        let dateString = formatter.stringFromDate(date).stringByReplacingOccurrencesOfString(" at ", withString: "\n")
+        
+        eventDateLabel.text = dateString
         
         NetworkManager.sharedManager.getUserForUID(event.hostUID) { (user) -> Void in
             self.hostNameLabel.text = user.userName
         }
-        
-        
         
     }
     

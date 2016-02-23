@@ -360,18 +360,6 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-S7-ccn">
-                                <rect key="frame" x="275.5" y="530" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="d6C-bh-IXB"/>
-                                    <constraint firstAttribute="width" constant="50" id="o9T-fj-AAp"/>
-                                </constraints>
-                                <color key="tintColor" red="0.3992299171" green="1" blue="0.59635763360000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="PlusButton"/>
-                                <connections>
-                                    <segue destination="bOD-nt-Ovi" kind="custom" identifier="addEventSegue" customClass="NewEventSegue" customModule="eventBox" animates="NO" id="ejr-pn-Faw"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWQ-4s-ZdS">
                                 <rect key="frame" x="20" y="317" width="560" height="21"/>
                                 <constraints>
@@ -573,6 +561,32 @@
                                     <outlet property="delegate" destination="Xv8-wC-Jqe" id="PMq-G3-sOv"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-S7-ccn">
+                                <rect key="frame" x="270" y="530" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="SSE-QK-Dbe"/>
+                                    <constraint firstAttribute="height" constant="50" id="d6C-bh-IXB"/>
+                                    <constraint firstAttribute="width" secondItem="9Bi-S7-ccn" secondAttribute="height" multiplier="1:1" id="n3z-UP-HFD"/>
+                                    <constraint firstAttribute="width" constant="60" id="o9T-fj-AAp"/>
+                                </constraints>
+                                <color key="tintColor" red="0.3992299171" green="1" blue="0.59635763360000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="PlusButton"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="d6C-bh-IXB"/>
+                                        <exclude reference="n3z-UP-HFD"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="bOD-nt-Ovi" kind="custom" identifier="addEventSegue" customClass="NewEventSegue" customModule="eventBox" animates="NO" id="ejr-pn-Faw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -583,7 +597,7 @@
                             <constraint firstItem="UWQ-4s-ZdS" firstAttribute="leading" secondItem="Hxn-pO-6Wz" secondAttribute="leadingMargin" id="Ioj-ul-48t"/>
                             <constraint firstItem="v9Q-jy-M7U" firstAttribute="centerY" secondItem="Hxn-pO-6Wz" secondAttribute="centerY" id="Nf4-Mk-aGi"/>
                             <constraint firstItem="snw-ec-z56" firstAttribute="leading" secondItem="Hxn-pO-6Wz" secondAttribute="leading" id="StJ-P6-ExY"/>
-                            <constraint firstItem="Cwx-Ht-Uq8" firstAttribute="top" secondItem="9Bi-S7-ccn" secondAttribute="bottom" constant="20" id="T4K-7v-u3o"/>
+                            <constraint firstItem="Cwx-Ht-Uq8" firstAttribute="top" secondItem="9Bi-S7-ccn" secondAttribute="bottom" constant="10" id="T4K-7v-u3o"/>
                             <constraint firstItem="9Bi-S7-ccn" firstAttribute="centerX" secondItem="Hxn-pO-6Wz" secondAttribute="centerX" id="T4r-Qi-rA3"/>
                             <constraint firstItem="VTR-Qf-OAI" firstAttribute="centerX" secondItem="Hxn-pO-6Wz" secondAttribute="centerX" id="TRo-Z3-Xlv"/>
                             <constraint firstItem="v9Q-jy-M7U" firstAttribute="trailing" secondItem="Hxn-pO-6Wz" secondAttribute="trailingMargin" id="Xa0-8d-WCy"/>
@@ -598,7 +612,7 @@
                     <connections>
                         <outlet property="eventsCollectionView" destination="snw-ec-z56" id="vlh-p9-B9H"/>
                         <outlet property="newEventButton" destination="9Bi-S7-ccn" id="SqJ-VM-8Gd"/>
-                        <segue destination="6FY-AS-Fr8" kind="presentation" identifier="enterEventSegue" modalTransitionStyle="crossDissolve" id="EyZ-v0-YXc"/>
+                        <segue destination="6FY-AS-Fr8" kind="presentation" identifier="enterEventSegue" animates="NO" modalTransitionStyle="crossDissolve" id="EyZ-v0-YXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dxg-zM-2vu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -893,7 +907,7 @@
         <!--Event Detail View Controller-->
         <scene sceneID="dfi-H3-bHF">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="6FY-AS-Fr8" customClass="EventDetailViewController" customModule="eventBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6FY-AS-Fr8" customClass="EventDetailViewController" customModule="eventBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ds2-2b-bOf"/>
                         <viewControllerLayoutGuide type="bottom" id="CQR-db-xLr"/>
@@ -983,6 +997,7 @@
                                 <state key="normal" image="noun_multiply_315673"/>
                                 <connections>
                                     <action selector="onExitTapped:" destination="VV6-zN-FsI" eventType="touchUpInside" id="47J-yx-7yt"/>
+                                    <segue destination="yz0-lg-R3x" kind="unwind" animates="NO" unwindAction="returnFromSegueActions:" id="YcK-UG-54x"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o9K-nk-2GX">
@@ -1036,6 +1051,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBP-9u-hc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yz0-lg-R3x" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2276" y="2629"/>
         </scene>
