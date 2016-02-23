@@ -205,7 +205,7 @@ class NetworkManager {
         let eventData: [String:AnyObject] =
         ["eventUID": eventRef.key,
             "eventName": event.eventName,
-            "hostUID": event.hostUID,
+            "hostUID": userUID,
             "startDate": event.startDate,
             "lat":String(event.location.lat),
             "lon":String(event.location.lon),

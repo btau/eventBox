@@ -17,6 +17,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     @IBOutlet weak var eventTimeTextField: UITextField!
     
     var textFields: [UITextField]!
+    var eventDate: NSDate?
+    var eventTime: NSDate?
     
     let animationSpeed = 0.25
     
@@ -108,6 +110,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         let formatter = NSDateFormatter()
         formatter.dateStyle = .LongStyle
         formatter.timeStyle = .NoStyle
+        self.eventDate = date
         
         eventDateTextField.text = formatter.stringFromDate(date)
     }
@@ -120,6 +123,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         let formatter = NSDateFormatter()
         formatter.dateStyle = .NoStyle
         formatter.timeStyle = .ShortStyle
+        self.eventTime = time
         
         eventTimeTextField.text = formatter.stringFromDate(time)
     }
@@ -188,13 +192,58 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     }
     
     
-    @IBAction func onCreateTapped(sender: UIButton) {
+    @IBAction func onCreateTapped(sender: UIButton)
+    {
         
+        let eventName = eventNameTextField.text
         
-        
+        if eventName != "" && self.eventDate != nil && self.eventTime != nil
+        {
+            
+            // Creating new start date by combing both Date Field with Time Field
+            let createdStartDate = combineDate(self.eventDate!, WithTime: self.eventTime!)
+            
+            // Taking createdStartDate and converting it to Double via timeIntervalSince1970
+            let newStartDate = createdStartDate.timeIntervalSince1970
+            
+            let newEvent = Event()
+            newEvent.eventName = eventName!
+            newEvent.startDate = newStartDate
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
+            print("\(dateFormatter.stringFromDate(createdStartDate))")
+            
+            NetworkManager.sharedManager.createEvent(newEvent)
+                
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Error!", message: "Please Fill In All Fields", preferredStyle: .Alert)
+            let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            alertController.addAction(cancel)
+            presentViewController(alertController, animated: true, completion: nil)
+                
+        }
     }
     
-    
+    func combineDate(date: NSDate, WithTime time: NSDate) -> NSDate
+    {
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([.Month, .Day, .Year], fromDate: date)
+        let timeComponents = calendar.components([.Hour, .Minute, .Second], fromDate: time)
+        
+        let components = NSDateComponents()
+        components.year = dateComponents.year
+        components.month = dateComponents.month
+        components.day = dateComponents.day
+        components.hour = timeComponents.hour
+        components.minute = timeComponents.minute
+        components.second = timeComponents.second
+        
+        return calendar.dateFromComponents(components)!
+        
+    }
     
     
 }
