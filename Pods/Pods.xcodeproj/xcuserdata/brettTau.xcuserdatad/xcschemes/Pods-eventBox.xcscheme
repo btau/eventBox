@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '079F73CF660FF270A4C8AFEE'
+               BlueprintIdentifier = 'B67D2C43338E26FC8D0E0F10'
                BlueprintName = 'Pods-eventBox'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_eventBox.framework'>

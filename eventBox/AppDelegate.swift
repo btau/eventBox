@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Batch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: - AppDelegate Stack
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        Batch.startWithAPIKey("DEV56CCD39D0FAEA40294DD7759625")
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
