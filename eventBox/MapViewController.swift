@@ -8,40 +8,61 @@
 
 import UIKit
 import Mapbox
+import MapKit
+import CoreLocation
 
-class MapViewController: UIViewController, MGLMapViewDelegate {
+class MapViewController: UIViewController, MGLMapViewDelegate, CLLocationManagerDelegate {
+
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventAddressLabel: UILabel!
     @IBOutlet weak var mapView: MGLMapView!
     @IBOutlet weak var getDirectionsButton: UIButton!
     
-    var event: Event!
-    
-    var currentEvent = Event()
+    var locationManager = CLLocationManager()
+//    var currentEvent = Event()
     var currentEventAnnotation = MGLPointAnnotation()
+    var currentEvent: Event = NetworkManager.sharedManager.selectedEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: "eventUpdate", object: nil)
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         self.view.backgroundColor = UIColor.eventBoxBlack()
-        getDirectionsButton.backgroundColor = UIColor.eventBoxGreen()
+        getDirectionsButton.backgroundColor = UIColor.eventBoxAccent()
         getDirectionsButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
+        
         mapView.showsUserLocation = true
-        
-        //TODO: Test Code - Delete Later
-        currentEvent.eventName = "Test Event"
-        currentEvent.location = LocationCords(lat: 41.8789, lon: -87.6358)
-        
-        //Creating Pin Annotation for Event
+        mapView.delegate = self
+    }
+    
+    
+    func reloadData() {
+        currentEvent = NetworkManager.sharedManager.selectedEvent!
+        eventNameLabel.textColor = UIColor.eventBoxAccent()
+        eventNameLabel.text = currentEvent.eventName
+        mapView.removeAnnotation(currentEventAnnotation)
+        createPinAnnotation()
+        reverseGeocode()
+    }
+    
+    
+    func createPinAnnotation() {
         currentEventAnnotation.coordinate = CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon)
         mapView.setCenterCoordinate(CLLocationCoordinate2DMake(currentEvent.location.lat, currentEvent.location.lon), zoomLevel: 15, animated: false)
         currentEventAnnotation.title = currentEvent.eventName
         mapView.addAnnotation(currentEventAnnotation)
         view.addSubview(mapView)
-        mapView.delegate = self
-
-        //Reverse GeoCoding Lat/Lon to Event Address
+    }
+    
+    
+    func reverseGeocode() {
         let location = CLLocation(latitude: currentEvent.location.lat, longitude: currentEvent.location.lon)
         CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) -> Void in
             if error != nil {
@@ -56,17 +77,18 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
                 }
             }
         }
-     
-        
-        eventNameLabel.textColor = UIColor.eventBoxGreen()
-        eventNameLabel.text = currentEvent.eventName
-        
-        
     }
     
+    
     @IBAction func onGetDirectionsTapped(sender: UIButton) {
-        //TODO: Send user to Apple Maps for step by step directions
         
+        let coords = CLLocationCoordinate2DMake(self.currentEvent.location.lat, self.currentEvent.location.lon)
+        let placemark = MKPlacemark(coordinate: coords, addressDictionary: nil)
+        let item = MKMapItem(placemark: placemark)
+        item.name = self.currentEvent.eventName
+        item.openInMapsWithLaunchOptions(nil)
+        
+        locationManager.stopUpdatingLocation()
     }
     
 }

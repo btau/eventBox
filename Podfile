@@ -12,6 +12,7 @@ pod 'FBSDKShareKit'
 pod 'Calendar-iOS'
 pod 'FoldingTabBar', '~> 1.0.2'
 pod 'Mapbox-iOS-SDK'
+pod 'Batch', '~> 1.5'
 
 end
 
