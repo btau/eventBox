@@ -279,15 +279,18 @@ class NetworkManager {
         newEvent.startDate = eventData["startDate"] as! Double
         newEvent.imageName = eventData["imageName"] as! String
         
-        if let guests = eventData["guests"] as? [String] {
+        if let guests = eventData["guests"] as? [String:[String:String]] {
             for guest in guests {
-                newEvent.guests.append(guest)
+                newEvent.guests.append(guest.0)
             }
         }
         
-        if let items = eventData["items"] as? [Item] {
+        if let items = eventData["items"] as? [String:[String:String]] {
             for item in items {
-                newEvent.items.append(item)
+                let itemUID = item.0
+                let itemString = item.1["item"]
+                let newItem = Item(itemUID: itemUID, item: itemString!, userUID: "")
+                newEvent.items.append(newItem)
             }
         }
         

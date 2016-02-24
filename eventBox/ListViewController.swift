@@ -10,29 +10,26 @@ import UIKit
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var event: Event!
-    
+    var currentEvent = NetworkManager.sharedManager.selectedEvent
+    var currentUser: User?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("ListItemCell") else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCellWithIdentifier("ListItemCell")! as! ListViewCell
+        cell.itemLabel.text = currentEvent?.items[indexPath.row].item
         return cell
     }
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return (currentEvent?.items.count)!
     }
+    
+    
+    
 
 }
