@@ -14,6 +14,7 @@ PODS:
     - FBSDKCoreKit
   - Firebase (2.5.1)
   - FoldingTabBar (1.0.2)
+  - GoogleMaps (1.12.1)
   - Mapbox-iOS-SDK (3.1.2)
 
 DEPENDENCIES:
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - Firebase
   - FoldingTabBar (~> 1.0.2)
+  - GoogleMaps
   - Mapbox-iOS-SDK
 
 SPEC CHECKSUMS:
@@ -33,6 +35,7 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   FoldingTabBar: 79df76dfd5a84c0a369beaa378a31c07aa53b6b2
+  GoogleMaps: d4e7526e96e78faf7131ea95f13dd5411cc2916d
   Mapbox-iOS-SDK: 0a910c2cce1aa8cff5b9ec2a990e7a32332a776a
 
 COCOAPODS: 0.39.0

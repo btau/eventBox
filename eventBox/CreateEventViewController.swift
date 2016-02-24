@@ -8,6 +8,7 @@
 
 import UIKit
 import Calendar_iOS
+import GoogleMaps
 
 class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate, TimeViewControllerDelegate {
     
@@ -31,14 +32,17 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     var animator: UIDynamicAnimator?
     var snap: UISnapBehavior?
     
+    var placesClient: GMSPlacesClient?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
+        placesClient = GMSPlacesClient()
         
     }
     
- 
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,6 +53,17 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         textField.resignFirstResponder()
         clearTextfields(Except: nil)
         return true
+    }
+    
+    
+
+    @IBAction func OnAddressChanged(sender: UITextField, forEvent event: UIEvent) {
+        if let text = sender.text {
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            self.presentViewController(autocompleteController, animated: true, completion: nil)
+            //placeAutoComplete(text)
+        }
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -208,11 +223,15 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     {
         
         let eventName = eventNameTextField.text
+        //let eventAddress = eventAddressTextField.text
+        let selectedImageString = "1"
+        
+        //placeAutoComplete(eventAddress!)
         
         if eventName != "" && self.eventDate != nil && self.eventTime != nil
         {
             
-            // Creating new start date by combing both Date Field with Time Field
+            // Creating new start date by combing both Date Field with Time Field by use of combineDate func
             let createdStartDate = combineDate(self.eventDate!, WithTime: self.eventTime!)
             
             // Taking createdStartDate and converting it to Double via timeIntervalSince1970
@@ -221,6 +240,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             let newEvent = Event()
             newEvent.eventName = eventName!
             newEvent.startDate = newStartDate
+            newEvent.imageName = selectedImageString
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
@@ -257,5 +277,55 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
     }
     
+    func placeAutoComplete(eventAddress: String){
+        
+        guard eventAddress != "" else {
+            return
+        }
+        
+        //let eventAddress = eventAddressTextField.text
+        let filter = GMSAutocompleteFilter()
+        filter.type = .Geocode
+        
+        placesClient?.autocompleteQuery(eventAddress, bounds: nil, filter: filter, callback: { (results, error: NSError?) -> Void in
+            if let error = error {
+                print("Autocomplete error: \(error)")
+            }
+            
+            for result in results!
+            {
+                if let result = result as? GMSAutocompletePrediction
+                {
+                    
+                    print("Result: \(result.attributedFullText.string) with placeID \(result.placeID)" )
+                }
+            }
+            
+        })
+    }
+}
+
+extension CreateEventViewController: GMSAutocompleteViewControllerDelegate {
     
+    func viewController(viewController: GMSAutocompleteViewController!, didAutocompleteWithPlace place: GMSPlace!) {
+        print("Place Name: \(place.name)")
+        print("Place Address: \(place.formattedAddress)")
+        print("Place Attributions: \(place.attributions)")
+    }
+    
+    func viewController(viewController: GMSAutocompleteViewController!, didFailAutocompleteWithError error: NSError!) {
+        print("Error", error.description)
+    }
+    
+    func wasCancelled(viewController: GMSAutocompleteViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(viewController: GMSAutocompleteViewController!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(viewController: GMSAutocompleteViewController!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
 }
