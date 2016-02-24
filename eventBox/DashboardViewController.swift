@@ -33,11 +33,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
 
+        newEventButton.tintColor = UIColor.eventBoxAccent()
+        
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
@@ -151,6 +152,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         print(cell.eventImageView.bounds.origin.x)
         print(poppedCellBounds.origin.x)
         cellImageView = UIImageView(image: cell.eventImageView.image)
+        cellImageView.userInteractionEnabled = true
         cellImageView.frame = self.view.convertRect(cell.eventImageView.frame, toView: self.view)
         cellImageView.contentMode = .ScaleAspectFill
         cellImageView.clipsToBounds = true
@@ -170,6 +172,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
                 
                 UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: .CurveEaseIn, animations: { () -> Void in
                     
+                    self.cellImageView.layer.cornerRadius = 0
+                    
                     self.cellImageView.frame = CGRect(x: self.SCREEN_BOUNDS.origin.x, y: self.SCREEN_BOUNDS.origin.y, width: self.SCREEN_BOUNDS.width, height: self.SCREEN_BOUNDS.height)
                     
                     }, completion: { (done) -> Void in
@@ -188,6 +192,8 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
                 y: self.poppedCellBounds.origin.y,
                 width: self.poppedCellBounds.width,
                 height: self.poppedCellBounds.height)
+            
+            self.cellImageView.layer.cornerRadius = 10
             
             }) { (done) -> Void in
                 

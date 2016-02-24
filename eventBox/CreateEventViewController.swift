@@ -36,6 +36,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
         
+        for textField in textFields {
+            textField.borderColor = UIColor.eventBoxAccent()
+        }
+        
     }
     
  

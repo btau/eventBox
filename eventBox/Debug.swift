@@ -1,9 +1,8 @@
 //
 //  Debug.swift
-//  eventBox
 //
-//  Created by Brett Tau on 2/18/16.
-//  Copyright © 2016 Brett Tau. All rights reserved.
+//  Created by BergerBytes on 2/18/16.
+//  Copyright © 2016 Michael Berger All rights reserved.
 //
 
 import Foundation

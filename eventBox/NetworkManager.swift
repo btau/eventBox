@@ -205,9 +205,11 @@ class NetworkManager {
         
         selectedEvent = event
         
-        eventsRef.childByAppendingPath(event.eventUID).observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) -> Void in
+        eventsRef.childByAppendingPath(event.eventUID).observeEventType(.Value) { (snapshot: FDataSnapshot!) -> Void in
             
             let eventData = snapshot.value as! [String:AnyObject]
+            
+            
             
             self.selectedEvent = self.unpackEvent(eventData)
             
@@ -270,7 +272,7 @@ class NetworkManager {
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
         
-        print(eventData)
+        //print(eventData)
         
         newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
         newEvent.hostUID = eventData["hostUID"] as! String

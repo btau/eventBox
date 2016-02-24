@@ -16,20 +16,26 @@ import Batch
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     //MARK: - Firebase - Allow Persistence
     override init() {
         super.init()
-        //Firebase.defaultConfig().persistenceEnabled = true
+        Firebase.defaultConfig().persistenceEnabled = true
         
         if NSUserDefaults.standardUserDefaults().boolForKey("setColor") == false {
             
-            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
-            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
-            NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
-         
+            //            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
+            //            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
+            //NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
+            
+            NSUserDefaults.standardUserDefaults().setFloat(50,  forKey: "red")
+            NSUserDefaults.standardUserDefaults().setFloat(200, forKey: "green")
+            NSUserDefaults.standardUserDefaults().setFloat(250, forKey: "blue")
+            
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "setColor")
         }
+        
+        
         
         
         
