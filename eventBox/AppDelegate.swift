@@ -43,7 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: - AppDelegate Stack
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //Start Batch
+        BatchPush.setupPush()
         Batch.startWithAPIKey("DEV56CCD39D0FAEA40294DD7759625")
+        
+        //Register for push notifications
+        BatchPush.registerForRemoteNotifications()
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -73,7 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        BatchPush.dismissNotifications()
+    }
+    
+    
 
 }
 
