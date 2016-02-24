@@ -35,16 +35,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     var snap: UISnapBehavior?
     
     let autocompleteController = GMSAutocompleteViewController()
-    var placesClient: GMSPlacesClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
-        placesClient = GMSPlacesClient()
         autocompleteController.delegate = self
-        
-        
     }
     
     
@@ -60,14 +56,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         return true
     }
     
-    
-    
-    @IBAction func OnAddressChanged(sender: UITextField, forEvent event: UIEvent) {
-        if let text = sender.text {
-            
-            //placeAutoComplete(text)
-        }
-    }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -280,13 +268,22 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             let newEvent = Event()
             newEvent.eventName = eventName!
             newEvent.startDate = newStartDate
+            newEvent.location.lat = (eventLocation?.latitude)!
+            newEvent.location.lon = (eventLocation?.longitude)!
             newEvent.imageName = selectedImageString
+            
+            print("Event Latitude:\(newEvent.location.lat)")
+            print("Event Longitude:\(newEvent.location.lon)")
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
             print("\(dateFormatter.stringFromDate(createdStartDate))")
             
-            NetworkManager.sharedManager.createEvent(newEvent)
+            NetworkManager.sharedManager.createEvent(newEvent, created: { () -> Void in
+                 self.dismiss()
+            })
+            
+           
             
         }
         else
@@ -317,32 +314,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
     }
     
-    func placeAutoComplete(eventAddress: String){
-        
-        guard eventAddress != "" else {
-            return
-        }
-        
-        //let eventAddress = eventAddressTextField.text
-        let filter = GMSAutocompleteFilter()
-        filter.type = .Geocode
-        
-        placesClient?.autocompleteQuery(eventAddress, bounds: nil, filter: filter, callback: { (results, error: NSError?) -> Void in
-            if let error = error {
-                print("Autocomplete error: \(error)")
-            }
-            
-            for result in results!
-            {
-                if let result = result as? GMSAutocompletePrediction
-                {
-                    
-                    print("Result: \(result.attributedFullText.string) with placeID \(result.placeID)" )
-                }
-            }
-            
-        })
-    }
-}
+ }
 
 
