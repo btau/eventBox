@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Firebase - Allow Persistence
     override init() {
         super.init()
-        //Firebase.defaultConfig().persistenceEnabled = true
+        Firebase.defaultConfig().persistenceEnabled = true
         
         if NSUserDefaults.standardUserDefaults().boolForKey("setColor") == false {
             

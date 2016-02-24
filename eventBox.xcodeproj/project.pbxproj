@@ -35,6 +35,7 @@
 		4CF418231C7902210040A0A6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418221C7902210040A0A6 /* LaunchViewController.swift */; };
 		4CF418251C7908550040A0A6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418241C7908550040A0A6 /* OnboardingViewController.swift */; };
 		4CF418271C791A5C0040A0A6 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418261C791A5C0040A0A6 /* TimeViewController.swift */; };
+		4CF5B1B31C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF5B1B21C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift */; };
 		4CF6CCA31C7BA2AF0071B07E /* CenterCellCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF6CCA21C7BA2AF0071B07E /* CenterCellCollectionViewFlowLayout.swift */; };
 		4CF6CCA51C7BAC3D0071B07E /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF6CCA41C7BAC3D0071B07E /* EventCollectionViewCell.swift */; };
 		4CF6CCA71C7BEA370071B07E /* EventLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF6CCA61C7BEA370071B07E /* EventLandingViewController.swift */; };
@@ -74,6 +75,7 @@
 		4CF418221C7902210040A0A6 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		4CF418241C7908550040A0A6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4CF418261C791A5C0040A0A6 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		4CF5B1B21C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLandingDetailsTableViewController.swift; sourceTree = "<group>"; };
 		4CF6CCA21C7BA2AF0071B07E /* CenterCellCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCellCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		4CF6CCA41C7BAC3D0071B07E /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CF6CCA61C7BEA370071B07E /* EventLandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLandingViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				4CF418261C791A5C0040A0A6 /* TimeViewController.swift */,
 				0D7C818F1C7BA83600892A25 /* MapViewController.swift */,
 				4CF6CCA61C7BEA370071B07E /* EventLandingViewController.swift */,
+				4CF5B1B21C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				0D7C81901C7BA83600892A25 /* MapViewController.swift in Sources */,
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
+				4CF5B1B31C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift in Sources */,
 				4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */,
 				4CF418251C7908550040A0A6 /* OnboardingViewController.swift in Sources */,
 				4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */,

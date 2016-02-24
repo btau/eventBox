@@ -65,7 +65,7 @@ import UIKit
             
             layer.cornerRadius = frame.height / 2
             layer.borderColor = UIColor(white: 1.0, alpha: 0.5).CGColor
-            layer.borderWidth = 2
+            layer.borderWidth = 0
             
             backgroundColor = UIColor.clearColor()
             
