@@ -33,11 +33,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     let SCREEN_BOUNDS = UIScreen.mainScreen().bounds
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
 
+        newEventButton.tintColor = UIColor.eventBoxAccent()
+        
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
@@ -151,6 +152,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         print(cell.eventImageView.bounds.origin.x)
         print(poppedCellBounds.origin.x)
         cellImageView = UIImageView(image: cell.eventImageView.image)
+        cellImageView.userInteractionEnabled = true
         cellImageView.frame = self.view.convertRect(cell.eventImageView.frame, toView: self.view)
         cellImageView.contentMode = .ScaleAspectFill
         cellImageView.clipsToBounds = true

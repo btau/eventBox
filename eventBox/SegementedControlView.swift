@@ -42,7 +42,7 @@ import UIKit
                 setSelectedColors()
             }
         }
-        
+    
         
         @IBInspectable var font : UIFont! = UIFont.systemFontOfSize(12) {
             didSet {

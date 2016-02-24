@@ -24,12 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if NSUserDefaults.standardUserDefaults().boolForKey("setColor") == false {
             
-            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
-            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
-            NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
+//            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
+//            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
+//            NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
          
+            NSUserDefaults.standardUserDefaults().setFloat(85,  forKey: "red")
+            NSUserDefaults.standardUserDefaults().setFloat(230, forKey: "green")
+            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "blue")
+            
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "setColor")
         }
+        
+        
         
         
         
