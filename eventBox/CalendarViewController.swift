@@ -27,8 +27,8 @@ class CalendarViewController: UIViewController, CalendarViewDelegate {
         super.viewDidLoad()
         
         calendarView.shouldShowHeaders = true
-        calendarView.selectionColor  = UIColor.eventBoxGreen()
-        calendarView.fontHeaderColor = UIColor.eventBoxGreen()
+        calendarView.selectionColor  = UIColor.eventBoxAccent()
+        calendarView.fontHeaderColor = UIColor.eventBoxAccent()
         calendarView.calendarDelegate = self
         calendarView.fontColor = UIColor.whiteColor()
         calendarView.bgColor = UIColor.eventBoxBlack()

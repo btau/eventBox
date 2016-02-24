@@ -88,7 +88,7 @@ extension UIColor {
     }
     
     class func eventBoxBlack() -> UIColor {
-        return UIColor(red: 49/255, green: 49/255, blue: 49/255, alpha: 1.0)
+        return UIColor(red: 38/255, green: 38/255, blue: 38/255, alpha: 1.0)
     }
     
 }

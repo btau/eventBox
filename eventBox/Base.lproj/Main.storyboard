@@ -279,7 +279,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpJ-pQ-ZA5">
-                                <rect key="frame" x="20" y="274.5" width="560" height="50"/>
+                                <rect key="frame" x="20" y="275" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7SI-Ah-DAk"/>
                                 </constraints>
@@ -295,12 +295,11 @@
                                         <attributes>
                                             <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="42" name="Avenir-Heavy"/>
-                                            <font key="NSOriginalFont" size="42" name="Avenir-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
+                                <color key="highlightedColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
@@ -308,7 +307,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KpJ-pQ-ZA5" firstAttribute="leading" secondItem="1xI-iX-C69" secondAttribute="leadingMargin" id="4cf-mL-3zc"/>
                             <constraint firstItem="KpJ-pQ-ZA5" firstAttribute="centerY" secondItem="1xI-iX-C69" secondAttribute="centerY" id="KDa-hX-X1v"/>
@@ -560,7 +559,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-S7-ccn">
                                 <rect key="frame" x="270" y="530" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="SSE-QK-Dbe"/>
                                     <constraint firstAttribute="height" constant="50" id="d6C-bh-IXB"/>
@@ -585,7 +584,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9Bi-S7-ccn" firstAttribute="top" secondItem="snw-ec-z56" secondAttribute="bottom" constant="8" id="0fc-PD-rdy"/>
                             <constraint firstItem="v9Q-jy-M7U" firstAttribute="leading" secondItem="Hxn-pO-6Wz" secondAttribute="leadingMargin" id="9m3-9B-mYM"/>
@@ -1566,7 +1565,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1N-lK-B0s">
                                         <rect key="frame" x="50" y="513" width="498" height="54"/>
-                                        <color key="backgroundColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="54" id="VPU-dj-Ign"/>
                                         </constraints>
@@ -1762,7 +1761,7 @@
                                         </date>
                                     </datePicker>
                                 </subviews>
-                                <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="mam-98-lDh" firstAttribute="centerX" secondItem="Ps9-MR-1Me" secondAttribute="centerX" id="6yN-ki-Wta"/>
                                     <constraint firstItem="mam-98-lDh" firstAttribute="centerY" secondItem="Ps9-MR-1Me" secondAttribute="centerY" id="QOw-AK-7cy"/>
@@ -1857,7 +1856,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="295" id="A7F-FD-sFa"/>
                                     <constraint firstItem="9wI-vs-lpQ" firstAttribute="centerY" secondItem="FdC-nE-h8W" secondAttribute="centerY" id="Kha-Ry-wjn"/>
@@ -1934,7 +1933,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Event">
                                         <attributes>
-                                            <color key="NSColor" red="0.39922991708009692" green="1" blue="0.59635763360438587" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.33333333333333331" green="0.90196078431372551" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="42" name="Avenir-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -1948,7 +1947,7 @@
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
+                                <color key="highlightedColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
@@ -1956,7 +1955,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="21D-5h-87g" firstAttribute="trailing" secondItem="WhF-Il-gUI" secondAttribute="trailingMargin" id="6aC-f0-Zk5"/>
                             <constraint firstItem="u7Y-SY-3MG" firstAttribute="trailing" secondItem="WhF-Il-gUI" secondAttribute="trailingMargin" id="Gs7-eW-mr2"/>
@@ -2014,6 +2013,6 @@
         <image name="noun_multiply_315673" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f9i-1I-7RQ"/>
+        <segue reference="1HE-x6-EET"/>
     </inferredMetricsTieBreakers>
 </document>
