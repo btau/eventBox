@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1431,6 +1431,69 @@
             </objects>
             <point key="canvasLocation" x="3097" y="2942"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="amw-d1-N3G">
+            <objects>
+                <viewController id="QbI-3h-lju" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0F6-fy-rTm"/>
+                        <viewControllerLayoutGuide type="bottom" id="yvo-oV-ail"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eew-RI-IQG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-er-87H">
+                                <rect key="frame" x="20" y="530" width="560" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.32016387369999999" blue="0.27679930559999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hnu-g3-dZ8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0g7-Pd-OaP">
+                                <rect key="frame" x="20" y="465" width="560" height="50"/>
+                                <color key="backgroundColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Fm7-vh-4xc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8c-eH-WVd">
+                                <rect key="frame" x="20" y="407" width="560" height="50"/>
+                                <color key="backgroundColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="wYr-QC-NSr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="Join">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="z8c-eH-WVd" firstAttribute="leading" secondItem="eew-RI-IQG" secondAttribute="leadingMargin" id="3SN-eF-jKv"/>
+                            <constraint firstItem="0g7-Pd-OaP" firstAttribute="leading" secondItem="eew-RI-IQG" secondAttribute="leadingMargin" id="HGW-JV-bFG"/>
+                            <constraint firstItem="RAZ-er-87H" firstAttribute="top" secondItem="0g7-Pd-OaP" secondAttribute="bottom" constant="15" id="NFX-u4-5U7"/>
+                            <constraint firstItem="z8c-eH-WVd" firstAttribute="trailing" secondItem="eew-RI-IQG" secondAttribute="trailingMargin" id="PFj-5q-DpB"/>
+                            <constraint firstItem="0g7-Pd-OaP" firstAttribute="trailing" secondItem="eew-RI-IQG" secondAttribute="trailingMargin" id="Wc0-Sk-7E2"/>
+                            <constraint firstItem="RAZ-er-87H" firstAttribute="leading" secondItem="eew-RI-IQG" secondAttribute="leadingMargin" id="g5G-Vc-5Ls"/>
+                            <constraint firstItem="RAZ-er-87H" firstAttribute="trailing" secondItem="eew-RI-IQG" secondAttribute="trailingMargin" id="p5J-R6-cS9"/>
+                            <constraint firstItem="yvo-oV-ail" firstAttribute="top" secondItem="RAZ-er-87H" secondAttribute="bottom" constant="20" id="q4d-WM-tx8"/>
+                            <constraint firstItem="0g7-Pd-OaP" firstAttribute="top" secondItem="z8c-eH-WVd" secondAttribute="bottom" constant="8" id="uEW-MY-TXr"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R4A-ZM-Zzy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501" y="2629"/>
+        </scene>
         <!--Create Event View Controller-->
         <scene sceneID="IUZ-FR-HWH">
             <objects>
@@ -1642,6 +1705,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="OnAddressChanged:forEvent:" destination="bOD-nt-Ovi" eventType="editingChanged" id="1AZ-44-Z4z"/>
                                             <outlet property="delegate" destination="bOD-nt-Ovi" id="fUb-6N-EcA"/>
                                         </connections>
                                     </textField>

@@ -8,8 +8,9 @@
 
 import UIKit
 import Calendar_iOS
+import GoogleMaps
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate, TimeViewControllerDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate, TimeViewControllerDelegate, GMSAutocompleteViewControllerDelegate {
     
     
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -19,8 +20,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     
     
     var textFields: [UITextField]!
+    
     var eventDate: NSDate?
     var eventTime: NSDate?
+    var eventLocation: CLLocationCoordinate2D?
     
     let animationSpeed = 0.25
     
@@ -31,10 +34,13 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     var animator: UIDynamicAnimator?
     var snap: UISnapBehavior?
     
+    let autocompleteController = GMSAutocompleteViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
+        autocompleteController.delegate = self
         
         for textField in textFields {
             textField.borderColor = UIColor.eventBoxAccent()
@@ -42,18 +48,19 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
     }
     
- 
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
-
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         clearTextfields(Except: nil)
         return true
     }
+    
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -74,17 +81,21 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         textField.layer.addAnimation(width, forKey: "borderWidth")
         
         switch textField.tag {
-        case 1,4:
+        case 1:
             return true
         case 2:
             performSegueWithIdentifier("CalendarPop", sender: nil)
         case 3:
             performSegueWithIdentifier("TimePop", sender: nil)
+        case 4:
+            
+            self.presentViewController(autocompleteController, animated: true, completion: nil)
+            
         default:
             return false
         }
         return false
-
+        
     }
     
     func clearTextfields(Except selectedTextfield: UITextField?) {
@@ -114,6 +125,39 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             textField.layer.addAnimation(width, forKey: "borderWidth")
             
         }
+    }
+    
+    //MARK: - Google Location
+    
+    func viewController(viewController: GMSAutocompleteViewController!, didAutocompleteWithPlace place: GMSPlace!) {
+        print("Place Name: \(place.name)")
+        print("Place Address: \(place.formattedAddress)")
+        print("Place Attributions: \(place.attributions)")
+        
+        eventLocation = place.coordinate
+        
+        eventAddressTextField.text = place.name
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        clearTextfields(Except: nil)
+    }
+    
+    func viewController(viewController: GMSAutocompleteViewController!, didFailAutocompleteWithError error: NSError!) {
+        print("Error", error.description)
+    }
+    
+    func wasCancelled(viewController: GMSAutocompleteViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        clearTextfields(Except: nil)
+    }
+    
+    func didRequestAutocompletePredictions(viewController: GMSAutocompleteViewController!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(viewController: GMSAutocompleteViewController!) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
     //MARK: - CalenderView -
@@ -186,16 +230,16 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             unwindSegue.snap = snap!
             unwindSegue.cancel = cancel
             
-           
             
-          //  let time = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss", userInfo: nil, repeats: false)
+            
+            //  let time = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "dismiss", userInfo: nil, repeats: false)
         }
     }
     
-        func dismiss() {
-            dismissViewControllerAnimated(false, completion: nil)
-            print("dealloc")
-        }
+    func dismiss() {
+        dismissViewControllerAnimated(false, completion: nil)
+        print("dealloc")
+    }
     
     func dismissTintView() {
         UIView.animateWithDuration(0.5, animations: { () -> Void in
@@ -212,11 +256,15 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     {
         
         let eventName = eventNameTextField.text
+        //let eventAddress = eventAddressTextField.text
+        let selectedImageString = "1"
+        
+        //placeAutoComplete(eventAddress!)
         
         if eventName != "" && self.eventDate != nil && self.eventTime != nil
         {
             
-            // Creating new start date by combing both Date Field with Time Field
+            // Creating new start date by combing both Date Field with Time Field by use of combineDate func
             let createdStartDate = combineDate(self.eventDate!, WithTime: self.eventTime!)
             
             // Taking createdStartDate and converting it to Double via timeIntervalSince1970
@@ -225,13 +273,23 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             let newEvent = Event()
             newEvent.eventName = eventName!
             newEvent.startDate = newStartDate
+            newEvent.location.lat = (eventLocation?.latitude)!
+            newEvent.location.lon = (eventLocation?.longitude)!
+            newEvent.imageName = selectedImageString
+            
+            print("Event Latitude:\(newEvent.location.lat)")
+            print("Event Longitude:\(newEvent.location.lon)")
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
             print("\(dateFormatter.stringFromDate(createdStartDate))")
             
-            NetworkManager.sharedManager.createEvent(newEvent)
-                
+            NetworkManager.sharedManager.createEvent(newEvent, created: { () -> Void in
+                 self.dismiss()
+            })
+            
+           
+            
         }
         else
         {
@@ -239,7 +297,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             let cancel = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
             alertController.addAction(cancel)
             presentViewController(alertController, animated: true, completion: nil)
-                
+            
         }
     }
     
@@ -261,5 +319,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
     }
     
-    
-}
+ }
+
+

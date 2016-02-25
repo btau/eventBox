@@ -47,7 +47,7 @@ class NetworkManager {
     init() {
         print("Network Manager Initialized")
         eventsRef = rootRef.childByAppendingPath("events")
-        usersRef = rootRef.childByAppendingPath("users")
+        usersRef  = rootRef.childByAppendingPath("users")
         
         if rootRef.authData != nil {
             
@@ -220,7 +220,7 @@ class NetworkManager {
         
     }
     
-    func createEvent(event: Event) {
+    func createEvent(event: Event, created created: () -> Void) {
         
         guard let userUID = currentUser?.UID else {
             Debug.log("No User")
@@ -244,8 +244,24 @@ class NetworkManager {
         let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
         
-        userAdminRef.setValue(userEventData)
-        eventRef.setValue(eventData)
+//        userAdminRef.setValue(userEventData)
+//        eventRef.setValue(eventData)
+        
+        var index = 0
+        
+        userAdminRef.setValue(userEventData) { (erro:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
+        
+        eventRef.setValue(eventData) { (error:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
     }
    
     
@@ -302,20 +318,22 @@ class NetworkManager {
             }
         }
         
+        if let messages = eventData["messages"] as? [String:AnyObject] {
+            for message in messages {
+                
+                let time = message.1["time"] as! Double
+                let newMessage = message.1["message"] as! String
+                let userUID = message.1["userUID"] as! String
+                
+                let messageUID = message.0
+                
+                newEvent.messages.append(Message(userUID: userUID, time: time, message: newMessage, messageUID: messageUID))
+            }
+        }
+        
         return newEvent
         
-            //        if let messages = eventData["messages"] as? [String:AnyObject] {
-            //            for message in messages {
-            //
-            //                let time = message.1["time"] as! Double
-            //                let newMessage = message.1["message"] as! String
-            //                let userUID = message.1["userUID"] as! String
-            //
-            //                let messageUID = message.0
-            //
-            //                newEvent.messages.append(Message(userUID: userUID, time: time, message: message, messageUID: messageUID))
-            //            }
-            //        }
+
     }
     
     
@@ -359,7 +377,37 @@ class NetworkManager {
 
     }
     
-    //Event Attendance Handling
+    //MARK: - Messages
+    
+    func addMessage(message message: String, messageFailedToSend: () -> Void) {
+        
+        
+        guard
+            let eventUID = selectedEvent?.eventUID,
+            let selfUID  = authData?.uid
+            else {
+                messageFailedToSend()
+                return
+        }
+        
+        let messagesRef   = eventsRef.childByAppendingPath("\(eventUID)/messages")
+        let newMessageRef = messagesRef.childByAutoId()
+        
+        let messageData   = [
+            "userUID"   : selfUID,
+            "time"      : NSDate().timeIntervalSince1970,
+            "message"   : message,
+            "messageUID": newMessageRef.key]
+        
+        newMessageRef.setValue(messageData) { (error:NSError!, snap:Firebase!) -> Void in
+            
+          
+        }
+        
+    }
+    
+    
+    //MARK: - Event Attendance Handling
     func attendEvent(eventUID: String) {
         
         guard let userUID = currentUser?.UID
