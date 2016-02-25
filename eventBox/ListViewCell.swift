@@ -12,5 +12,6 @@ class ListViewCell: UITableViewCell {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var itemLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
     
 }

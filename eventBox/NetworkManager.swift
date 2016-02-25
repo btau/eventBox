@@ -268,7 +268,7 @@ class NetworkManager {
     
     func unpackEvent(eventData: [String:AnyObject]) -> Event {
         let newEvent = Event()
-        
+        var userUID: String?
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
         
@@ -291,7 +291,13 @@ class NetworkManager {
             for item in items {
                 let itemUID = item.0
                 let itemString = item.1["item"]
-                let newItem = Item(itemUID: itemUID, item: itemString!, userUID: "")
+                if let tempUserUID = item.1["userUID"] {
+                    userUID = tempUserUID
+                }
+                else {
+                    userUID = ""
+                }
+                let newItem = Item(itemUID: itemUID, item: itemString!, userUID: userUID!)
                 newEvent.items.append(newItem)
             }
         }
