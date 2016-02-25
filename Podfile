@@ -15,6 +15,7 @@ pod 'FoldingTabBar', '~> 1.0.2'
 pod 'Mapbox-iOS-SDK'
 pod 'GoogleMaps'
 pod 'Batch', '~> 1.5'
+pod 'FirebaseUI/Core', '~> 0.3'
 
 end
 
