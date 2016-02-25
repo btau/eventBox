@@ -84,6 +84,26 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        if currentUser?.UID == currentEvent.hostUID {
+            return true
+        }
+        else {
+            return false
+        }
+        
+    }
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            NetworkManager.sharedManager.removeItem(eventUID: currentEvent.eventUID, itemUID: currentEvent.items[indexPath.row].itemUID)
+        }
+    }
+    
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return itemTextField.resignFirstResponder()
     }
