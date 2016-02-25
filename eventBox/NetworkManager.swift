@@ -205,9 +205,11 @@ class NetworkManager {
         
         selectedEvent = event
         
-        eventsRef.childByAppendingPath(event.eventUID).observeEventType(.ChildChanged) { (snapshot: FDataSnapshot!) -> Void in
+        eventsRef.childByAppendingPath(event.eventUID).observeEventType(.Value) { (snapshot: FDataSnapshot!) -> Void in
             
             let eventData = snapshot.value as! [String:AnyObject]
+            
+            
             
             self.selectedEvent = self.unpackEvent(eventData)
             
@@ -282,11 +284,11 @@ class NetworkManager {
     
     func unpackEvent(eventData: [String:AnyObject]) -> Event {
         let newEvent = Event()
-        
+        var userUID: String?
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
         
-        print(eventData)
+        //print(eventData)
         
         newEvent.location = LocationCords(lat: Double(lat)!, lon: Double(lon)!)
         newEvent.hostUID = eventData["hostUID"] as! String
@@ -295,15 +297,24 @@ class NetworkManager {
         newEvent.startDate = eventData["startDate"] as! Double
         newEvent.imageName = eventData["imageName"] as! String
         
-        if let guests = eventData["guests"] as? [String] {
+        if let guests = eventData["guests"] as? [String:[String:String]] {
             for guest in guests {
-                newEvent.guests.append(guest)
+                newEvent.guests.append(guest.0)
             }
         }
         
-        if let items = eventData["items"] as? [Item] {
+        if let items = eventData["items"] as? [String:[String:String]] {
             for item in items {
-                newEvent.items.append(item)
+                let itemUID = item.0
+                let itemString = item.1["item"]
+                if let tempUserUID = item.1["userUID"] {
+                    userUID = tempUserUID
+                }
+                else {
+                    userUID = ""
+                }
+                let newItem = Item(itemUID: itemUID, item: itemString!, userUID: userUID!)
+                newEvent.items.append(newItem)
             }
         }
         

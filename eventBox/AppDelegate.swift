@@ -11,25 +11,32 @@ import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleMaps
+import Batch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     //MARK: - Firebase - Allow Persistence
     override init() {
         super.init()
-        //Firebase.defaultConfig().persistenceEnabled = true
+        Firebase.defaultConfig().persistenceEnabled = true
         
         if NSUserDefaults.standardUserDefaults().boolForKey("setColor") == false {
             
-            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
-            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
-            NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
-         
+            //            NSUserDefaults.standardUserDefaults().setFloat(91,  forKey: "red")
+            //            NSUserDefaults.standardUserDefaults().setFloat(255, forKey: "green")
+            //NSUserDefaults.standardUserDefaults().setFloat(134, forKey: "blue")
+            
+            NSUserDefaults.standardUserDefaults().setFloat(50,  forKey: "red")
+            NSUserDefaults.standardUserDefaults().setFloat(200, forKey: "green")
+            NSUserDefaults.standardUserDefaults().setFloat(250, forKey: "blue")
+            
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "setColor")
         }
+        
+        
         
         
         
@@ -38,6 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - AppDelegate Stack
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyBVUNOoYISoS5e4wgENbxvVJjjDGhxto4Y")
+        //Start Batch
+        BatchPush.setupPush()
+        Batch.startWithAPIKey("DEV56CCD39D0FAEA40294DD7759625")
+        
+        //Register for push notifications
+        BatchPush.registerForRemoteNotifications()
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -67,7 +81,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        BatchPush.dismissNotifications()
+    }
+    
+    
 
 }
 

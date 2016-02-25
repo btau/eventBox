@@ -41,6 +41,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
         textFields = [eventNameTextField,eventDateTextField,eventTimeTextField, eventAddressTextField]
         autocompleteController.delegate = self
+        
+        for textField in textFields {
+            textField.borderColor = UIColor.eventBoxAccent()
+        }
+        
     }
     
     

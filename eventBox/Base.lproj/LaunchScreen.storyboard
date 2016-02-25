@@ -26,7 +26,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Event">
                                         <attributes>
-                                            <color key="NSColor" red="0.39922991708009692" green="1" blue="0.59635763360438587" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.19607843137254902" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="42" name="Avenir-Heavy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -39,10 +39,10 @@
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
+                                <color key="highlightedColor" red="0.33333333329999998" green="0.90196078430000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hAg-GW-TkU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Mau-kJ-XN7"/>
                             <constraint firstItem="hAg-GW-TkU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="On0-QB-835"/>

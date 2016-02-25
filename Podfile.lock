@@ -1,4 +1,5 @@
 PODS:
+  - Batch (1.5)
   - Bolts (1.6.0):
     - Bolts/AppLinks (= 1.6.0)
     - Bolts/Tasks (= 1.6.0)
@@ -18,6 +19,7 @@ PODS:
   - Mapbox-iOS-SDK (3.1.2)
 
 DEPENDENCIES:
+  - Batch (~> 1.5)
   - Calendar-iOS
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -28,6 +30,7 @@ DEPENDENCIES:
   - Mapbox-iOS-SDK
 
 SPEC CHECKSUMS:
+  Batch: 8ae30e3c3cfc4ddc812ad908ae75bbee9c4c7057
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   Calendar-iOS: 2296d7b4354a36ee1eefa012617b573270a206cb
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
