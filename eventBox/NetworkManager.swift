@@ -220,7 +220,7 @@ class NetworkManager {
         
     }
     
-    func createEvent(event: Event) {
+    func createEvent(event: Event, created created: () -> Void) {
         
         guard let userUID = currentUser?.UID else {
             Debug.log("No User")
@@ -244,8 +244,24 @@ class NetworkManager {
         let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
         
-        userAdminRef.setValue(userEventData)
-        eventRef.setValue(eventData)
+//        userAdminRef.setValue(userEventData)
+//        eventRef.setValue(eventData)
+        
+        var index = 0
+        
+        userAdminRef.setValue(userEventData) { (erro:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
+        
+        eventRef.setValue(eventData) { (error:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
     }
    
     
