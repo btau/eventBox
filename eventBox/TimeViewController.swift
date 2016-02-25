@@ -14,13 +14,13 @@ protocol TimeViewControllerDelegate {
     func timeViewControllerDidSelectTime(time: NSDate)
 }
 
-class TimeViewController: UIViewController {
+class TimeViewController: UIViewController, UIPickerViewDelegate {
 
     @IBOutlet weak var timePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        timePicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
 
     var delegate: TimeViewControllerDelegate?
@@ -35,14 +35,6 @@ class TimeViewController: UIViewController {
         delegate?.timeViewControllerDidSelectTime(timePicker.date)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
+    
 }

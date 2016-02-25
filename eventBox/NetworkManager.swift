@@ -220,7 +220,7 @@ class NetworkManager {
         
     }
     
-    func createEvent(event: Event) {
+    func createEvent(event: Event, created created: () -> Void) {
         
         guard let userUID = currentUser?.UID else {
             Debug.log("No User")
@@ -244,8 +244,24 @@ class NetworkManager {
         let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
         
-        userAdminRef.setValue(userEventData)
-        eventRef.setValue(eventData)
+//        userAdminRef.setValue(userEventData)
+//        eventRef.setValue(eventData)
+        
+        var index = 0
+        
+        userAdminRef.setValue(userEventData) { (erro:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
+        
+        eventRef.setValue(eventData) { (error:NSError!, snap:Firebase!) -> Void in
+            index++
+            if index == 2 {
+                created()
+            }
+        }
     }
    
     
@@ -268,7 +284,7 @@ class NetworkManager {
     
     func unpackEvent(eventData: [String:AnyObject]) -> Event {
         let newEvent = Event()
-        
+        var userUID: String?
         let lat = eventData["lat"] as! String
         let lon = eventData["lon"] as! String
         
@@ -281,15 +297,24 @@ class NetworkManager {
         newEvent.startDate = eventData["startDate"] as! Double
         newEvent.imageName = eventData["imageName"] as! String
         
-        if let guests = eventData["guests"] as? [String] {
+        if let guests = eventData["guests"] as? [String:[String:String]] {
             for guest in guests {
-                newEvent.guests.append(guest)
+                newEvent.guests.append(guest.0)
             }
         }
         
-        if let items = eventData["items"] as? [Item] {
+        if let items = eventData["items"] as? [String:[String:String]] {
             for item in items {
-                newEvent.items.append(item)
+                let itemUID = item.0
+                let itemString = item.1["item"]
+                if let tempUserUID = item.1["userUID"] {
+                    userUID = tempUserUID
+                }
+                else {
+                    userUID = ""
+                }
+                let newItem = Item(itemUID: itemUID, item: itemString!, userUID: userUID!)
+                newEvent.items.append(newItem)
             }
         }
         
