@@ -832,7 +832,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cij-4T-BB2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="38" width="600" height="482"/>
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ListItemCell" rowHeight="90" id="ygc-PT-PHM" customClass="ListViewCell" customModule="eventBox" customModuleProvider="target">
@@ -888,6 +888,7 @@
                                                 <constraint firstItem="N1C-eC-iHW" firstAttribute="top" secondItem="EFf-Qo-bUw" secondAttribute="topMargin" id="nAz-Ub-KsO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="itemLabel" destination="N1C-eC-iHW" id="2fc-pM-3aA"/>
                                             <outlet property="userImageView" destination="rA2-aa-gj6" id="Wyu-2n-jDn"/>
@@ -900,16 +901,34 @@
                                     <outlet property="delegate" destination="Q7o-XA-Xqn" id="tsO-46-ajB"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="piu-FT-KFw">
+                                <rect key="frame" x="20" y="0.0" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9Ve-Ht-eZB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Q7o-XA-Xqn" id="ozz-ah-fWY"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Cij-4T-BB2" firstAttribute="top" secondItem="Ins-jo-9PL" secondAttribute="bottom" id="92C-62-1py"/>
-                            <constraint firstAttribute="bottom" secondItem="Cij-4T-BB2" secondAttribute="bottom" id="cyQ-oD-Vre"/>
+                            <constraint firstItem="Cij-4T-BB2" firstAttribute="top" secondItem="Ins-jo-9PL" secondAttribute="bottom" constant="38" id="92C-62-1py"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="piu-FT-KFw" secondAttribute="trailing" id="MKX-qp-BRb"/>
+                            <constraint firstItem="piu-FT-KFw" firstAttribute="leading" secondItem="b19-c3-OwR" secondAttribute="leadingMargin" id="Uhk-WL-KXq"/>
+                            <constraint firstItem="piu-FT-KFw" firstAttribute="top" secondItem="Ins-jo-9PL" secondAttribute="bottom" id="YfO-Eg-eE3"/>
+                            <constraint firstAttribute="bottom" secondItem="Cij-4T-BB2" secondAttribute="bottom" constant="80" id="cyQ-oD-Vre"/>
                             <constraint firstAttribute="trailing" secondItem="Cij-4T-BB2" secondAttribute="trailing" id="ng2-fJ-WoC"/>
                             <constraint firstItem="Cij-4T-BB2" firstAttribute="leading" secondItem="b19-c3-OwR" secondAttribute="leading" id="vlK-tt-Nam"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" id="5os-Ed-mRU"/>
+                    <connections>
+                        <outlet property="itemTextField" destination="piu-FT-KFw" id="Upz-Mj-5XS"/>
+                        <outlet property="listTableView" destination="Cij-4T-BB2" id="pH9-RP-Fd7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4c-vY-8wj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
