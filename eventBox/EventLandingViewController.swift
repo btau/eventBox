@@ -27,6 +27,7 @@ class EventLandingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        countdownTime()
 
         
         
@@ -111,6 +112,19 @@ class EventLandingViewController: UIViewController {
     }
 
     @IBAction func onExitTapped(sender: AnyObject) {
+    }
+    
+    func countdownTime() {
+        let dayCalenderUnit: NSCalendarUnit = [.Day]
+        let today = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let eventDate = NSDate(timeInterval: event.startDate, sinceDate: today)
+        
+        let dayUntilStartDate = calendar.components(dayCalenderUnit, fromDate: today, toDate: eventDate, options: [])
+        
+        print("\(dayUntilStartDate.day) days until start date!" )
+        
+        
     }
 
 
