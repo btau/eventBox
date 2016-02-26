@@ -91,6 +91,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-eventBox/FBSDKShareKit.framework"
   install_framework "Pods-eventBox/Firebase.framework"
   install_framework "Pods-eventBox/FoldingTabBar.framework"
+  install_framework "Pods-eventBox/JSQMessagesViewController.framework"
+  install_framework "Pods-eventBox/JSQSystemSoundPlayer.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -101,5 +103,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-eventBox/FBSDKShareKit.framework"
   install_framework "Pods-eventBox/Firebase.framework"
   install_framework "Pods-eventBox/FoldingTabBar.framework"
+  install_framework "Pods-eventBox/JSQMessagesViewController.framework"
+  install_framework "Pods-eventBox/JSQSystemSoundPlayer.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
 fi

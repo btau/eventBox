@@ -16,6 +16,9 @@ PODS:
   - Firebase (2.5.1)
   - FoldingTabBar (1.0.2)
   - GoogleMaps (1.12.2)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - Mapbox-iOS-SDK (3.1.2)
 
 DEPENDENCIES:
@@ -27,6 +30,7 @@ DEPENDENCIES:
   - Firebase
   - FoldingTabBar (~> 1.0.2)
   - GoogleMaps
+  - JSQMessagesViewController
   - Mapbox-iOS-SDK
 
 SPEC CHECKSUMS:
@@ -39,6 +43,8 @@ SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   FoldingTabBar: 79df76dfd5a84c0a369beaa378a31c07aa53b6b2
   GoogleMaps: cc76edaa94a4284e80ecd7089ed319d1cca5f37e
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Mapbox-iOS-SDK: 0a910c2cce1aa8cff5b9ec2a990e7a32332a776a
 
 COCOAPODS: 0.39.0

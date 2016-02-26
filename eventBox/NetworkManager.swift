@@ -142,7 +142,9 @@ class NetworkManager {
             
             let currentUser = self.unpackUser(snapshot)
          
-            didGetUser(user: currentUser)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                didGetUser(user: currentUser)
+            })
         }
     }
     
@@ -379,7 +381,7 @@ class NetworkManager {
     
     //MARK: - Messages
     
-    func addMessage(message message: String, messageFailedToSend: () -> Void) {
+    func addMessage(message message: String,messageSent: (message:Message) -> Void , messageFailedToSend: () -> Void) {
         
         
         guard
@@ -399,9 +401,14 @@ class NetworkManager {
             "message"   : message,
             "messageUID": newMessageRef.key]
         
+        let newMessage = Message(userUID: selfUID, time: NSDate().timeIntervalSince1970, message: message, messageUID: newMessageRef.key)
+        
         newMessageRef.setValue(messageData) { (error:NSError!, snap:Firebase!) -> Void in
             
-          
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                messageSent(message: newMessage)
+            })
+
         }
         
     }

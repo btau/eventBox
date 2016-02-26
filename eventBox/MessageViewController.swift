@@ -27,7 +27,7 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
         self.view.backgroundColor = .eventBoxBlack()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: "eventUpdate", object: nil)
-        reloadData()
+        
         
     }
 
@@ -37,12 +37,30 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
         //tableView.reloadData()
         //tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 23, inSection: 0), atScrollPosition: .Bottom, animated: true)
         
-      // tableView.transform = CGAffineTransformMakeScale(1, -1)
+       tableView.transform = CGAffineTransformMakeScale(1, -1)
         
         
         
-       // tableView.reloadData()
+        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+       // tableView.reloadData()
+        
+        messagesArray = []
+        
+        for message in event.messages {
+            
+            messagesArray.append(message)
+            
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: messagesArray.count-1, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
+            
+        }
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print(indexPath.row)
@@ -77,7 +95,8 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
         cell.textView.text = message.message
         cell.textView.textContainer.lineBreakMode = .ByWordWrapping;
         cell.textView.sizeToFit()
-        //cell.transform = CGAffineTransformMakeScale(1, -1)
+        cell.backgroundColor = .eventBoxBlack()
+        cell.transform = CGAffineTransformMakeScale(1, -1)
         
         return cell
         
@@ -101,8 +120,8 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return event.messages.count + 2
-       // return messagesArray.count + 2
+       // return event.messages.count + 2
+       return messagesArray.count + 2
     }
     
     func tabBarViewWillExpand() {
@@ -114,9 +133,7 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     }
     
     func extraRightItemDidPress() {
-        NetworkManager.sharedManager.addMessage(message: "Hello World!") { () -> Void in
-            
-        }
+
         //displayKeyboard()
     }
     
@@ -130,16 +147,19 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     
     func reloadData() {
         event = NetworkManager.sharedManager.selectedEvent!
-        
-        if messagesArray.last?.messageUID != event.messages.last?.messageUID {
+        print(event.messages.first!.time)
+        if messagesArray.first?.messageUID != event.messages.first?.messageUID {
+         //   messagesArray.insert(event.messages.last!, atIndex: 0)
+            messagesArray.append(event.messages.last!)
             
-            
-            
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
         }
 
         
-        tableView.reloadData()
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: messagesArray.count-1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        
+        //tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: messagesArray.count-1, inSection: 0), atScrollPosition: .Bottom, animated: true)
     }
     
 
