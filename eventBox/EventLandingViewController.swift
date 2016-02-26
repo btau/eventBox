@@ -18,6 +18,7 @@ class EventLandingViewController: UIViewController {
     
     @IBOutlet weak var tableViewContainer: UIView!
     var event: Event!
+    var currentEvent = NetworkManager.sharedManager.selectedEvent!
     
     @IBOutlet weak var shadowView: UIImageView!
     @IBOutlet weak var numberOfTimeLabel: UILabel!
@@ -115,15 +116,48 @@ class EventLandingViewController: UIViewController {
     }
     
     func countdownTime() {
+        
         let dayCalenderUnit: NSCalendarUnit = [.Day]
-        let today = NSDate()
+        let today = NSDate()                   // Todays date
         let calendar = NSCalendar.currentCalendar()
-        let eventDate = NSDate(timeInterval: event.startDate, sinceDate: today)
         
-        let dayUntilStartDate = calendar.components(dayCalenderUnit, fromDate: today, toDate: eventDate, options: [])
+        // Getting the startDate double and converting to NSDate
+        let eventDate = NSDate(timeIntervalSince1970: currentEvent.startDate)
         
-        print("\(dayUntilStartDate.day) days until start date!" )
         
+        // Getting days until event date
+        let daysUntilStartDate = calendar.components(dayCalenderUnit, fromDate: today, toDate: eventDate, options: [])
+        
+        // Getting hours until event date
+        let hoursUntilStartDate = calendar.components([NSCalendarUnit.Hour, NSCalendarUnit.Minute] , fromDate: today, toDate: eventDate, options: [])
+
+        // Comparing the two dates in units of Days and returning a NSComparisonResult
+        let compareDatesByDays = calendar.compareDate(today, toDate: eventDate, toUnitGranularity: dayCalenderUnit)
+        
+        
+        // Logic
+        if compareDatesByDays == NSComparisonResult.OrderedSame {
+            numberOfTimeLabel.text = "Today"
+            timeAmountLabel.text = ""
+        } else if compareDatesByDays == NSComparisonResult.OrderedAscending {
+            if hoursUntilStartDate.hour < 24 {
+                numberOfTimeLabel.text = "Tomorrow"
+                timeAmountLabel.text = ""
+            } else {
+            numberOfTimeLabel.text = String(daysUntilStartDate.day)
+            timeAmountLabel.text = "Days Until Event"
+            }
+        } else {
+            numberOfTimeLabel.text = "Event Over"
+            numberOfTimeLabel.sizeToFit()
+            timeAmountLabel.text = ""
+        }
+        
+        print("\(today)")
+        print("\(eventDate)")
+        print("\(hoursUntilStartDate)")
+        
+        print("\(daysUntilStartDate.day) days until start date!" )
         
     }
 

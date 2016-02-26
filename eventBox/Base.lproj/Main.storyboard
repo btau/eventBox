@@ -485,8 +485,8 @@
                                                             </constraints>
                                                             <blurEffect style="extraLight"/>
                                                         </visualEffectView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQm-tx-IAf">
-                                                            <rect key="frame" x="8" y="190" width="248" height="62"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQm-tx-IAf">
+                                                            <rect key="frame" x="8" y="190" width="120" height="62"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="62" id="yVa-xg-dIe"/>
                                                             </constraints>
@@ -495,14 +495,14 @@
                                                                     <attributes>
                                                                         <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <font key="NSFont" size="70" name="Avenir-Heavy"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                                 <fragment content="Days">
                                                                     <attributes>
                                                                         <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <font key="NSFont" size="30" name="Avenir-Heavy"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
@@ -515,7 +515,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="6rl-zO-PHf" secondAttribute="trailing" id="3DI-A2-lai"/>
                                                         <constraint firstItem="6rl-zO-PHf" firstAttribute="top" secondItem="OQm-tx-IAf" secondAttribute="bottom" id="CVM-5B-9jM"/>
                                                         <constraint firstAttribute="bottom" secondItem="8NZ-mQ-pNH" secondAttribute="bottom" id="MuY-bD-qWT"/>
-                                                        <constraint firstAttribute="trailing" secondItem="OQm-tx-IAf" secondAttribute="trailing" constant="8" id="Q7J-o9-43A"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OQm-tx-IAf" secondAttribute="trailing" constant="136" id="Q7J-o9-43A"/>
                                                         <constraint firstAttribute="trailing" secondItem="8NZ-mQ-pNH" secondAttribute="trailing" id="U01-TJ-FgX"/>
                                                         <constraint firstAttribute="bottom" secondItem="6rl-zO-PHf" secondAttribute="bottom" id="Ush-qo-rhv"/>
                                                         <constraint firstItem="OQm-tx-IAf" firstAttribute="leading" secondItem="T79-L2-f7U" secondAttribute="leading" constant="8" id="bc6-pF-IC0"/>
@@ -1011,10 +1011,10 @@
                                     <segue destination="yz0-lg-R3x" kind="unwind" animates="NO" unwindAction="returnFromSegueActions:" id="YcK-UG-54x"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="o9K-nk-2GX">
-                                <rect key="frame" x="264" y="20" width="72" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9K-nk-2GX">
+                                <rect key="frame" x="200" y="20" width="200" height="72"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="Ru8-PS-I0X"/>
+                                    <constraint firstAttribute="width" constant="200" id="Ru8-PS-I0X"/>
                                     <constraint firstAttribute="height" constant="72" id="hea-ae-P2l"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="79"/>
@@ -1022,7 +1022,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAYS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sx2-Ow-hmb">
-                                <rect key="frame" x="264" y="92" width="72" height="23.5"/>
+                                <rect key="frame" x="200" y="92" width="200" height="23.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23.5" id="yuL-Ca-kC1"/>
                                 </constraints>

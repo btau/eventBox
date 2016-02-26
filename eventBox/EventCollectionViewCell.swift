@@ -45,6 +45,46 @@ class EventCollectionViewCell: UICollectionViewCell {
             self.hostNameLabel.text = user.userName
         }
         
+        countdownTime()
+        
     }
+    
+    func countdownTime() {
+        
+        let dayCalenderUnit: NSCalendarUnit = [.Day]
+        let today = NSDate()                   // Todays date
+        let calendar = NSCalendar.currentCalendar()
+        
+        // Getting the startDate double and converting to NSDate
+        let eventDate = NSDate(timeIntervalSince1970: event.startDate)
+        
+        
+        // Getting days until event date
+        let daysUntilStartDate = calendar.components(dayCalenderUnit, fromDate: today, toDate: eventDate, options: [])
+        
+        // Getting hours until event date
+        let hoursUntilStartDate = calendar.components([NSCalendarUnit.Hour, NSCalendarUnit.Minute] , fromDate: today, toDate: eventDate, options: [])
+        
+        // Comparing the two dates in units of Days and returning a NSComparisonResult
+        let compareDatesByDays = calendar.compareDate(today, toDate: eventDate, toUnitGranularity: dayCalenderUnit)
+        
+        
+        // Logic
+        if compareDatesByDays == NSComparisonResult.OrderedSame {
+            bigCountdownLabel.text = "Today"
+        } else if compareDatesByDays == NSComparisonResult.OrderedAscending {
+            if hoursUntilStartDate.hour < 24 {
+                bigCountdownLabel.text = "Tomorrow"
+            } else {
+                bigCountdownLabel.text = "\(String(daysUntilStartDate.day)) Days Until Event"
+            }
+        } else {
+            bigCountdownLabel.text = "Event Over"
+        }
+        
+    }
+
+    
+    
     
 }

@@ -256,12 +256,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     {
         
         let eventName = eventNameTextField.text
-        //let eventAddress = eventAddressTextField.text
         let selectedImageString = "1"
         
-        //placeAutoComplete(eventAddress!)
-        
-        if eventName != "" && self.eventDate != nil && self.eventTime != nil
+        if eventName != "" && self.eventDate != nil && self.eventTime != nil 
         {
             
             // Creating new start date by combing both Date Field with Time Field by use of combineDate func
