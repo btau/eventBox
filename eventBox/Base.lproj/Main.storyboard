@@ -861,54 +861,64 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_happy_49834" translatesAutoresizingMaskIntoConstraints="NO" id="rA2-aa-gj6">
-                                                    <rect key="frame" x="526" y="16" width="58" height="58"/>
-                                                    <color key="backgroundColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRV-Hc-SXM">
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="82"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_happy_49834" translatesAutoresizingMaskIntoConstraints="NO" id="rA2-aa-gj6">
+                                                            <rect key="frame" x="518" y="12" width="58" height="58"/>
+                                                            <color key="backgroundColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="58" id="PIU-Fo-SyT"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="29"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                    <real key="value" value="2"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYz-Mb-0xX">
+                                                            <rect key="frame" x="11" y="47" width="499" height="27"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="58" id="PIU-Fo-SyT"/>
+                                                        <constraint firstItem="rA2-aa-gj6" firstAttribute="trailing" secondItem="rRV-Hc-SXM" secondAttribute="trailingMargin" id="Kk3-Yc-MOE"/>
+                                                        <constraint firstItem="rA2-aa-gj6" firstAttribute="top" secondItem="rRV-Hc-SXM" secondAttribute="top" constant="12" id="TQp-lh-yI2"/>
+                                                        <constraint firstItem="rA2-aa-gj6" firstAttribute="centerY" secondItem="rRV-Hc-SXM" secondAttribute="centerY" id="rwl-sD-MUN"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="29"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="2"/>
+                                                            <real key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYz-Mb-0xX">
-                                                    <rect key="frame" x="8" y="55" width="510" height="27"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1C-eC-iHW">
-                                                    <rect key="frame" x="8" y="8" width="510" height="39"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Item Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1C-eC-iHW">
+                                                    <rect key="frame" x="19" y="8" width="499" height="39"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.19215686269999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="rA2-aa-gj6" secondAttribute="trailing" constant="8" id="9rn-II-h5q"/>
-                                                <constraint firstItem="rA2-aa-gj6" firstAttribute="leading" secondItem="oYz-Mb-0xX" secondAttribute="trailing" constant="8" id="HGN-Oa-Hxc"/>
-                                                <constraint firstItem="rA2-aa-gj6" firstAttribute="leading" secondItem="N1C-eC-iHW" secondAttribute="trailing" constant="8" id="Hyd-hm-UjV"/>
+                                                <constraint firstItem="rRV-Hc-SXM" firstAttribute="leading" secondItem="EFf-Qo-bUw" secondAttribute="leadingMargin" id="6ra-nA-yPl"/>
+                                                <constraint firstItem="rRV-Hc-SXM" firstAttribute="top" secondItem="EFf-Qo-bUw" secondAttribute="topMargin" constant="-8" id="Hnn-qe-Yyd"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="N1C-eC-iHW" secondAttribute="bottom" constant="35" id="IY2-Hq-cFm"/>
-                                                <constraint firstItem="oYz-Mb-0xX" firstAttribute="top" secondItem="N1C-eC-iHW" secondAttribute="bottom" constant="8" id="SUl-kb-JAN"/>
-                                                <constraint firstItem="oYz-Mb-0xX" firstAttribute="leading" secondItem="EFf-Qo-bUw" secondAttribute="leadingMargin" id="b7G-BE-Xb1"/>
-                                                <constraint firstItem="rA2-aa-gj6" firstAttribute="bottom" secondItem="EFf-Qo-bUw" secondAttribute="bottomMargin" constant="-8" id="c7a-Ii-HF4"/>
-                                                <constraint firstItem="N1C-eC-iHW" firstAttribute="leading" secondItem="EFf-Qo-bUw" secondAttribute="leadingMargin" id="cDx-Sx-HKd"/>
-                                                <constraint firstItem="oYz-Mb-0xX" firstAttribute="bottom" secondItem="EFf-Qo-bUw" secondAttribute="bottomMargin" id="geI-up-Yv4"/>
-                                                <constraint firstItem="rA2-aa-gj6" firstAttribute="top" secondItem="EFf-Qo-bUw" secondAttribute="topMargin" constant="8" id="mDH-uX-oJZ"/>
+                                                <constraint firstItem="N1C-eC-iHW" firstAttribute="leading" secondItem="EFf-Qo-bUw" secondAttribute="leadingMargin" constant="11" id="cDx-Sx-HKd"/>
+                                                <constraint firstItem="rRV-Hc-SXM" firstAttribute="bottom" secondItem="EFf-Qo-bUw" secondAttribute="bottomMargin" id="lWl-yL-ksp"/>
+                                                <constraint firstItem="rRV-Hc-SXM" firstAttribute="trailing" secondItem="EFf-Qo-bUw" secondAttribute="trailingMargin" id="lnm-g1-kYA"/>
                                                 <constraint firstItem="N1C-eC-iHW" firstAttribute="top" secondItem="EFf-Qo-bUw" secondAttribute="topMargin" id="nAz-Ub-KsO"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="cardView" destination="rRV-Hc-SXM" id="87v-x9-U0u"/>
                                             <outlet property="itemLabel" destination="N1C-eC-iHW" id="2fc-pM-3aA"/>
                                             <outlet property="userImageView" destination="rA2-aa-gj6" id="Wyu-2n-jDn"/>
                                             <outlet property="userNameLabel" destination="oYz-Mb-0xX" id="Sci-fk-3gp"/>

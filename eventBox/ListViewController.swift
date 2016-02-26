@@ -42,8 +42,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.userImageView.backgroundColor = UIColor.eventBoxAccent()
         cell.userImageView.borderColor = UIColor.eventBoxAccent()
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        
         cell.itemLabel.text = currentEvent.items[indexPath.row].item
         
         if currentEvent.items[indexPath.row].userUID == "" {
@@ -53,7 +51,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         else if currentEvent.items[indexPath.row].userUID != "" {
             NetworkManager.sharedManager.getUserForUID(currentEvent.items[indexPath.row].userUID, didGetUser: { (user) -> Void in
                 self.itemUser = user
+                cell.cardView.backgroundColor = UIColor.eventBoxAccent()
                 cell.userNameLabel.text = self.itemUser?.userName
+                cell.userNameLabel.textColor = UIColor.whiteColor()
                 
                 self.createImage((self.itemUser?.image)!, didCreateImage: { (userImage) -> Void in
                     cell.userImageView.image = userImage
@@ -72,6 +72,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cell.userNameLabel.text == "" {
             NetworkManager.sharedManager.selectItem(eventUID: currentEvent.eventUID, itemUID: (currentEvent.items[indexPath.row].itemUID), userUID: (currentUser?.UID)!)
             cell.userNameLabel.text = currentUser!.userName
+            cell.userNameLabel.textColor = UIColor.whiteColor()
+            cell.cardView.backgroundColor = UIColor.eventBoxAccent()
             createImage((currentUser?.image)!, didCreateImage: { (userImage) -> Void in
                 cell.userImageView.image = userImage
             })
@@ -79,7 +81,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         else if cell.userNameLabel.text == currentUser?.userName {
             NetworkManager.sharedManager.unselectItem(eventUID: currentEvent.eventUID, itemUID: currentEvent.items[indexPath.row].itemUID)
             cell.userNameLabel.text = ""
+            cell.userNameLabel.textColor = UIColor.blackColor()
             cell.userImageView.image = UIImage(named: "noun_happy_49834")
+            cell.cardView.backgroundColor = UIColor.whiteColor()
+            
         }
     }
     
