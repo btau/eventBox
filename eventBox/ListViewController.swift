@@ -46,6 +46,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if currentEvent.items[indexPath.row].userUID == "" {
             cell.userNameLabel.text = ""
+            cell.cardView.backgroundColor = UIColor.whiteColor()
             cell.userImageView.image = UIImage(named: "noun_happy_49834")
         }
         else if currentEvent.items[indexPath.row].userUID != "" {
