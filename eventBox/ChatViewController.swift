@@ -37,6 +37,7 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
         self.inputToolbar?.contentView?.textView?.keyboardAppearance = .Dark
         self.inputToolbar?.hidden = true
         self.collectionView?.backgroundColor = .eventBoxBlack()
+        
         self.collectionView?.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         title = "EventChat"
         senderDisplayName = ""
@@ -100,11 +101,20 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        if messages[indexPath.row].senderId == senderId {
+            return nil
+        }
+        
+        let image = JSQMessagesAvatarImage(placeholder: UIImage(named: "fb-art"))
+        
+        return image
+        
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        guard let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as? JSQMessagesCollectionViewCell else {
+            return super.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        }
             
             let message = messages[indexPath.item]
             
@@ -113,8 +123,10 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
             } else {
                 cell.textView!.textColor = UIColor.blackColor()
             }
-            
-            return cell
+        
+        cell.avatarImageView?.cornerRadius = 10
+        
+        return cell
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
