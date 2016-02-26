@@ -47,7 +47,7 @@ class NetworkManager {
     init() {
         print("Network Manager Initialized")
         eventsRef = rootRef.childByAppendingPath("events")
-        usersRef = rootRef.childByAppendingPath("users")
+        usersRef  = rootRef.childByAppendingPath("users")
         
         if rootRef.authData != nil {
             
@@ -142,7 +142,9 @@ class NetworkManager {
             
             let currentUser = self.unpackUser(snapshot)
          
-            didGetUser(user: currentUser)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                didGetUser(user: currentUser)
+            })
         }
     }
     
@@ -318,20 +320,22 @@ class NetworkManager {
             }
         }
         
+        if let messages = eventData["messages"] as? [String:AnyObject] {
+            for message in messages {
+                
+                let time = message.1["time"] as! Double
+                let newMessage = message.1["message"] as! String
+                let userUID = message.1["userUID"] as! String
+                
+                let messageUID = message.0
+                
+                newEvent.messages.append(Message(userUID: userUID, time: time, message: newMessage, messageUID: messageUID))
+            }
+        }
+        
         return newEvent
         
-            //        if let messages = eventData["messages"] as? [String:AnyObject] {
-            //            for message in messages {
-            //
-            //                let time = message.1["time"] as! Double
-            //                let newMessage = message.1["message"] as! String
-            //                let userUID = message.1["userUID"] as! String
-            //
-            //                let messageUID = message.0
-            //
-            //                newEvent.messages.append(Message(userUID: userUID, time: time, message: message, messageUID: messageUID))
-            //            }
-            //        }
+
     }
     
     
@@ -375,7 +379,42 @@ class NetworkManager {
 
     }
     
-    //Event Attendance Handling
+    //MARK: - Messages
+    
+    func addMessage(message message: String,messageSent: (message:Message) -> Void , messageFailedToSend: () -> Void) {
+        
+        
+        guard
+            let eventUID = selectedEvent?.eventUID,
+            let selfUID  = authData?.uid
+            else {
+                messageFailedToSend()
+                return
+        }
+        
+        let messagesRef   = eventsRef.childByAppendingPath("\(eventUID)/messages")
+        let newMessageRef = messagesRef.childByAutoId()
+        
+        let messageData   = [
+            "userUID"   : selfUID,
+            "time"      : NSDate().timeIntervalSince1970,
+            "message"   : message,
+            "messageUID": newMessageRef.key]
+        
+        let newMessage = Message(userUID: selfUID, time: NSDate().timeIntervalSince1970, message: message, messageUID: newMessageRef.key)
+        
+        newMessageRef.setValue(messageData) { (error:NSError!, snap:Firebase!) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                messageSent(message: newMessage)
+            })
+
+        }
+        
+    }
+    
+    
+    //MARK: - Event Attendance Handling
     func attendEvent(eventUID: String) {
         
         guard let userUID = currentUser?.UID

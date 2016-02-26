@@ -8,14 +8,21 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    var currentEvent = NetworkManager.sharedManager.selectedEvent
+    @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var itemTextField: UITextField!
+    var currentEvent: Event = NetworkManager.sharedManager.selectedEvent!
     var currentUser: User?
     var itemUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        reloadData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: "eventUpdate", object: nil)
+        
+        configureTextField()
         
         let userUID:String = NetworkManager.sharedManager.authData!.uid
         NetworkManager.sharedManager.getUserForUID(userUID, didGetUser: { (user) -> Void in
@@ -24,16 +31,30 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentEvent.items.count
+    }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListItemCell") as! ListViewCell
-
-        cell.itemLabel.text = currentEvent?.items[indexPath.row].item
         
-        if currentEvent?.items[indexPath.row].userUID != "" {
-            NetworkManager.sharedManager.getUserForUID(currentEvent?.items[indexPath.row].userUID, didGetUser: { (user) -> Void in
+        cell.userImageView.backgroundColor = UIColor.eventBoxAccent()
+        cell.userImageView.borderColor = UIColor.eventBoxAccent()
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        
+        cell.itemLabel.text = currentEvent.items[indexPath.row].item
+        
+        if currentEvent.items[indexPath.row].userUID == "" {
+            cell.userNameLabel.text = ""
+            cell.userImageView.image = UIImage(named: "noun_happy_49834")
+        }
+        else if currentEvent.items[indexPath.row].userUID != "" {
+            NetworkManager.sharedManager.getUserForUID(currentEvent.items[indexPath.row].userUID, didGetUser: { (user) -> Void in
                 self.itemUser = user
                 cell.userNameLabel.text = self.itemUser?.userName
-
+                
                 self.createImage((self.itemUser?.image)!, didCreateImage: { (userImage) -> Void in
                     cell.userImageView.image = userImage
                 })
@@ -44,27 +65,47 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (currentEvent?.items.count)!
-    }
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ListViewCell
         
         if cell.userNameLabel.text == "" {
-            NetworkManager.sharedManager.selectItem(eventUID: (currentEvent?.eventUID)!, itemUID: (currentEvent?.items[indexPath.row].itemUID)!, userUID: (currentUser?.UID)!)
+            NetworkManager.sharedManager.selectItem(eventUID: currentEvent.eventUID, itemUID: (currentEvent.items[indexPath.row].itemUID), userUID: (currentUser?.UID)!)
             cell.userNameLabel.text = currentUser!.userName
             createImage((currentUser?.image)!, didCreateImage: { (userImage) -> Void in
                 cell.userImageView.image = userImage
             })
         }
         else if cell.userNameLabel.text == currentUser?.userName {
-            NetworkManager.sharedManager.unselectItem(eventUID: (currentEvent?.eventUID)!, itemUID: (currentEvent?.items[indexPath.row].itemUID)!)
+            NetworkManager.sharedManager.unselectItem(eventUID: currentEvent.eventUID, itemUID: currentEvent.items[indexPath.row].itemUID)
             cell.userNameLabel.text = ""
             cell.userImageView.image = UIImage(named: "noun_happy_49834")
         }
+    }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        if currentUser?.UID == currentEvent.hostUID {
+            return true
+        }
+        else {
+            return false
+        }
+        
+    }
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            NetworkManager.sharedManager.removeItem(eventUID: currentEvent.eventUID, itemUID: currentEvent.items[indexPath.row].itemUID)
+        }
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        return itemTextField.resignFirstResponder()
     }
     
     
@@ -76,5 +117,34 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         didCreateImage(userImage: userImage!)
     }
     
+    func configureTextField() {
+        let addItemButton = UIButton()
+        addItemButton.frame = CGRectMake(0, 5, 30, 30)
+        addItemButton.layer.cornerRadius = 15
+        addItemButton.backgroundColor = UIColor.eventBoxAccent()
+        addItemButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
+        addItemButton.setTitle("+", forState: .Normal)
+        addItemButton.addTarget(self, action: Selector("onAddItemTapped"), forControlEvents: .TouchUpInside)
+        
+        itemTextField.layer.cornerRadius = 15
+        itemTextField.rightView = addItemButton
+        itemTextField.rightViewMode = UITextFieldViewMode.Always
+    }
+    
+    
+    func reloadData() {
+        currentEvent = NetworkManager.sharedManager.selectedEvent!
+        listTableView.reloadData()
+    }
+
+    
+    func onAddItemTapped() {
+        if itemTextField.text != "" {
+            NetworkManager.sharedManager.addItem(item: itemTextField.text!, eventUID: currentEvent.eventUID)
+            itemTextField.text = ""
+            itemTextField.resignFirstResponder()
+            reloadData()
+        }
+    }
 
 }

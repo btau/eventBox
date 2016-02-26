@@ -29,6 +29,7 @@
 		4C44BB0C1C74FB1C003A0276 /* CalendarViewSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0B1C74FB1C003A0276 /* CalendarViewSegue.swift */; };
 		4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */; };
 		4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */; };
+		4C743C851C7FACCB00E8C7F5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */; };
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
@@ -70,6 +71,7 @@
 		4C44BB0B1C74FB1C003A0276 /* CalendarViewSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewSegue.swift; sourceTree = "<group>"; };
 		4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventUnwind.swift; sourceTree = "<group>"; };
 		4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				0D7C818F1C7BA83600892A25 /* MapViewController.swift */,
 				4CF6CCA61C7BEA370071B07E /* EventLandingViewController.swift */,
 				4CF5B1B21C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift */,
+				4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */,
 				4C44BB0C1C74FB1C003A0276 /* CalendarViewSegue.swift in Sources */,
 				4CF418231C7902210040A0A6 /* LaunchViewController.swift in Sources */,
+				4C743C851C7FACCB00E8C7F5 /* ChatViewController.swift in Sources */,
 				0D0D41FD1C75173300987B3C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,21 +17,50 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     
     @IBOutlet weak var textEntryView: UIVisualEffectView!
     
-    var event: Event!
+    var event: Event = NetworkManager.sharedManager.selectedEvent!
     
-    var messagesArray = ["Test!","Awesome!!!!! YAY, WOO, ALRIGHT! LET'S GO!!","This is a longer test Message!","This app is amaizing! I'm telling alllllllllllll my friends!","Me too!","I am running out of things to say","Yeah same here.... hmmm","The design def needs to be better, I don't like it!","Yeah it could use some work","But function is what we are after!","Yeah! wait.. we?? I am talking to myself","oh boy","jeghaejhgjadbg","fhjad sgkjah gj hgj ajsgjesh gklja","gnajs gbakj bgkjaewbg","ghae sghieaw gewh gjew gjaw b","haej guiewa gewa hgiawh","gb jskgjawe gharwb hgb arw","ghrsaj gbra giarw bg","gas ","gsjg iarwgi awh","dg iurashgiur hgia r",]
+    var messagesArray = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 200
+        self.view.backgroundColor = .eventBoxBlack()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadData", name: "eventUpdate", object: nil)
+        
+        
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //tableView.setContentOffset(CGPoint(x: 0.0, y: tableView.contentSize.height), animated: false)
-        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: messagesArray.count-1, inSection: 0), atScrollPosition: .Top, animated: false)
-       // tableView.reloadData()
+        //tableView.reloadData()
+        //tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 23, inSection: 0), atScrollPosition: .Bottom, animated: true)
+        
+       tableView.transform = CGAffineTransformMakeScale(1, -1)
+        
+        
+        
+        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+       // tableView.reloadData()
+        
+        messagesArray = []
+        
+        for message in event.messages {
+            
+            messagesArray.append(message)
+            
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: messagesArray.count-1, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
+            
+        }
+    }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print(indexPath.row)
@@ -53,8 +82,6 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
         
         var cell: MessageTableViewCell!
         
-        
-        
         if indexPath.row % 2 == 0 {
             
             cell = tableView.dequeueReusableCellWithIdentifier("LocalMessage")! as! MessageTableViewCell
@@ -63,12 +90,13 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
             
         }
         
-        cell.textView.text = messagesArray[indexPath.row - 1]
+        let message: Message = messagesArray[indexPath.row - 1]
         
-        
+        cell.textView.text = message.message
         cell.textView.textContainer.lineBreakMode = .ByWordWrapping;
         cell.textView.sizeToFit()
-
+        cell.backgroundColor = .eventBoxBlack()
+        cell.transform = CGAffineTransformMakeScale(1, -1)
         
         return cell
         
@@ -76,7 +104,7 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        guard indexPath.row != messagesArray.count else {
+        guard indexPath.row != event.messages.count else {
             return 180
         }
         
@@ -92,7 +120,8 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messagesArray.count + 2
+       // return event.messages.count + 2
+       return messagesArray.count + 2
     }
     
     func tabBarViewWillExpand() {
@@ -104,7 +133,8 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
     }
     
     func extraRightItemDidPress() {
-        displayKeyboard()
+
+        //displayKeyboard()
     }
     
     func displayKeyboard() {
@@ -113,5 +143,24 @@ class MessageViewController: UIViewController, YALTabBarInteracting, UITableView
         let window: UIWindow = UIApplication.sharedApplication().windows.last!
         window.addSubview(textEntryView)
     }
+    
+    
+    func reloadData() {
+        event = NetworkManager.sharedManager.selectedEvent!
+        print(event.messages.first!.time)
+        if messagesArray.first?.messageUID != event.messages.first?.messageUID {
+         //   messagesArray.insert(event.messages.last!, atIndex: 0)
+            messagesArray.append(event.messages.last!)
+            
+            tableView.beginUpdates()
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
+
+        
+        
+        //tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: messagesArray.count-1, inSection: 0), atScrollPosition: .Bottom, animated: true)
+    }
+    
 
 }
