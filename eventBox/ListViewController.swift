@@ -40,7 +40,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCellWithIdentifier("ListItemCell") as! ListViewCell
         
         cell.userImageView.backgroundColor = UIColor.eventBoxAccent()
-        cell.userImageView.borderColor = UIColor.eventBoxAccent()
+        cell.userImageView.borderColor = UIColor.whiteColor()
         
         cell.itemLabel.text = currentEvent.items[indexPath.row].item
         
