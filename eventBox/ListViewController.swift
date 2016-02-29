@@ -75,6 +75,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.userNameLabel.text = currentUser!.userName
             cell.userNameLabel.textColor = UIColor.whiteColor()
             cell.cardView.backgroundColor = UIColor.eventBoxAccent()
+            
             createImage((currentUser?.image)!, didCreateImage: { (userImage) -> Void in
                 cell.userImageView.image = userImage
             })
@@ -117,19 +118,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func createImage(userImageString: String, didCreateImage: (userImage: UIImage) -> Void) {
         let url = NSURL(string: userImageString)
-        let data = NSData(contentsOfURL: url!)
-        let userImage = UIImage(data: data!)
-        
-        didCreateImage(userImage: userImage!)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(url!) { (data, response, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let userImage = UIImage(data: data!)
+                didCreateImage(userImage: userImage!)
+            })
+        }
+        task.resume()
     }
     
     func configureTextField() {
         let addItemButton = UIButton()
-        addItemButton.frame = CGRectMake(0, 5, 30, 30)
+        addItemButton.frame = CGRectMake(0, 5, 60, 30)
         addItemButton.layer.cornerRadius = 15
         addItemButton.backgroundColor = UIColor.eventBoxAccent()
         addItemButton.setTitleColor(UIColor.eventBoxBlack(), forState: .Normal)
-        addItemButton.setTitle("+", forState: .Normal)
+        addItemButton.setTitle("Add", forState: .Normal)
         addItemButton.addTarget(self, action: Selector("onAddItemTapped"), forControlEvents: .TouchUpInside)
         
         itemTextField.layer.cornerRadius = 15
