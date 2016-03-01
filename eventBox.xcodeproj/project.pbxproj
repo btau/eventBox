@@ -30,6 +30,8 @@
 		4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */; };
 		4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */; };
 		4C743C851C7FACCB00E8C7F5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */; };
+		4C7D93761C810CDE00E9FE55 /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D93751C810CDE00E9FE55 /* ActionSheetViewController.swift */; };
+		4C7D93781C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D93771C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift */; };
 		4CE97DBC1C738AD50081BE50 /* SegementedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */; };
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
@@ -72,6 +74,8 @@
 		4C44BB0D1C751400003A0276 /* NewEventUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventUnwind.swift; sourceTree = "<group>"; };
 		4C44BB0F1C7638BA003A0276 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4C7D93751C810CDE00E9FE55 /* ActionSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
+		4C7D93771C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CE97DBB1C738AD50081BE50 /* SegementedControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegementedControlView.swift; sourceTree = "<group>"; };
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				4CF6CCA21C7BA2AF0071B07E /* CenterCellCollectionViewFlowLayout.swift */,
 				4CF6CCA41C7BAC3D0071B07E /* EventCollectionViewCell.swift */,
 				0D7C81AF1C7E42D700892A25 /* ListViewCell.swift */,
+				4C7D93771C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				4CF6CCA61C7BEA370071B07E /* EventLandingViewController.swift */,
 				4CF5B1B21C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift */,
 				4C743C841C7FACCB00E8C7F5 /* ChatViewController.swift */,
+				4C7D93751C810CDE00E9FE55 /* ActionSheetViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 				4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */,
 				0D2AF82C1C736900004099AD /* Event.swift in Sources */,
 				4CF5B1B31C7CF6C60054A9A0 /* EventLandingDetailsTableViewController.swift in Sources */,
+				4C7D93781C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift in Sources */,
 				4C44BB101C7638BA003A0276 /* EventDetailViewController.swift in Sources */,
 				4CF418251C7908550040A0A6 /* OnboardingViewController.swift in Sources */,
 				4C44BB0E1C751400003A0276 /* NewEventUnwind.swift in Sources */,
@@ -397,6 +404,7 @@
 				4C44BB031C74CD67003A0276 /* CreateEventViewController.swift in Sources */,
 				0D7C81B01C7E42D700892A25 /* ListViewCell.swift in Sources */,
 				4CF6CCA71C7BEA370071B07E /* EventLandingViewController.swift in Sources */,
+				4C7D93761C810CDE00E9FE55 /* ActionSheetViewController.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
 				4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */,
