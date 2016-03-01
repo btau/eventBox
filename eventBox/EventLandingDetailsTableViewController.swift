@@ -19,8 +19,11 @@ class EventLandingDetailsTableViewController: UITableViewController {
     @IBOutlet weak var eventTokenLabel: UILabel!
     @IBOutlet weak var eventGuestsLabel: UILabel!
     @IBOutlet weak var itemsNeededLabel: UILabel!
+    @IBOutlet weak var attendButton: UIButton!
     
     let event = NetworkManager.sharedManager.selectedEvent!
+    let currentUser = NetworkManager.sharedManager.authData?.uid
+    var isAttending: Bool?
     var itemCount = 0
     
     override func viewDidLoad() {
@@ -45,6 +48,7 @@ class EventLandingDetailsTableViewController: UITableViewController {
         }
         
         
+        
         eventNameLabel.text = event.eventName
         
         let date = NSDate(timeIntervalSince1970: event.startDate)
@@ -62,6 +66,32 @@ class EventLandingDetailsTableViewController: UITableViewController {
         eventTokenLabel.text = "Token: " + event.eventUID
         
         eventGuestsLabel.text = "\(event.guests.count) Guests"
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if event.guests.contains(currentUser!) {
+            configureUnattendButton()
+            isAttending = true
+        }
+        else {
+            attendButton.setTitle("Attend", forState: .Normal)
+            attendButton.tintColor = UIColor.eventBoxBlack()
+            attendButton.backgroundColor = UIColor.eventBoxAccent()
+            isAttending = false
+        }
+        
+//        for guest in event.guests {
+//            if guest == currentUser! {
+//                attendButton.setTitle("Attend", forState: .Normal)
+//                attendButton.tintColor = UIColor.eventBoxBlack()
+//                attendButton.backgroundColor = UIColor.eventBoxAccent()
+//                isAttending = true
+//            }
+//            else if guest != currentUser! {
+//                configureUnattendButton()
+//                isAttending = false
+//            }
+//        }
     }
 
 
@@ -83,5 +113,29 @@ class EventLandingDetailsTableViewController: UITableViewController {
         
     }
 
+    @IBAction func onUnattendTapped(sender: UIButton) {
+        if isAttending == true {
+            NetworkManager.sharedManager.unattendEvent(currentUser!, eventUID: event.eventUID)
+            attendButton.setTitle("Attend", forState: .Normal)
+            attendButton.tintColor = UIColor.eventBoxBlack()
+            attendButton.backgroundColor = UIColor.eventBoxAccent()
+            isAttending = false
+        } else if isAttending == false {
+            NetworkManager.sharedManager.attendEvent(event.eventUID)
+            configureUnattendButton()
+            isAttending = true
+        }
+        
+
+        
+        
+    }
+    
+    func configureUnattendButton() {
+        attendButton.backgroundColor = UIColor.redColor()
+        attendButton.tintColor = UIColor.whiteColor()
+        attendButton.setTitle("Unattend", forState: .Normal)
+        
+    }
 
 }
