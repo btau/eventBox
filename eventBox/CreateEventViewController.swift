@@ -38,6 +38,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
     
     let autocompleteController = GMSAutocompleteViewController()
     
+    var selectedImage = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,11 +76,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         
         
         textField.borderWidth = 3
+        
         let width:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
-        width.fromValue = 0
-        width.toValue = 3
-        width.duration = animationSpeed
-        width.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            width.fromValue        = 0
+            width.toValue          = 3
+            width.duration         = animationSpeed
+            width.timingFunction   = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
         textField.layer.addAnimation(width, forKey: "borderWidth")
         
@@ -170,8 +173,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
     
     func calendarViewControllerDidSelectDate(date: NSDate) {
         let formatter = NSDateFormatter()
-        formatter.dateStyle = .LongStyle
-        formatter.timeStyle = .NoStyle
+            formatter.dateStyle = .LongStyle
+            formatter.timeStyle = .NoStyle
         self.eventDate = date
         
         eventDateTextField.text = formatter.stringFromDate(date)
@@ -258,7 +261,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
     {
         
         let eventName = eventNameTextField.text
-        let selectedImageString = "1"
+        
         
         if eventName != "" && self.eventDate != nil && self.eventTime != nil 
         {
@@ -270,11 +273,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
             let newStartDate = createdStartDate.timeIntervalSince1970
             
             let newEvent = Event()
-            newEvent.eventName = eventName!
-            newEvent.startDate = newStartDate
-            newEvent.location.lat = (eventLocation?.latitude)!
-            newEvent.location.lon = (eventLocation?.longitude)!
-            newEvent.imageName = selectedImageString
+                newEvent.eventName    = eventName!
+                newEvent.startDate    = newStartDate
+                newEvent.location.lat = (eventLocation?.latitude)!
+                newEvent.location.lon = (eventLocation?.longitude)!
+                newEvent.imageName    = "\(selectedImage)"
             
             print("Event Latitude:\(newEvent.location.lat)")
             print("Event Longitude:\(newEvent.location.lon)")
@@ -306,13 +309,13 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         let dateComponents = calendar.components([.Month, .Day, .Year], fromDate: date)
         let timeComponents = calendar.components([.Hour, .Minute, .Second], fromDate: time)
         
-        let components = NSDateComponents()
-        components.year = dateComponents.year
-        components.month = dateComponents.month
-        components.day = dateComponents.day
-        components.hour = timeComponents.hour
-        components.minute = timeComponents.minute
-        components.second = timeComponents.second
+        let components        = NSDateComponents()
+            components.year   = dateComponents.year
+            components.month  = dateComponents.month
+            components.day    = dateComponents.day
+            components.hour   = timeComponents.hour
+            components.minute = timeComponents.minute
+            components.second = timeComponents.second
         
         return calendar.dateFromComponents(components)!
         
@@ -324,14 +327,22 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
     let imageCount = 10
     var imageCollectionView: UICollectionView?
     var exitImageButton = UIButton(frame: CGRect(x: 10, y: -44, width: 44, height: 44))
+    var imageReturnFrame: CGRect!
     
     @IBAction func onBackgroundTapped(sender: UIButton) {
         initImageSelect()
-        
+    }
+    
+    @IBAction func onExitBackgroundSelectTapped(sender: UIButton) {
+        closeImageSelect()
     }
     
     
     func initImageSelect() {
+        
+        
+        imageReturnFrame = eventBackgroundImageView.frame
+        
         
         let flowLayout = UICollectionViewFlowLayout()
         
@@ -345,11 +356,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         
         flowLayout.headerReferenceSize = CGSize(width: 10, height: collectionHeight)
         flowLayout.footerReferenceSize = CGSize(width: 10, height: collectionHeight)
+        
         let sH = UIScreen.mainScreen().bounds.height
         let sW = UIScreen.mainScreen().bounds.width
-        
-
-
         
         imageCollectionView = UICollectionView(frame: CGRect(x: 0, y: sH, width: sW, height: collectionHeight), collectionViewLayout: flowLayout)
  
@@ -362,6 +371,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         self.view.insertSubview(self.imageCollectionView!, aboveSubview: self.eventBackgroundImageView)
         
         self.imageCollectionView!.reloadData()
+        self.imageCollectionView?.selectItemAtIndexPath(NSIndexPath(forRow: selectedImage - 1, inSection: 0), animated: true, scrollPosition: .CenteredVertically)
+        
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
             animations: { () -> Void in
@@ -383,7 +394,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
                         self.exitImageButton.frame.origin.y = 20
                         self.imageCollectionView?.frame.origin.y = (sH - collectionHeight - 10)
                     }, completion: { (done) -> Void in
-                        
+                        self.exitImageButton.addTarget(self, action: "onExitBackgroundSelectTapped:", forControlEvents: .TouchUpInside)
                 })
 
         })
@@ -404,9 +415,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         cell.clipsToBounds   = true
         cell.cornerRadius    = 10
         
-        cell.imageView.frame = cell.bounds
+        cell.imageView.frame       = cell.bounds
         cell.imageView.contentMode = .ScaleAspectFill
-        cell.borderColor = UIColor.eventBoxAccent()
+        cell.borderColor           = UIColor.eventBoxAccent()
         
         if cell.selected {
             cell.borderWidth = cellSelectWidth
@@ -460,6 +471,30 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         cell.layer.addAnimation(Width, forKey: "borderWidth")
     }
 
+    
+    func closeImageSelect() {
+        
+        if let selectedRow = imageCollectionView?.indexPathsForSelectedItems()?.first?.row {
+            selectedImage = selectedRow + 1
+        }
+        
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
+            animations: { () -> Void in
+            
+                self.eventBackgroundImageView.frame = self.imageReturnFrame
+                self.eventBackgroundImageView.cornerRadius = 10
+                self.eventBackgroundButton.alpha = 1
+                
+                self.exitImageButton.frame.origin.y = -100
+                self.imageCollectionView?.frame.origin.y = (UIScreen.mainScreen().bounds.height)
+                
+            }) { (complete) -> Void in
+                self.exitImageButton.removeFromSuperview()
+                self.imageCollectionView?.removeFromSuperview()
+                
+        }
+        
+    }
     
  }
 
