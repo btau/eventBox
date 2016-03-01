@@ -10,13 +10,15 @@ import UIKit
 import Calendar_iOS
 import GoogleMaps
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate, CalendarViewControllerDelegate, TimeViewControllerDelegate, GMSAutocompleteViewControllerDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CalendarViewControllerDelegate, TimeViewControllerDelegate, GMSAutocompleteViewControllerDelegate {
     
     
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var eventTimeTextField: UITextField!
     @IBOutlet weak var eventAddressTextField: UITextField!
+    @IBOutlet weak var eventBackgroundImageView: UIImageView!
+    @IBOutlet weak var eventBackgroundButton: UIButton!
     
     
     var textFields: [UITextField]!
@@ -35,6 +37,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     var snap: UISnapBehavior?
     
     let autocompleteController = GMSAutocompleteViewController()
+    
+    var selectedImage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +76,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         
         
         textField.borderWidth = 3
+        
         let width:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
-        width.fromValue = 0
-        width.toValue = 3
-        width.duration = animationSpeed
-        width.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            width.fromValue        = 0
+            width.toValue          = 3
+            width.duration         = animationSpeed
+            width.timingFunction   = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
         textField.layer.addAnimation(width, forKey: "borderWidth")
         
@@ -168,8 +173,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     
     func calendarViewControllerDidSelectDate(date: NSDate) {
         let formatter = NSDateFormatter()
-        formatter.dateStyle = .LongStyle
-        formatter.timeStyle = .NoStyle
+            formatter.dateStyle = .LongStyle
+            formatter.timeStyle = .NoStyle
         self.eventDate = date
         
         eventDateTextField.text = formatter.stringFromDate(date)
@@ -256,7 +261,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
     {
         
         let eventName = eventNameTextField.text
-        let selectedImageString = "1"
+        
         
         if eventName != "" && self.eventDate != nil && self.eventTime != nil 
         {
@@ -268,11 +273,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
             let newStartDate = createdStartDate.timeIntervalSince1970
             
             let newEvent = Event()
-            newEvent.eventName = eventName!
-            newEvent.startDate = newStartDate
-            newEvent.location.lat = (eventLocation?.latitude)!
-            newEvent.location.lon = (eventLocation?.longitude)!
-            newEvent.imageName = selectedImageString
+                newEvent.eventName    = eventName!
+                newEvent.startDate    = newStartDate
+                newEvent.location.lat = (eventLocation?.latitude)!
+                newEvent.location.lon = (eventLocation?.longitude)!
+                newEvent.imageName    = "\(selectedImage)"
             
             print("Event Latitude:\(newEvent.location.lat)")
             print("Event Longitude:\(newEvent.location.lon)")
@@ -304,15 +309,190 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, Calendar
         let dateComponents = calendar.components([.Month, .Day, .Year], fromDate: date)
         let timeComponents = calendar.components([.Hour, .Minute, .Second], fromDate: time)
         
-        let components = NSDateComponents()
-        components.year = dateComponents.year
-        components.month = dateComponents.month
-        components.day = dateComponents.day
-        components.hour = timeComponents.hour
-        components.minute = timeComponents.minute
-        components.second = timeComponents.second
+        let components        = NSDateComponents()
+            components.year   = dateComponents.year
+            components.month  = dateComponents.month
+            components.day    = dateComponents.day
+            components.hour   = timeComponents.hour
+            components.minute = timeComponents.minute
+            components.second = timeComponents.second
         
         return calendar.dateFromComponents(components)!
+        
+    }
+    
+    
+    //MARK: - Image Select -
+    
+    let imageCount = 10
+    var imageCollectionView: UICollectionView?
+    var exitImageButton = UIButton(frame: CGRect(x: 10, y: -44, width: 44, height: 44))
+    var imageReturnFrame: CGRect!
+    
+    @IBAction func onBackgroundTapped(sender: UIButton) {
+        initImageSelect()
+    }
+    
+    @IBAction func onExitBackgroundSelectTapped(sender: UIButton) {
+        closeImageSelect()
+    }
+    
+    
+    func initImageSelect() {
+        
+        
+        imageReturnFrame = eventBackgroundImageView.frame
+        
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let collectionHeight = 150 as CGFloat
+        let space = 10.0 as CGFloat
+        
+        flowLayout.itemSize = CGSizeMake(100, collectionHeight)
+        flowLayout.scrollDirection = .Horizontal
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        
+        flowLayout.headerReferenceSize = CGSize(width: 10, height: collectionHeight)
+        flowLayout.footerReferenceSize = CGSize(width: 10, height: collectionHeight)
+        
+        let sH = UIScreen.mainScreen().bounds.height
+        let sW = UIScreen.mainScreen().bounds.width
+        
+        imageCollectionView = UICollectionView(frame: CGRect(x: 0, y: sH, width: sW, height: collectionHeight), collectionViewLayout: flowLayout)
+ 
+        imageCollectionView?.backgroundColor = .clearColor()
+        imageCollectionView?.showsHorizontalScrollIndicator = false
+        
+        imageCollectionView!.registerClass(BackgroundImageCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        self.imageCollectionView?.delegate = self
+        self.imageCollectionView?.dataSource = self
+        self.view.insertSubview(self.imageCollectionView!, aboveSubview: self.eventBackgroundImageView)
+        
+        self.imageCollectionView!.reloadData()
+        self.imageCollectionView?.selectItemAtIndexPath(NSIndexPath(forRow: selectedImage - 1, inSection: 0), animated: true, scrollPosition: .CenteredVertically)
+        
+        
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
+            animations: { () -> Void in
+            
+                self.eventBackgroundImageView.frame = self.view.frame
+                self.eventBackgroundImageView.cornerRadius = 0
+                self.eventBackgroundButton.alpha = 0
+                
+            }, completion: { (done) -> Void in
+                
+                self.view.addSubview(self.exitImageButton)
+                
+                self.exitImageButton.tintColor = .blackColor()
+                self.exitImageButton.setImage(UIImage(named: "noun_multiply_315673"), forState: .Normal)
+                
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
+                    animations: { () -> Void in
+                        
+                        self.exitImageButton.frame.origin.y = 20
+                        self.imageCollectionView?.frame.origin.y = (sH - collectionHeight - 10)
+                    }, completion: { (done) -> Void in
+                        self.exitImageButton.addTarget(self, action: "onExitBackgroundSelectTapped:", forControlEvents: .TouchUpInside)
+                })
+
+        })
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageCount
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+       
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BackgroundImageCollectionViewCell
+        cell.imageView.image = UIImage(named: "\(indexPath.row + 1)")
+        
+        cell.addSubview(cell.imageView)
+        cell.backgroundColor = .whiteColor()
+        cell.clipsToBounds   = true
+        cell.cornerRadius    = 10
+        
+        cell.imageView.frame       = cell.bounds
+        cell.imageView.contentMode = .ScaleAspectFill
+        cell.borderColor           = UIColor.eventBoxAccent()
+        
+        if cell.selected {
+            cell.borderWidth = cellSelectWidth
+        } else {
+            cell.borderWidth = 0
+        }
+        
+        return cell
+    }
+
+    let cellSelectWidth = 5 as CGFloat
+    let cellSelectDuration = 0.1 as Double
+    
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        guard let cell = imageCollectionView?.cellForItemAtIndexPath(indexPath) as? BackgroundImageCollectionViewCell else {
+            return false
+        }
+        
+        if cell.selected {
+            return false
+        }
+        
+        cell.borderWidth = cellSelectWidth
+        
+        let Width:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
+        Width.fromValue = 0
+        Width.toValue   = cellSelectWidth
+        Width.duration  = cellSelectDuration
+        Width.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        cell.layer.addAnimation(Width, forKey: "borderWidth")
+        
+        self.eventBackgroundImageView.image = UIImage(named: "\(indexPath.row + 1)")
+        
+        return true
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let cell = imageCollectionView?.cellForItemAtIndexPath(indexPath) as? BackgroundImageCollectionViewCell else {
+            return
+        }
+        cell.borderWidth = 0
+        
+        let Width:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
+        Width.fromValue = cellSelectWidth
+        Width.toValue   = 0
+        Width.duration  = cellSelectDuration
+        
+        cell.layer.addAnimation(Width, forKey: "borderWidth")
+    }
+
+    
+    func closeImageSelect() {
+        
+        if let selectedRow = imageCollectionView?.indexPathsForSelectedItems()?.first?.row {
+            selectedImage = selectedRow + 1
+        }
+        
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
+            animations: { () -> Void in
+            
+                self.eventBackgroundImageView.frame = self.imageReturnFrame
+                self.eventBackgroundImageView.cornerRadius = 10
+                self.eventBackgroundButton.alpha = 1
+                
+                self.exitImageButton.frame.origin.y = -100
+                self.imageCollectionView?.frame.origin.y = (UIScreen.mainScreen().bounds.height)
+                
+            }) { (complete) -> Void in
+                self.exitImageButton.removeFromSuperview()
+                self.imageCollectionView?.removeFromSuperview()
+                
+        }
         
     }
     

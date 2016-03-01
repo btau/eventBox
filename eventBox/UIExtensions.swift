@@ -73,9 +73,9 @@ import UIKit
 
 extension UIColor {
     
-    
+    // Legacy
     class func eventBoxGreen() -> UIColor {
-        return UIColor(red: 91/255, green: 255/255, blue: 134/255, alpha: 1.0)
+        return UIColor.eventBoxAccent()
     }
     
     class func eventBoxAccent() -> UIColor {

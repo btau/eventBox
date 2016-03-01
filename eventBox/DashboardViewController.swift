@@ -16,7 +16,7 @@ enum DisplayItems {
     
 }
 
-class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ActionSheetDelegate {
     
     var animator: UIDynamicAnimator?
     
@@ -38,7 +38,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         self.setupCollectionView()
 
         newEventButton.tintColor = UIColor.eventBoxAccent()
-        
+        //newEventButton.layer.zPosition = CGFloat.max
         NetworkManager.sharedManager.getUserEvents(
             Success: { (events) -> Void in
                 self.events = events
@@ -161,7 +161,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         cellImageView.alpha = 0
         
        // self.view.addSubview(cellImageView)
-        self.view.insertSubview(cellImageView, belowSubview: newEventButton)
+        self.view.insertSubview(cellImageView, aboveSubview: cell.eventImageView)
         
         
         UIView.animateWithDuration(0.2, animations: { () -> Void in
@@ -263,6 +263,9 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     //MARK: - Navigation
     
+    func didSelectCreate() {
+        performSegueWithIdentifier("addEventSegue", sender: nil)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addEventSegue" {
@@ -275,9 +278,15 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             eventSegue.gravity   = gravity
             eventSegue.collision = collision
         } else if segue.identifier == "enterEventSegue" {
-            
+        
             let eventDetailVC = segue.destinationViewController as! EventDetailViewController
             eventDetailVC.event = NetworkManager.sharedManager.selectedEvent
+            
+        } else if segue.identifier == "actionSheetsegue" {
+            
+            guard let actionSheet = segue.destinationViewController as? ActionSheetViewController else { return }
+            
+            actionSheet.delegate = self
             
         }
     }
