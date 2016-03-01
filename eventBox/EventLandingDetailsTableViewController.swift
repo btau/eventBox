@@ -18,12 +18,31 @@ class EventLandingDetailsTableViewController: UITableViewController {
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var eventTokenLabel: UILabel!
     @IBOutlet weak var eventGuestsLabel: UILabel!
+    @IBOutlet weak var itemsNeededLabel: UILabel!
     
     let event = NetworkManager.sharedManager.selectedEvent!
+    var itemCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        for item in event.items {
+            if item.userUID == "" {
+                self.itemCount++
+            }
+        }
         
+        print("Count: \(itemCount)")
+        
+        if itemCount == 0 {
+            itemsNeededLabel.text = "No items needed"
+
+        } else if  itemCount == 1 {
+            itemsNeededLabel.text = "\(itemCount) item needed"
+        } else  {
+            itemsNeededLabel.text = "\(itemCount) items needed"
+
+        }
         
         
         eventNameLabel.text = event.eventName
