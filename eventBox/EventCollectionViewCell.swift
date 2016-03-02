@@ -15,16 +15,26 @@ class EventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var hostNameLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     @IBOutlet weak var eventImageView: UIImageView!
     
     @IBOutlet weak var cellView: UIView!
     
     var event: Event!
+    let currentUserUID = NetworkManager.sharedManager.authData?.uid
     
     func configureWithEvent(event: Event) {
         
         self.event = event
+        
+        if currentUserUID == event.hostUID {
+            deleteButton.hidden = false
+            deleteButton.enabled = true
+        } else {
+            deleteButton.hidden = true
+            deleteButton.enabled = false
+        }
         
         eventImageView.image = UIImage(named: event.imageName)
         
@@ -84,6 +94,11 @@ class EventCollectionViewCell: UICollectionViewCell {
         
     }
 
+    @IBAction func onDeleteTapped(sender: UIButton) {
+        print("Tapped")
+        NetworkManager.sharedManager.deleteEvent(event.eventUID, guestList: event.guests)
+        
+    }
     
     
     

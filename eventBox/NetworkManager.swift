@@ -268,20 +268,25 @@ class NetworkManager {
     }
    
     
-    func deleteEvent(eventUID: String) {
+    func deleteEvent(eventUID: String, guestList: [String]) {
+        for guest in guestList {
+            getUserForUID(guest, didGetUser: { (user: User) -> Void in
+                let localUser = user
+                for event in localUser.userEvents {
+                    if event == eventUID {
+                        let userRef = self.usersRef.childByAppendingPath("\(guest)/userEvents/\(eventUID)")
+                        userRef.removeValue()
+                    }
+                }
+            })
+            
+        }
+        
+        
         let eventRef = eventsRef.childByAppendingPath(eventUID)
-        
-        let foundIndex = events.indexOf { (event:Event) -> Bool in
-            if event.eventUID == eventUID {
-                return true
-            }
-            return false
-        }
-        
-        if let index = foundIndex {
-            events.removeAtIndex(index)
-            eventRef.removeValue()
-        }
+        eventRef.removeValue()
+
+
     }
     
     

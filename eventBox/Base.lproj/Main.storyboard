@@ -466,6 +466,20 @@
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xd-EW-pee" userLabel="DeleteButton">
+                                                                        <rect key="frame" x="226" y="119" width="30" height="30.5"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="LCM-71-7Z2"/>
+                                                                            <constraint firstAttribute="height" constant="30.5" id="Qll-6S-w29"/>
+                                                                            <constraint firstAttribute="width" constant="30" id="wKB-Yt-Zbc"/>
+                                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30.5" id="yj4-dX-ONl"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <state key="normal" image="noun_multiply_315673"/>
+                                                                        <connections>
+                                                                            <action selector="onDeleteTapped:" destination="wAw-gk-EoK" eventType="touchUpInside" id="eXD-hV-VaL"/>
+                                                                        </connections>
+                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="MBZ-FF-GQv" firstAttribute="top" secondItem="ZfX-QD-tKb" secondAttribute="top" constant="8" id="Dsg-UY-YuC"/>
@@ -476,6 +490,8 @@
                                                                     <constraint firstAttribute="bottom" secondItem="7He-L5-fNi" secondAttribute="bottom" constant="8" id="PM6-XO-jxJ"/>
                                                                     <constraint firstItem="7He-L5-fNi" firstAttribute="leading" secondItem="ZfX-QD-tKb" secondAttribute="leading" constant="8" id="Sba-l8-esm"/>
                                                                     <constraint firstItem="XYv-QO-EFk" firstAttribute="leading" secondItem="7He-L5-fNi" secondAttribute="trailing" constant="8" id="b25-le-F1X"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="4xd-EW-pee" secondAttribute="bottom" constant="8" id="bYL-1R-W3o"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="4xd-EW-pee" secondAttribute="trailing" constant="8" id="eu7-zv-qmg"/>
                                                                     <constraint firstItem="MBZ-FF-GQv" firstAttribute="leading" secondItem="ZfX-QD-tKb" secondAttribute="leading" constant="8" id="fuf-wY-xqH"/>
                                                                     <constraint firstItem="SgJ-C9-cNt" firstAttribute="top" secondItem="MBZ-FF-GQv" secondAttribute="bottom" constant="1" id="mTa-rj-RJi"/>
                                                                     <constraint firstAttribute="bottom" secondItem="XYv-QO-EFk" secondAttribute="bottom" constant="8" id="sjW-yU-Aa1"/>
@@ -547,6 +563,7 @@
                                         <connections>
                                             <outlet property="bigCountdownLabel" destination="OQm-tx-IAf" id="hVf-cC-O5g"/>
                                             <outlet property="cellView" destination="T79-L2-f7U" id="0FG-iz-iTc"/>
+                                            <outlet property="deleteButton" destination="4xd-EW-pee" id="uhw-ne-VCO"/>
                                             <outlet property="eventDateLabel" destination="SgJ-C9-cNt" id="mxV-1v-qGa"/>
                                             <outlet property="eventImageView" destination="8NZ-mQ-pNH" id="UkT-do-sEp"/>
                                             <outlet property="eventNameLabel" destination="MBZ-FF-GQv" id="4k3-kL-0yq"/>
