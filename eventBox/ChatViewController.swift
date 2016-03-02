@@ -13,7 +13,7 @@ import Firebase
 
 class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
 
-    var messages = [JSQMessage]()
+    var messages = [ChatMessage]()
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
@@ -66,7 +66,8 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
     
     func addMessage(userUID: String, text: String) {
         
-            let newMessage = JSQMessage(senderId: userUID, displayName: "", text: text)
+            let newMessage = ChatMessage(senderId: userUID, displayName: "", text: text)
+                newMessage.getImageFromServer()
             self.messages.append(newMessage)
         
         if userUID == senderId {
@@ -105,11 +106,13 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
             return nil
         }
         
-        let image = JSQMessagesAvatarImage(placeholder: UIImage(named: "fb-art"))
+        let message = messages[indexPath.row]
         
-        return image
+        return JSQMessagesAvatarImage(avatarImage: message.avatarImage, highlightedImage: nil, placeholderImage: UIImage(named: "fb-art"))
         
     }
+    
+   
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as? JSQMessagesCollectionViewCell else {
@@ -128,6 +131,7 @@ class ChatViewController: JSQMessagesViewController, YALTabBarInteracting {
         
         return cell
     }
+
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
     

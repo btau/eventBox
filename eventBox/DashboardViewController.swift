@@ -267,6 +267,12 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
         performSegueWithIdentifier("addEventSegue", sender: nil)
     }
     
+    func didJoinEvent(eventUID: String) {
+        
+        eventsCollectionView.reloadData()
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addEventSegue" {
             
