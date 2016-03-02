@@ -36,6 +36,7 @@
 		4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */; };
 		4CE97DC11C7395EE0081BE50 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */; };
 		4CE97DC31C73B1AB0081BE50 /* NewEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */; };
+		4CF2D90A1C87563E0032A60A /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2D9091C87563E0032A60A /* ChatMessage.swift */; };
 		4CF418231C7902210040A0A6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418221C7902210040A0A6 /* LaunchViewController.swift */; };
 		4CF418251C7908550040A0A6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418241C7908550040A0A6 /* OnboardingViewController.swift */; };
 		4CF418271C791A5C0040A0A6 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF418261C791A5C0040A0A6 /* TimeViewController.swift */; };
@@ -80,6 +81,7 @@
 		4CE97DBD1C7392290081BE50 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		4CE97DC01C7395EE0081BE50 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		4CE97DC21C73B1AB0081BE50 /* NewEventSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventSegue.swift; sourceTree = "<group>"; };
+		4CF2D9091C87563E0032A60A /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		4CF418221C7902210040A0A6 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		4CF418241C7908550040A0A6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4CF418261C791A5C0040A0A6 /* TimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				4CF6CCA41C7BAC3D0071B07E /* EventCollectionViewCell.swift */,
 				0D7C81AF1C7E42D700892A25 /* ListViewCell.swift */,
 				4C7D93771C84B0A800E9FE55 /* BackgroundImageCollectionViewCell.swift */,
+				4CF2D9091C87563E0032A60A /* ChatMessage.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -292,7 +295,7 @@
 				TargetAttributes = {
 					0D2AF80C1C725A17004099AD = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = HCE44QJFL2;
+						DevelopmentTeam = 77N74LDXL5;
 					};
 				};
 			};
@@ -407,6 +410,7 @@
 				4C7D93761C810CDE00E9FE55 /* ActionSheetViewController.swift in Sources */,
 				0D2AF8131C725A17004099AD /* ViewController.swift in Sources */,
 				0D2AF8111C725A17004099AD /* AppDelegate.swift in Sources */,
+				4CF2D90A1C87563E0032A60A /* ChatMessage.swift in Sources */,
 				4CE97DBE1C7392290081BE50 /* DashboardViewController.swift in Sources */,
 				4C44BB0C1C74FB1C003A0276 /* CalendarViewSegue.swift in Sources */,
 				4CF418231C7902210040A0A6 /* LaunchViewController.swift in Sources */,

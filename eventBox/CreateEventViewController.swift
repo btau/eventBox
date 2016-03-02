@@ -373,6 +373,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UICollec
         self.imageCollectionView!.reloadData()
         self.imageCollectionView?.selectItemAtIndexPath(NSIndexPath(forRow: selectedImage - 1, inSection: 0), animated: true, scrollPosition: .CenteredVertically)
         
+        self.imageCollectionView?.scrollToItemAtIndexPath(imageCollectionView!.indexPathsForSelectedItems()!.first!, atScrollPosition: .CenteredHorizontally, animated: true)
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .CurveEaseInOut,
             animations: { () -> Void in
