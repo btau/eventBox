@@ -121,7 +121,9 @@ class EventLandingDetailsTableViewController: UITableViewController {
             attendButton.backgroundColor = UIColor.eventBoxAccent()
             isAttending = false
         } else if isAttending == false {
-            NetworkManager.sharedManager.attendEvent(event.eventUID)
+            NetworkManager.sharedManager.attendEvent(event.eventUID, done: { () -> Void in
+                
+            })
             configureUnattendButton()
             isAttending = true
         }

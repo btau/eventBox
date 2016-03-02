@@ -36,31 +36,36 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupCollectionView()
-
+        
+        refreshData()
+        
         newEventButton.tintColor = UIColor.eventBoxAccent()
         //newEventButton.layer.zPosition = CGFloat.max
-        NetworkManager.sharedManager.getUserEvents(
-            Success: { (events) -> Void in
-                self.events = events
-                
-                self.events?.sortInPlace({ NSDate(timeIntervalSince1970: $0.0.startDate).compare(NSDate(timeIntervalSince1970: $0.1.startDate )) == .OrderedAscending })
-
-                self.popDropCollectionView(true)
-            },
-            Failed: { () -> Void in
-                
-        })
+//        NetworkManager.sharedManager.getUserEvents(
+//            Success: { (events) -> Void in
+//                self.events = events
+//                
+//                self.events?.sortInPlace({ NSDate(timeIntervalSince1970: $0.0.startDate).compare(NSDate(timeIntervalSince1970: $0.1.startDate )) == .OrderedAscending })
+//
+//                self.popDropCollectionView(true)
+//            },
+//            Failed: { () -> Void in
+//                
+//        })
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         
+        //refreshData()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         popDownCell()
+        
         
     }
     
@@ -269,8 +274,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func didJoinEvent(eventUID: String) {
         
-        eventsCollectionView.reloadData()
-        
+        refreshData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -313,6 +317,34 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
         Debug.log("return")
         //popDownCell()
+    }
+    
+    
+    func refreshData() {
+        
+        NetworkManager.sharedManager.updateCurrentUser { () -> Void in
+            
+            NetworkManager.sharedManager.getUserEvents(
+                Success: { (events) -> Void in
+                    
+                    
+                    for event in events {
+                        print(event.eventName)
+                    }
+                    
+                    self.events = events
+                    
+                    self.events?.sortInPlace({ NSDate(timeIntervalSince1970: $0.0.startDate).compare(NSDate(timeIntervalSince1970: $0.1.startDate )) == .OrderedAscending })
+                    
+                    self.popDropCollectionView(true)
+                    
+                },
+                Failed: { () -> Void in
+                    
+                    Debug.log("failed")
+                    
+            })
+        }
     }
     
 }

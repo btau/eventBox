@@ -344,7 +344,13 @@ class NetworkManager {
 
     }
     
-    
+    func updateCurrentUser(didUpdate: () -> Void) {
+        getUserForUID(currentUser?.UID) { (user) -> Void in
+            
+            self.currentUser? = user
+            didUpdate()
+        }
+    }
     
     func getUserEvents(
         Success didGetEvents: (events: [Event]) -> Void,
@@ -356,30 +362,34 @@ class NetworkManager {
                 return
             }
             
-            var index = 0
-            
-            var events = [Event]()
-            
-            for event in eventsToDownload {
                 
-                eventsRef.childByAppendingPath(event).observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-                    
-                    let event = self.unpackEvent(snapshot.value as! [String:AnyObject])
-                    events.append(event)
-                    
-                    index++
-                    
-                    if index == eventsToDownload.count {
-                        
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            didGetEvents(events: events)
-                        })
-                        
-                    }
-                    
-                })
+                var index = 0
                 
-            }
+                var events = [Event]()
+                
+                for event in eventsToDownload {
+                    
+                    self.eventsRef.childByAppendingPath(event).observeSingleEventOfType(.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
+                        
+                        let event = self.unpackEvent(snapshot.value as! [String:AnyObject])
+                        events.append(event)
+                        
+                        index++
+                        
+                        if index == eventsToDownload.count {
+                            
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                didGetEvents(events: events)
+                            })
+                            
+                        }
+                        
+                    })
+                    
+                }
+                
+            
+            
             
             
 
@@ -421,7 +431,7 @@ class NetworkManager {
     
     
     //MARK: - Event Attendance Handling
-    func attendEvent(eventUID: String) {
+    func attendEvent(eventUID: String, done: () -> Void) {
         
         guard let userUID = currentUser?.UID
             else { Debug.log("No User"); return}
@@ -432,8 +442,19 @@ class NetworkManager {
         let userEventRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventUID)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
         
-        attendEventRef.updateChildValues(attendanceData)
-        userEventRef.updateChildValues(userEventData)
+        attendEventRef.updateChildValues(attendanceData) { (error, snap) -> Void in
+            
+            userEventRef.updateChildValues(userEventData, withCompletionBlock: { (error, snap) -> Void in
+                done()
+            })
+            
+        }
+        
+        
+       
+        
+        
+        
     }
     
     func unattendEvent(userUID: String, eventUID: String) {

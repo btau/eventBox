@@ -25,7 +25,7 @@ class ActionSheetViewController: UIViewController {
     @IBOutlet weak var tokenTextField: UITextField!
    
     @IBOutlet weak var joinViewHeight: NSLayoutConstraint!
-    
+        
     var joinDestination: CGRect!
     var createDestination: CGRect!
     var cancelDestination: CGRect!
@@ -177,8 +177,12 @@ class ActionSheetViewController: UIViewController {
         if let theString = pasteboardString {
             tokenTextField.text = theString
             
-           // delegate?.didJoinEvent(theString)
-            dismissViewControllerAnimated(true, completion: nil)
+            NetworkManager.sharedManager.attendEvent(theString, done: { () -> Void in
+                self.delegate?.didJoinEvent(theString)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+            
+           
         }
         
         
