@@ -506,7 +506,7 @@
                                                                 <constraint firstAttribute="width" constant="50" id="fPe-IE-7ea"/>
                                                             </constraints>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <state key="normal" image="noun_multiply_315673"/>
+                                                            <state key="normal" image="noun_cancel_135393"/>
                                                             <connections>
                                                                 <action selector="onDeleteTapped:" destination="wAw-gk-EoK" eventType="touchUpInside" id="eXD-hV-VaL"/>
                                                             </connections>
@@ -2318,6 +2318,7 @@
         <image name="Shadow" width="10" height="200"/>
         <image name="fb-art" width="200" height="200"/>
         <image name="noun_calendar_138379" width="150" height="150"/>
+        <image name="noun_cancel_135393" width="150" height="150"/>
         <image name="noun_check_45890" width="150" height="150"/>
         <image name="noun_clock_200962" width="150" height="150"/>
         <image name="noun_delete_45887" width="150" height="150"/>

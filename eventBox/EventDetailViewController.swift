@@ -54,15 +54,15 @@ class EventDetailViewController: UIViewController, YALTabBarViewDelegate {
         
         detailController.centerButtonImage = UIImage(named: "PlusButton")
         
-        let message = YALTabBarItem(itemImage:  UIImage(named: "noun_message_323222"), leftItemImage: UIImage(named: "noun_delete_45887"), rightItemImage: UIImage(named: "noun_comment_118635"))
+        let message = YALTabBarItem(itemImage:  UIImage(named: "noun_message_323222"), leftItemImage: nil, rightItemImage: UIImage(named: "noun_comment_118635"))
         
-        let location = YALTabBarItem(itemImage: UIImage(named: "noun_location-pin_281085"), leftItemImage:UIImage(named: "noun_delete_45887"), rightItemImage: nil)
+        let location = YALTabBarItem(itemImage: UIImage(named: "noun_location-pin_281085"), leftItemImage: nil, rightItemImage: nil)
 
         
         
         let landing = YALTabBarItem(itemImage: UIImage(named: "noun_newspaper_158465"), leftItemImage: nil, rightItemImage: nil)
         
-        let things = YALTabBarItem(itemImage: UIImage(named: "List"), leftItemImage: UIImage(named: "noun_delete_45887"), rightItemImage: nil)
+        let things = YALTabBarItem(itemImage: UIImage(named: "List"), leftItemImage: nil, rightItemImage: nil)
         
         detailController.leftBarItems = [landing, things]
         detailController.rightBarItems = [location, message]
