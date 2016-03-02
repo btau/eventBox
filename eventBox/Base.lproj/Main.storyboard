@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -456,20 +455,6 @@
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xd-EW-pee" userLabel="DeleteButton">
-                                                                        <rect key="frame" x="226" y="119" width="30" height="30.5"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="LCM-71-7Z2"/>
-                                                                            <constraint firstAttribute="height" constant="30.5" id="Qll-6S-w29"/>
-                                                                            <constraint firstAttribute="width" constant="30" id="wKB-Yt-Zbc"/>
-                                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30.5" id="yj4-dX-ONl"/>
-                                                                        </constraints>
-                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <state key="normal" image="noun_multiply_315673"/>
-                                                                        <connections>
-                                                                            <action selector="onDeleteTapped:" destination="wAw-gk-EoK" eventType="touchUpInside" id="eXD-hV-VaL"/>
-                                                                        </connections>
-                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="MBZ-FF-GQv" firstAttribute="top" secondItem="ZfX-QD-tKb" secondAttribute="top" constant="8" id="Dsg-UY-YuC"/>
@@ -480,8 +465,6 @@
                                                                     <constraint firstAttribute="bottom" secondItem="7He-L5-fNi" secondAttribute="bottom" constant="8" id="PM6-XO-jxJ"/>
                                                                     <constraint firstItem="7He-L5-fNi" firstAttribute="leading" secondItem="ZfX-QD-tKb" secondAttribute="leading" constant="8" id="Sba-l8-esm"/>
                                                                     <constraint firstItem="XYv-QO-EFk" firstAttribute="leading" secondItem="7He-L5-fNi" secondAttribute="trailing" constant="8" id="b25-le-F1X"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="4xd-EW-pee" secondAttribute="bottom" constant="8" id="bYL-1R-W3o"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="4xd-EW-pee" secondAttribute="trailing" constant="8" id="eu7-zv-qmg"/>
                                                                     <constraint firstItem="MBZ-FF-GQv" firstAttribute="leading" secondItem="ZfX-QD-tKb" secondAttribute="leading" constant="8" id="fuf-wY-xqH"/>
                                                                     <constraint firstItem="SgJ-C9-cNt" firstAttribute="top" secondItem="MBZ-FF-GQv" secondAttribute="bottom" constant="1" id="mTa-rj-RJi"/>
                                                                     <constraint firstAttribute="bottom" secondItem="XYv-QO-EFk" secondAttribute="bottom" constant="8" id="sjW-yU-Aa1"/>
@@ -516,17 +499,31 @@
                                                             </attributedString>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xd-EW-pee" userLabel="DeleteButton">
+                                                            <rect key="frame" x="206" y="8" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="PKQ-NV-CSV"/>
+                                                                <constraint firstAttribute="width" constant="50" id="fPe-IE-7ea"/>
+                                                            </constraints>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" image="noun_multiply_315673"/>
+                                                            <connections>
+                                                                <action selector="onDeleteTapped:" destination="wAw-gk-EoK" eventType="touchUpInside" id="eXD-hV-VaL"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="6rl-zO-PHf" firstAttribute="leading" secondItem="T79-L2-f7U" secondAttribute="leading" id="13R-6V-I4n"/>
                                                         <constraint firstAttribute="trailing" secondItem="6rl-zO-PHf" secondAttribute="trailing" id="3DI-A2-lai"/>
                                                         <constraint firstItem="6rl-zO-PHf" firstAttribute="top" secondItem="OQm-tx-IAf" secondAttribute="bottom" id="CVM-5B-9jM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="4xd-EW-pee" secondAttribute="trailing" constant="8" id="M0e-kp-geJ"/>
                                                         <constraint firstAttribute="bottom" secondItem="8NZ-mQ-pNH" secondAttribute="bottom" id="MuY-bD-qWT"/>
                                                         <constraint firstAttribute="trailing" secondItem="OQm-tx-IAf" secondAttribute="trailing" constant="136" id="Q7J-o9-43A"/>
                                                         <constraint firstAttribute="trailing" secondItem="8NZ-mQ-pNH" secondAttribute="trailing" id="U01-TJ-FgX"/>
                                                         <constraint firstAttribute="bottom" secondItem="6rl-zO-PHf" secondAttribute="bottom" id="Ush-qo-rhv"/>
                                                         <constraint firstItem="OQm-tx-IAf" firstAttribute="leading" secondItem="T79-L2-f7U" secondAttribute="leading" constant="8" id="bc6-pF-IC0"/>
+                                                        <constraint firstItem="4xd-EW-pee" firstAttribute="top" secondItem="T79-L2-f7U" secondAttribute="top" constant="8" id="e9l-Bn-UxB"/>
                                                         <constraint firstItem="8NZ-mQ-pNH" firstAttribute="top" secondItem="T79-L2-f7U" secondAttribute="top" id="hCg-rA-XJx"/>
                                                         <constraint firstItem="8NZ-mQ-pNH" firstAttribute="leading" secondItem="T79-L2-f7U" secondAttribute="leading" id="xEX-tq-N65"/>
                                                     </constraints>

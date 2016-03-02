@@ -200,7 +200,7 @@ class NetworkManager {
     //MARK: Event Handling
     
     func selectEvent(event: Event) {
-        
+        Debug.log(event.eventName)
         if let lastEvent = selectedEvent {
             eventsRef.childByAppendingPath(lastEvent.eventUID).removeAllObservers()
         }
@@ -209,7 +209,12 @@ class NetworkManager {
         
         eventsRef.childByAppendingPath(event.eventUID).observeEventType(.Value) { (snapshot: FDataSnapshot!) -> Void in
             
-            let eventData = snapshot.value as! [String:AnyObject]
+            guard let eventData = snapshot.value as? [String:AnyObject] else {
+                
+                self.eventsRef.removeAllObservers()
+                return
+                
+            }
             
             
             
@@ -268,14 +273,24 @@ class NetworkManager {
     }
    
     
-    func deleteEvent(eventUID: String, guestList: [String]) {
+    func deleteEvent(eventUID: String, guestList: [String], done: () -> Void) {
+        var index = guestList.count
         for guest in guestList {
             getUserForUID(guest, didGetUser: { (user: User) -> Void in
                 let localUser = user
                 for event in localUser.userEvents {
                     if event == eventUID {
                         let userRef = self.usersRef.childByAppendingPath("\(guest)/userEvents/\(eventUID)")
-                        userRef.removeValue()
+                        userRef.removeValueWithCompletionBlock({ (error, snap) -> Void in
+                            index--
+                            if index <= 0 {
+                                let eventRef = self.eventsRef.childByAppendingPath(eventUID)
+                                eventRef.removeValueWithCompletionBlock { (error, snap) -> Void in
+                                    done()
+                                }
+                            }
+                            
+                        })
                     }
                 }
             })
@@ -283,8 +298,7 @@ class NetworkManager {
         }
         
         
-        let eventRef = eventsRef.childByAppendingPath(eventUID)
-        eventRef.removeValue()
+        
 
 
     }

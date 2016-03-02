@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol EventCollectionViewCellDelegate {
+    
+    func didDeleteEvent(eventUID: String)
+}
+
 class EventCollectionViewCell: UICollectionViewCell {
     
     
@@ -20,6 +25,8 @@ class EventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var eventImageView: UIImageView!
     
     @IBOutlet weak var cellView: UIView!
+    
+    var delegate: EventCollectionViewCellDelegate?
     
     var event: Event!
     let currentUserUID = NetworkManager.sharedManager.authData?.uid
@@ -95,8 +102,10 @@ class EventCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func onDeleteTapped(sender: UIButton) {
-        print("Tapped")
-        NetworkManager.sharedManager.deleteEvent(event.eventUID, guestList: event.guests)
+        Debug.log("Delete button tapped")
+        NetworkManager.sharedManager.deleteEvent(event.eventUID, guestList: event.guests) { () -> Void in
+            self.delegate?.didDeleteEvent(self.event.eventUID)
+        }
         
     }
     

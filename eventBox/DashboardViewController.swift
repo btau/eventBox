@@ -16,7 +16,7 @@ enum DisplayItems {
     
 }
 
-class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ActionSheetDelegate {
+class DashboardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, ActionSheetDelegate, EventCollectionViewCellDelegate {
     
     var animator: UIDynamicAnimator?
     
@@ -115,6 +115,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
             return UICollectionViewCell()
         }
         
+        cell.delegate = self
         cell.configureWithEvent(events![indexPath.row])
         
         return cell
@@ -133,7 +134,7 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        Debug.log("Did select collectionView")
         
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? EventCollectionViewCell else {
             return
@@ -274,6 +275,10 @@ class DashboardViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func didJoinEvent(eventUID: String) {
         
+        refreshData()
+    }
+    
+    func didDeleteEvent(eventUID: String) {
         refreshData()
     }
     
