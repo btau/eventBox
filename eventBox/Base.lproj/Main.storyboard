@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wpq-Zw-PGg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1318,25 +1319,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4J9-mC-3JD">
-                                                    <rect key="frame" x="503" y="8" width="51" height="31"/>
-                                                    <color key="onTintColor" red="0.35686274509999999" green="1" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6P-iC-U1a">
-                                                    <rect key="frame" x="8" y="0.0" width="487" height="47"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1v-L2-p1T">
+                                                    <rect key="frame" x="0.0" y="-7" width="560" height="61"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onUnattendTapped:" destination="xuK-gb-v0P" eventType="touchUpInside" id="G9I-WQ-qJr"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4J9-mC-3JD" firstAttribute="leading" secondItem="u6P-iC-U1a" secondAttribute="trailing" constant="8" id="3hZ-Gn-f82"/>
-                                                <constraint firstItem="4J9-mC-3JD" firstAttribute="top" secondItem="dXZ-KT-iNs" secondAttribute="top" constant="8" id="MK1-g3-rTQ"/>
-                                                <constraint firstItem="u6P-iC-U1a" firstAttribute="top" secondItem="dXZ-KT-iNs" secondAttribute="top" id="PJl-jt-CSx"/>
-                                                <constraint firstAttribute="trailing" secondItem="4J9-mC-3JD" secondAttribute="trailing" constant="8" id="RBM-8p-4aR"/>
-                                                <constraint firstItem="u6P-iC-U1a" firstAttribute="leading" secondItem="dXZ-KT-iNs" secondAttribute="leading" constant="8" id="SIm-Xm-bCK"/>
-                                                <constraint firstAttribute="bottom" secondItem="4J9-mC-3JD" secondAttribute="bottom" constant="8" id="Yq7-Em-Swu"/>
-                                                <constraint firstAttribute="bottom" secondItem="u6P-iC-U1a" secondAttribute="bottom" id="Yxg-vU-2pd"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="K1v-L2-p1T" secondAttribute="trailing" constant="-8" id="4EE-ZX-Rav"/>
+                                                <constraint firstItem="K1v-L2-p1T" firstAttribute="top" secondItem="dXZ-KT-iNs" secondAttribute="topMargin" constant="-15" id="Jx3-Nx-gJv"/>
+                                                <constraint firstItem="K1v-L2-p1T" firstAttribute="leading" secondItem="dXZ-KT-iNs" secondAttribute="leadingMargin" constant="-8" id="TCt-Ns-qB2"/>
+                                                <constraint firstItem="K1v-L2-p1T" firstAttribute="bottom" secondItem="dXZ-KT-iNs" secondAttribute="bottomMargin" constant="15" id="feS-0l-Khb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1359,12 +1359,14 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="attendButton" destination="K1v-L2-p1T" id="Xeq-Nj-BBt"/>
                         <outlet property="eventDataLabel" destination="9PX-sS-5Jz" id="wEc-ac-YpE"/>
                         <outlet property="eventGuestsLabel" destination="Ihe-0Z-o2r" id="iTo-nt-Qcg"/>
                         <outlet property="eventNameLabel" destination="gXE-Ic-q25" id="xhZ-mI-wSc"/>
                         <outlet property="eventTimeLabel" destination="MXi-ew-Tta" id="3nV-0m-Gqn"/>
                         <outlet property="eventTokenLabel" destination="H7W-UK-bbC" id="LIS-tC-FOK"/>
                         <outlet property="headerSpace" destination="kGg-bq-Fjj" id="GbU-tT-l5f"/>
+                        <outlet property="itemsNeededLabel" destination="RP5-ui-pTe" id="P0I-4I-sOV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TpB-ra-gnw" userLabel="First Responder" sceneMemberID="firstResponder"/>

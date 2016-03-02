@@ -18,11 +18,34 @@ class EventLandingDetailsTableViewController: UITableViewController {
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var eventTokenLabel: UILabel!
     @IBOutlet weak var eventGuestsLabel: UILabel!
+    @IBOutlet weak var itemsNeededLabel: UILabel!
+    @IBOutlet weak var attendButton: UIButton!
     
     let event = NetworkManager.sharedManager.selectedEvent!
+    let currentUser = NetworkManager.sharedManager.authData?.uid
+    var isAttending: Bool?
+    var itemCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        for item in event.items {
+            if item.userUID == "" {
+                self.itemCount++
+            }
+        }
+        
+        print("Count: \(itemCount)")
+        
+        if itemCount == 0 {
+            itemsNeededLabel.text = "No items needed"
+
+        } else if  itemCount == 1 {
+            itemsNeededLabel.text = "\(itemCount) item needed"
+        } else  {
+            itemsNeededLabel.text = "\(itemCount) items needed"
+
+        }
         
         
         
@@ -44,6 +67,32 @@ class EventLandingDetailsTableViewController: UITableViewController {
         
         eventGuestsLabel.text = "\(event.guests.count) Guests"
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if event.guests.contains(currentUser!) {
+            configureUnattendButton()
+            isAttending = true
+        }
+        else {
+            attendButton.setTitle("Attend", forState: .Normal)
+            attendButton.tintColor = UIColor.eventBoxBlack()
+            attendButton.backgroundColor = UIColor.eventBoxAccent()
+            isAttending = false
+        }
+        
+//        for guest in event.guests {
+//            if guest == currentUser! {
+//                attendButton.setTitle("Attend", forState: .Normal)
+//                attendButton.tintColor = UIColor.eventBoxBlack()
+//                attendButton.backgroundColor = UIColor.eventBoxAccent()
+//                isAttending = true
+//            }
+//            else if guest != currentUser! {
+//                configureUnattendButton()
+//                isAttending = false
+//            }
+//        }
+    }
 
 
     
@@ -64,5 +113,29 @@ class EventLandingDetailsTableViewController: UITableViewController {
         
     }
 
+    @IBAction func onUnattendTapped(sender: UIButton) {
+        if isAttending == true {
+            NetworkManager.sharedManager.unattendEvent(currentUser!, eventUID: event.eventUID)
+            attendButton.setTitle("Attend", forState: .Normal)
+            attendButton.tintColor = UIColor.eventBoxBlack()
+            attendButton.backgroundColor = UIColor.eventBoxAccent()
+            isAttending = false
+        } else if isAttending == false {
+            NetworkManager.sharedManager.attendEvent(event.eventUID)
+            configureUnattendButton()
+            isAttending = true
+        }
+        
+
+        
+        
+    }
+    
+    func configureUnattendButton() {
+        attendButton.backgroundColor = UIColor.redColor()
+        attendButton.tintColor = UIColor.whiteColor()
+        attendButton.setTitle("Unattend", forState: .Normal)
+        
+    }
 
 }

@@ -239,12 +239,13 @@ class NetworkManager {
             "lat":String(event.location.lat),
             "lon":String(event.location.lon),
             "messages": [],
-            "guests":[],
+            "guests":[userUID:["time":String(NSDate().timeIntervalSince1970)]],
             "items": [],
             "imageName": event.imageName]
         
         let userAdminRef = usersRef.childByAppendingPath("\(userUID)/userEvents/\(eventRef.key)")
         let userEventData = ["time": String(NSDate().timeIntervalSince1970)]
+
         
 //        userAdminRef.setValue(userEventData)
 //        eventRef.setValue(eventData)
